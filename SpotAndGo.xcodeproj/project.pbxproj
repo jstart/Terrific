@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48446154CFBE00035BB36 /* UIKit.framework */; };
+		FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48448154CFBE00035BB36 /* Foundation.framework */; };
+		FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */; };
+		FDC48451154CFBE00035BB36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FDC4844F154CFBE00035BB36 /* InfoPlist.strings */; };
+		FDC48453154CFBE00035BB36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48452154CFBE00035BB36 /* main.m */; };
+		FDC48457154CFBE00035BB36 /* SGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48456154CFBE00035BB36 /* SGAppDelegate.m */; };
+		FDC4845A154CFBE00035BB36 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC48458154CFBE00035BB36 /* MainStoryboard.storyboard */; };
+		FDC4845D154CFBE00035BB36 /* SGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC4845C154CFBE00035BB36 /* SGViewController.m */; };
+		FDC48473154CFD530035BB36 /* SGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48472154CFD530035BB36 /* SGMapViewController.m */; };
+		FDC48475154CFD970035BB36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48474154CFD970035BB36 /* MapKit.framework */; };
+		FDC484B2154D02FF0035BB36 /* SVHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC4849A154D02FF0035BB36 /* SVHTTPClient.m */; };
+		FDC484B3154D02FF0035BB36 /* SVHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC4849C154D02FF0035BB36 /* SVHTTPRequest.m */; };
+		FDC484C6154D09970035BB36 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC484C5154D09970035BB36 /* CoreLocation.framework */; };
+		FDC484C9154D0EE10035BB36 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC484C7154D0EE10035BB36 /* navbar.png */; };
+		FDC484CA154D0EE10035BB36 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC484C8154D0EE10035BB36 /* navbar@2x.png */; };
+		FDC484CD154D10D40035BB36 /* SGDetailCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC484CC154D10D30035BB36 /* SGDetailCardView.m */; };
+		FDC484D3154D16D60035BB36 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC484D2154D16D60035BB36 /* QuartzCore.framework */; };
+		FDC484DE154D447C0035BB36 /* CTLocationDataManagerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC484DD154D43C40035BB36 /* CTLocationDataManagerResult.m */; };
+		FDC484E4154D517E0035BB36 /* CLScrollview.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC484E1154D517E0035BB36 /* CLScrollview.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC484E5154D517E0035BB36 /* CLTickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC484E3154D517E0035BB36 /* CLTickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC48525154DCB630035BB36 /* FLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48521154DCB4C0035BB36 /* FLImageView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC48526154DCB640035BB36 /* FullyLoaded.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48523154DCB4D0035BB36 /* FullyLoaded.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC48528154DCCA50035BB36 /* postscreen_location_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48527154DCCA50035BB36 /* postscreen_location_placeholder.png */; };
+		FDC4852A154DD6A60035BB36 /* gplaypattern.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48529154DD6A60035BB36 /* gplaypattern.png */; };
+		FDC4852C154DDF7E0035BB36 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4852B154DDF7E0035BB36 /* Default@2x.png */; };
+		FDC4852E154DE08E0035BB36 /* spotgo_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4852D154DE08E0035BB36 /* spotgo_logo@2x.png */; };
+		FDC48533154DE3500035BB36 /* eat.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4852F154DE34F0035BB36 /* eat.png */; };
+		FDC48534154DE3500035BB36 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48530154DE34F0035BB36 /* play.png */; };
+		FDC48535154DE3500035BB36 /* shop.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48531154DE34F0035BB36 /* shop.png */; };
+		FDC48536154DE3500035BB36 /* watch.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48532154DE3500035BB36 /* watch.png */; };
+		FDC48539154DE4A90035BB36 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48537154DE4A80035BB36 /* logo.png */; };
+		FDC4853A154DE4A90035BB36 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48538154DE4A90035BB36 /* logo@2x.png */; };
+		FDC4853C154DEFAA0035BB36 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4853B154DEFA90035BB36 /* Icon@2x.png */; };
+		FDC4853E154DEFF90035BB36 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4853D154DEFF90035BB36 /* Icon.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FDC48442154CFBE00035BB36 /* SpotAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDC48446154CFBE00035BB36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FDC48448154CFBE00035BB36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FDC4844E154CFBE00035BB36 /* SpotAndGo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpotAndGo-Info.plist"; sourceTree = "<group>"; };
+		FDC48450154CFBE00035BB36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FDC48452154CFBE00035BB36 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FDC48454154CFBE00035BB36 /* SpotAndGo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpotAndGo-Prefix.pch"; sourceTree = "<group>"; };
+		FDC48455154CFBE00035BB36 /* SGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAppDelegate.h; sourceTree = "<group>"; };
+		FDC48456154CFBE00035BB36 /* SGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGAppDelegate.m; sourceTree = "<group>"; };
+		FDC48459154CFBE00035BB36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		FDC4845B154CFBE00035BB36 /* SGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
+		FDC4845C154CFBE00035BB36 /* SGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
+		FDC48471154CFD530035BB36 /* SGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapViewController.h; sourceTree = "<group>"; };
+		FDC48472154CFD530035BB36 /* SGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapViewController.m; sourceTree = "<group>"; };
+		FDC48474154CFD970035BB36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FDC48499154D02FF0035BB36 /* SVHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVHTTPClient.h; sourceTree = "<group>"; };
+		FDC4849A154D02FF0035BB36 /* SVHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVHTTPClient.m; sourceTree = "<group>"; };
+		FDC4849B154D02FF0035BB36 /* SVHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVHTTPRequest.h; sourceTree = "<group>"; };
+		FDC4849C154D02FF0035BB36 /* SVHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVHTTPRequest.m; sourceTree = "<group>"; };
+		FDC484C4154D07C70035BB36 /* SGConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstants.h; sourceTree = "<group>"; };
+		FDC484C5154D09970035BB36 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FDC484C7154D0EE10035BB36 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
+		FDC484C8154D0EE10035BB36 /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar@2x.png"; sourceTree = "<group>"; };
+		FDC484CB154D10D30035BB36 /* SGDetailCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDetailCardView.h; sourceTree = "<group>"; };
+		FDC484CC154D10D30035BB36 /* SGDetailCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDetailCardView.m; sourceTree = "<group>"; };
+		FDC484D2154D16D60035BB36 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FDC484DC154D43C40035BB36 /* CTLocationDataManagerResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTLocationDataManagerResult.h; sourceTree = "<group>"; };
+		FDC484DD154D43C40035BB36 /* CTLocationDataManagerResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTLocationDataManagerResult.m; sourceTree = "<group>"; };
+		FDC484E0154D517E0035BB36 /* CLScrollview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLScrollview.h; sourceTree = "<group>"; };
+		FDC484E1154D517E0035BB36 /* CLScrollview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLScrollview.m; sourceTree = "<group>"; };
+		FDC484E2154D517E0035BB36 /* CLTickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTickerView.h; sourceTree = "<group>"; };
+		FDC484E3154D517E0035BB36 /* CLTickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTickerView.m; sourceTree = "<group>"; };
+		FDC48520154DCB4C0035BB36 /* FLImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLImageView.h; sourceTree = "<group>"; };
+		FDC48521154DCB4C0035BB36 /* FLImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLImageView.m; sourceTree = "<group>"; };
+		FDC48522154DCB4D0035BB36 /* FullyLoaded.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullyLoaded.h; sourceTree = "<group>"; };
+		FDC48523154DCB4D0035BB36 /* FullyLoaded.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullyLoaded.m; sourceTree = "<group>"; };
+		FDC48524154DCB4D0035BB36 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		FDC48527154DCCA50035BB36 /* postscreen_location_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postscreen_location_placeholder.png; sourceTree = "<group>"; };
+		FDC48529154DD6A60035BB36 /* gplaypattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gplaypattern.png; sourceTree = "<group>"; };
+		FDC4852B154DDF7E0035BB36 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FDC4852D154DE08E0035BB36 /* spotgo_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotgo_logo@2x.png"; sourceTree = "<group>"; };
+		FDC4852F154DE34F0035BB36 /* eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eat.png; sourceTree = "<group>"; };
+		FDC48530154DE34F0035BB36 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		FDC48531154DE34F0035BB36 /* shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop.png; sourceTree = "<group>"; };
+		FDC48532154DE3500035BB36 /* watch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch.png; sourceTree = "<group>"; };
+		FDC48537154DE4A80035BB36 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		FDC48538154DE4A90035BB36 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		FDC4853B154DEFA90035BB36 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		FDC4853D154DEFF90035BB36 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FDC4853F154DF1F80035BB36 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDC4843F154CFBE00035BB36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDC484D3154D16D60035BB36 /* QuartzCore.framework in Frameworks */,
+				FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */,
+				FDC484C6154D09970035BB36 /* CoreLocation.framework in Frameworks */,
+				FDC48475154CFD970035BB36 /* MapKit.framework in Frameworks */,
+				FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */,
+				FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FDC48437154CFBDF0035BB36 = {
+			isa = PBXGroup;
+			children = (
+				FDC4853F154DF1F80035BB36 /* Location.gpx */,
+				FDC484D2154D16D60035BB36 /* QuartzCore.framework */,
+				FDC484C5154D09970035BB36 /* CoreLocation.framework */,
+				FDC48474154CFD970035BB36 /* MapKit.framework */,
+				FDC4844C154CFBE00035BB36 /* SpotAndGo */,
+				FDC48445154CFBE00035BB36 /* Frameworks */,
+				FDC48443154CFBE00035BB36 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FDC48443154CFBE00035BB36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDC48442154CFBE00035BB36 /* SpotAndGo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDC48445154CFBE00035BB36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FDC48446154CFBE00035BB36 /* UIKit.framework */,
+				FDC48448154CFBE00035BB36 /* Foundation.framework */,
+				FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FDC4844C154CFBE00035BB36 /* SpotAndGo */ = {
+			isa = PBXGroup;
+			children = (
+				FDC4853D154DEFF90035BB36 /* Icon.png */,
+				FDC4853B154DEFA90035BB36 /* Icon@2x.png */,
+				FDC48520154DCB4C0035BB36 /* FLImageView.h */,
+				FDC48521154DCB4C0035BB36 /* FLImageView.m */,
+				FDC48522154DCB4D0035BB36 /* FullyLoaded.h */,
+				FDC48523154DCB4D0035BB36 /* FullyLoaded.m */,
+				FDC48524154DCB4D0035BB36 /* SynthesizeSingleton.h */,
+				FDC484DF154D517E0035BB36 /* CLTickerView */,
+				FDC484BF154D065E0035BB36 /* images */,
+				FDC48498154D02FF0035BB36 /* SVHTTPRequest */,
+				FDC48455154CFBE00035BB36 /* SGAppDelegate.h */,
+				FDC48456154CFBE00035BB36 /* SGAppDelegate.m */,
+				FDC484DC154D43C40035BB36 /* CTLocationDataManagerResult.h */,
+				FDC484DD154D43C40035BB36 /* CTLocationDataManagerResult.m */,
+				FDC48458154CFBE00035BB36 /* MainStoryboard.storyboard */,
+				FDC48471154CFD530035BB36 /* SGMapViewController.h */,
+				FDC48472154CFD530035BB36 /* SGMapViewController.m */,
+				FDC4845B154CFBE00035BB36 /* SGViewController.h */,
+				FDC4845C154CFBE00035BB36 /* SGViewController.m */,
+				FDC4844D154CFBE00035BB36 /* Supporting Files */,
+				FDC484C4154D07C70035BB36 /* SGConstants.h */,
+				FDC484CB154D10D30035BB36 /* SGDetailCardView.h */,
+				FDC484CC154D10D30035BB36 /* SGDetailCardView.m */,
+			);
+			path = SpotAndGo;
+			sourceTree = "<group>";
+		};
+		FDC4844D154CFBE00035BB36 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FDC4844E154CFBE00035BB36 /* SpotAndGo-Info.plist */,
+				FDC4844F154CFBE00035BB36 /* InfoPlist.strings */,
+				FDC48452154CFBE00035BB36 /* main.m */,
+				FDC48454154CFBE00035BB36 /* SpotAndGo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FDC48498154D02FF0035BB36 /* SVHTTPRequest */ = {
+			isa = PBXGroup;
+			children = (
+				FDC48499154D02FF0035BB36 /* SVHTTPClient.h */,
+				FDC4849A154D02FF0035BB36 /* SVHTTPClient.m */,
+				FDC4849B154D02FF0035BB36 /* SVHTTPRequest.h */,
+				FDC4849C154D02FF0035BB36 /* SVHTTPRequest.m */,
+			);
+			name = SVHTTPRequest;
+			path = ../SVHTTPRequest/SVHTTPRequest;
+			sourceTree = "<group>";
+		};
+		FDC484BF154D065E0035BB36 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FDC48537154DE4A80035BB36 /* logo.png */,
+				FDC48538154DE4A90035BB36 /* logo@2x.png */,
+				FDC4852F154DE34F0035BB36 /* eat.png */,
+				FDC48530154DE34F0035BB36 /* play.png */,
+				FDC48531154DE34F0035BB36 /* shop.png */,
+				FDC48532154DE3500035BB36 /* watch.png */,
+				FDC4852D154DE08E0035BB36 /* spotgo_logo@2x.png */,
+				FDC4852B154DDF7E0035BB36 /* Default@2x.png */,
+				FDC48529154DD6A60035BB36 /* gplaypattern.png */,
+				FDC48527154DCCA50035BB36 /* postscreen_location_placeholder.png */,
+				FDC484C7154D0EE10035BB36 /* navbar.png */,
+				FDC484C8154D0EE10035BB36 /* navbar@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		FDC484DF154D517E0035BB36 /* CLTickerView */ = {
+			isa = PBXGroup;
+			children = (
+				FDC484E0154D517E0035BB36 /* CLScrollview.h */,
+				FDC484E1154D517E0035BB36 /* CLScrollview.m */,
+				FDC484E2154D517E0035BB36 /* CLTickerView.h */,
+				FDC484E3154D517E0035BB36 /* CLTickerView.m */,
+			);
+			path = CLTickerView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FDC48441154CFBE00035BB36 /* SpotAndGo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDC48460154CFBE00035BB36 /* Build configuration list for PBXNativeTarget "SpotAndGo" */;
+			buildPhases = (
+				FDC4843E154CFBE00035BB36 /* Sources */,
+				FDC4843F154CFBE00035BB36 /* Frameworks */,
+				FDC48440154CFBE00035BB36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpotAndGo;
+			productName = SpotAndGo;
+			productReference = FDC48442154CFBE00035BB36 /* SpotAndGo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FDC48439154CFBDF0035BB36 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SG;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = FDC4843C154CFBDF0035BB36 /* Build configuration list for PBXProject "SpotAndGo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FDC48437154CFBDF0035BB36;
+			productRefGroup = FDC48443154CFBE00035BB36 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FDC48441154CFBE00035BB36 /* SpotAndGo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FDC48440154CFBE00035BB36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDC48451154CFBE00035BB36 /* InfoPlist.strings in Resources */,
+				FDC4845A154CFBE00035BB36 /* MainStoryboard.storyboard in Resources */,
+				FDC484C9154D0EE10035BB36 /* navbar.png in Resources */,
+				FDC484CA154D0EE10035BB36 /* navbar@2x.png in Resources */,
+				FDC48528154DCCA50035BB36 /* postscreen_location_placeholder.png in Resources */,
+				FDC4852A154DD6A60035BB36 /* gplaypattern.png in Resources */,
+				FDC4852C154DDF7E0035BB36 /* Default@2x.png in Resources */,
+				FDC4852E154DE08E0035BB36 /* spotgo_logo@2x.png in Resources */,
+				FDC48533154DE3500035BB36 /* eat.png in Resources */,
+				FDC48534154DE3500035BB36 /* play.png in Resources */,
+				FDC48535154DE3500035BB36 /* shop.png in Resources */,
+				FDC48536154DE3500035BB36 /* watch.png in Resources */,
+				FDC48539154DE4A90035BB36 /* logo.png in Resources */,
+				FDC4853A154DE4A90035BB36 /* logo@2x.png in Resources */,
+				FDC4853C154DEFAA0035BB36 /* Icon@2x.png in Resources */,
+				FDC4853E154DEFF90035BB36 /* Icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FDC4843E154CFBE00035BB36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDC48453154CFBE00035BB36 /* main.m in Sources */,
+				FDC48457154CFBE00035BB36 /* SGAppDelegate.m in Sources */,
+				FDC4845D154CFBE00035BB36 /* SGViewController.m in Sources */,
+				FDC48473154CFD530035BB36 /* SGMapViewController.m in Sources */,
+				FDC484B2154D02FF0035BB36 /* SVHTTPClient.m in Sources */,
+				FDC48526154DCB640035BB36 /* FullyLoaded.m in Sources */,
+				FDC48525154DCB630035BB36 /* FLImageView.m in Sources */,
+				FDC484DE154D447C0035BB36 /* CTLocationDataManagerResult.m in Sources */,
+				FDC484B3154D02FF0035BB36 /* SVHTTPRequest.m in Sources */,
+				FDC484CD154D10D40035BB36 /* SGDetailCardView.m in Sources */,
+				FDC484E4154D517E0035BB36 /* CLScrollview.m in Sources */,
+				FDC484E5154D517E0035BB36 /* CLTickerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FDC4844F154CFBE00035BB36 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDC48450154CFBE00035BB36 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FDC48458154CFBE00035BB36 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDC48459154CFBE00035BB36 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FDC4845E154CFBE00035BB36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FDC4845F154CFBE00035BB36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FDC48461154CFBE00035BB36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
+				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FDC48462154CFBE00035BB36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
+				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FDC4843C154CFBDF0035BB36 /* Build configuration list for PBXProject "SpotAndGo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDC4845E154CFBE00035BB36 /* Debug */,
+				FDC4845F154CFBE00035BB36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDC48460154CFBE00035BB36 /* Build configuration list for PBXNativeTarget "SpotAndGo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDC48461154CFBE00035BB36 /* Debug */,
+				FDC48462154CFBE00035BB36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FDC48439154CFBDF0035BB36 /* Project object */;
+}
