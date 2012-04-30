@@ -46,12 +46,14 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.mapView.userLocation.coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters)];
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(kDefaultCurrentLat, kDefaultCurrentLng), kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters)];
   [self performSearch];
 }
 
 -(void)performSearch{
-    NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+//    NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+  
+  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentCategory,@"category",locationArray,@"location", nil];
     [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
     [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSError * error){
@@ -151,15 +153,19 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 115/2, 150, 40)];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
     nameLabel.layer.transform = CATransform3DMakeRotation(M_PI, 1.0f, 0.0f, 0.0f);
+    nameLabel.layer.shouldRasterize = TRUE;
+    nameLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     [nameLabel setText:[currentPlaceDict objectForKey:@"name"]];
     UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:14];
 
     [nameLabel setFont:font];
     [nameLabel setLineBreakMode:UILineBreakModeWordWrap];
-    [nameLabel setNumberOfLines:3];
+    [nameLabel setNumberOfLines:2];
     UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 20)];
     [phoneLabel setBackgroundColor:[UIColor clearColor]];
     phoneLabel.layer.transform = CATransform3DMakeRotation(M_PI, 1.0f, 0.0f, 0.0f);
+    phoneLabel.layer.shouldRasterize = TRUE;
+    phoneLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     [phoneLabel setText:[currentPlaceDict objectForKey:@"phone"]];
     [phoneLabel setFont:font];
     [yourView addSubview:nameLabel];
@@ -173,8 +179,8 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 }
 
 -(void)getDirections:(int)placeInteger{
-  NSString * start_latitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.latitude];
-  NSString * start_longitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.longitude];
+  NSString * start_latitude = [NSString stringWithFormat:@"%f",kDefaultCurrentLat];//[self.mapView userLocation].coordinate.latitude];
+  NSString * start_longitude = [NSString stringWithFormat:@"%f",kDefaultCurrentLng];//[self.mapView userLocation].coordinate.longitude];
   NSString * destination_latitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"latitude"] floatValue]];
   NSString * destionation_longitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"longitude"] floatValue]];
   NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -209,12 +215,18 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
         [label setFont:font];
         [label setLineBreakMode:UILineBreakModeWordWrap];
         [label setNumberOfLines:0];
+        label.layer.shouldRasterize = TRUE;
+        label.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         [scrollv addSubview:label];
         scrollv.layer.transform = CATransform3DMakeRotation(M_PI, 1.0f, 0.0f, 0.0f);
-        
+        scrollv.layer.shouldRasterize = TRUE;
+        scrollv.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         [self.placeResultCardView addSubview:scrollv];
         [UIView animateWithDuration:1 animations:^{
           self.placeResultCardView.layer.transform = CATransform3DMakeRotation(M_PI,1.0,0.0,0.0); //finish the flip
+          self.placeResultCardView.layer.shouldRasterize = TRUE;
+          self.placeResultCardView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+          
         } completion:^(BOOL complete){
           // Flip completion code here
         }];
