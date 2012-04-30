@@ -51,9 +51,9 @@
 }
 
 -(void)performSearch{
-//    NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+    NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
   
-  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+//  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:currentCategory,@"category",locationArray,@"location", nil];
     [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
     [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSError * error){
@@ -179,8 +179,8 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 }
 
 -(void)getDirections:(int)placeInteger{
-  NSString * start_latitude = [NSString stringWithFormat:@"%f",kDefaultCurrentLat];//[self.mapView userLocation].coordinate.latitude];
-  NSString * start_longitude = [NSString stringWithFormat:@"%f",kDefaultCurrentLng];//[self.mapView userLocation].coordinate.longitude];
+  NSString * start_latitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.latitude];
+  NSString * start_longitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.longitude];
   NSString * destination_latitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"latitude"] floatValue]];
   NSString * destionation_longitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"longitude"] floatValue]];
   NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -202,6 +202,8 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
           [[self.placeResultCardView.subviews lastObject] removeFromSuperview]; // remove all subviews
         NSArray * directionsArray = [response objectForKey:@"directions"];
         UITextView * scrollv = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        [scrollv setEditable:NO];
+        [scrollv setUserInteractionEnabled:NO];
         NSMutableString * string = [[NSMutableString alloc] init];
         for (NSString * aString in directionsArray) {
           [string appendString:aString];
