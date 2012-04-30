@@ -13,11 +13,45 @@
 @implementation SGAppDelegate
 
 @synthesize window = _window;
+/*
+ My Apps Custom uncaught exception catcher, we do special stuff here, and TestFlight takes care of the rest
+ **/
+void HandleExceptions(NSException *exception) {
+  NSLog(@"This is where we save the application data during a exception");
+  // Save application data on crash
+}
+/*
+ My Apps Custom signal catcher, we do special stuff here, and TestFlight takes care of the rest
+ **/
+void SignalHandler(int sig) {
+  NSLog(@"This is where we save the application data during a signal");
+  // Save application data on crash
+}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+-(BOOL)application:(UIApplication *)application 
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+  // installs HandleExceptions as the Uncaught Exception Handler
+  NSSetUncaughtExceptionHandler(&HandleExceptions);
+  // create the signal action structure 
+  struct sigaction newSignalAction;
+  // initialize the signal action structure
+  memset(&newSignalAction, 0, sizeof(newSignalAction));
+  // set SignalHandler as the handler in the signal action structure
+  newSignalAction.sa_handler = &SignalHandler;
+  // set SignalHandler as the handlers for SIGABRT, SIGILL and SIGBUS
+  sigaction(SIGABRT, &newSignalAction, NULL);
+  sigaction(SIGILL, &newSignalAction, NULL);
+  sigaction(SIGBUS, &newSignalAction, NULL);
     [[SVHTTPClient sharedClient] setBasePath:kBaseURL];
-    // Override point for customization after application launch.
+  // start of your application:didFinishLaunchingWithOptions 
+  // ...
+  [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
+  // The rest of your application:didFinishLaunchingWithOptions method
+#define TESTING 1
+#ifdef TESTING
+  [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
+
     return YES;
 }
 							
@@ -47,5 +81,7 @@
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

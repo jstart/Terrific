@@ -18,6 +18,8 @@
 @property (strong, nonatomic) SGDetailCardView *placeResultCardView;
 @property (strong, nonatomic) NSMutableArray *currentPlaces;
 @property (strong, nonatomic) NSString * currentCategory;
+@property (nonatomic) CLAuthorizationStatus authStatus;
+@property (nonatomic, retain) NSArray * polylineArray;
 @end
 
 #pragma mark MapViewController

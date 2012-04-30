@@ -1,0 +1,1 @@
+ditto -cz /Users/trumanc/Library/Developer/Xcode/DerivedData/SpotAndGo-bodxlchtagvaphelimjpzjononmn/Build/Products/Debug-iphonesimulator/SpotAndGo.app   - | curl -F "key=707d9bdca8c309115e6bb3d4edf1ea85c0aaa71b" -F "file=@-" http://www.pieceable.com/view/publish

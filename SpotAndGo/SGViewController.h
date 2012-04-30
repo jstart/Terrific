@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface SGViewController : UIViewController{
+@interface SGViewController : UIViewController <CLLocationManagerDelegate>{
   NSArray  *categoryButtons;
+  CLLocationManager * locationManager;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, retain) IBOutletCollection(UIButton) NSArray *categoryButtons;
+@property (nonatomic, retain) CLLocationManager * locationManager;
 
 - (IBAction)buttonSelected:(id)sender;
 

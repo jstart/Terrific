@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD8D60C8154F471B00F4B326 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D60C7154F471B00F4B326 /* libTestFlight.a */; };
+		FD8D60CB154F4A6200F4B326 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */; };
 		FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48446154CFBE00035BB36 /* UIKit.framework */; };
 		FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48448154CFBE00035BB36 /* Foundation.framework */; };
 		FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */; };
@@ -41,13 +43,19 @@
 		FDC4853A154DE4A90035BB36 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48538154DE4A90035BB36 /* logo@2x.png */; };
 		FDC4853C154DEFAA0035BB36 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4853B154DEFA90035BB36 /* Icon@2x.png */; };
 		FDC4853E154DEFF90035BB36 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4853D154DEFF90035BB36 /* Icon.png */; };
-		FDC48544154E08A50035BB36 /* eat.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48540154E08A50035BB36 /* eat.png */; };
-		FDC48545154E08A50035BB36 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48541154E08A50035BB36 /* play.png */; };
-		FDC48546154E08A50035BB36 /* shop.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48542154E08A50035BB36 /* shop.png */; };
-		FDC48547154E08A50035BB36 /* watch.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48543154E08A50035BB36 /* watch.png */; };
+		FDC48588154F11AA0035BB36 /* dropdown-alert.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48586154F11AA0035BB36 /* dropdown-alert.png */; };
+		FDC48589154F11AA0035BB36 /* dropdown-alert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC48587154F11AA0035BB36 /* dropdown-alert@2x.png */; };
+		FDC48590154F11B60035BB36 /* bg-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4858C154F11B60035BB36 /* bg-yellow.png */; };
+		FDC48591154F11B60035BB36 /* bg-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDC4858D154F11B60035BB36 /* bg-yellow@2x.png */; };
+		FDC48592154F11B60035BB36 /* YRDropdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC4858F154F11B60035BB36 /* YRDropdownView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC48597154F33900035BB36 /* NVPolylineAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48596154F33850035BB36 /* NVPolylineAnnotationView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDC48598154F33920035BB36 /* NVPolylineAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC48594154F33840035BB36 /* NVPolylineAnnotation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD8D60C7154F471B00F4B326 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		FD8D60C9154F472600F4B326 /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		FDC48442154CFBE00035BB36 /* SpotAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC48446154CFBE00035BB36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FDC48448154CFBE00035BB36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,10 +107,16 @@
 		FDC4853B154DEFA90035BB36 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FDC4853D154DEFF90035BB36 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		FDC4853F154DF1F80035BB36 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
-		FDC48540154E08A50035BB36 /* eat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eat.png; sourceTree = "<group>"; };
-		FDC48541154E08A50035BB36 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		FDC48542154E08A50035BB36 /* shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shop.png; sourceTree = "<group>"; };
-		FDC48543154E08A50035BB36 /* watch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch.png; sourceTree = "<group>"; };
+		FDC48586154F11AA0035BB36 /* dropdown-alert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropdown-alert.png"; sourceTree = "<group>"; };
+		FDC48587154F11AA0035BB36 /* dropdown-alert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropdown-alert@2x.png"; sourceTree = "<group>"; };
+		FDC4858C154F11B60035BB36 /* bg-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow.png"; sourceTree = "<group>"; };
+		FDC4858D154F11B60035BB36 /* bg-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow@2x.png"; sourceTree = "<group>"; };
+		FDC4858E154F11B60035BB36 /* YRDropdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRDropdownView.h; sourceTree = "<group>"; };
+		FDC4858F154F11B60035BB36 /* YRDropdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRDropdownView.m; sourceTree = "<group>"; };
+		FDC48593154F33840035BB36 /* NVPolylineAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVPolylineAnnotation.h; sourceTree = "<group>"; };
+		FDC48594154F33840035BB36 /* NVPolylineAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVPolylineAnnotation.m; sourceTree = "<group>"; };
+		FDC48595154F33850035BB36 /* NVPolylineAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NVPolylineAnnotationView.h; sourceTree = "<group>"; };
+		FDC48596154F33850035BB36 /* NVPolylineAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVPolylineAnnotationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,12 +124,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D60CB154F4A6200F4B326 /* libz.1.2.5.dylib in Frameworks */,
 				FDC484D3154D16D60035BB36 /* QuartzCore.framework in Frameworks */,
 				FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */,
 				FDC484C6154D09970035BB36 /* CoreLocation.framework in Frameworks */,
 				FDC48475154CFD970035BB36 /* MapKit.framework in Frameworks */,
 				FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */,
 				FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */,
+				FD8D60C8154F471B00F4B326 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +141,10 @@
 		FDC48437154CFBDF0035BB36 = {
 			isa = PBXGroup;
 			children = (
+				FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */,
 				FDC4853F154DF1F80035BB36 /* Location.gpx */,
+				FD8D60C7154F471B00F4B326 /* libTestFlight.a */,
+				FD8D60C9154F472600F4B326 /* TestFlight.h */,
 				FDC484D2154D16D60035BB36 /* QuartzCore.framework */,
 				FDC484C5154D09970035BB36 /* CoreLocation.framework */,
 				FDC48474154CFD970035BB36 /* MapKit.framework */,
@@ -156,6 +175,11 @@
 		FDC4844C154CFBE00035BB36 /* SpotAndGo */ = {
 			isa = PBXGroup;
 			children = (
+				FDC48593154F33840035BB36 /* NVPolylineAnnotation.h */,
+				FDC48594154F33840035BB36 /* NVPolylineAnnotation.m */,
+				FDC48595154F33850035BB36 /* NVPolylineAnnotationView.h */,
+				FDC48596154F33850035BB36 /* NVPolylineAnnotationView.m */,
+				FDC4858B154F11B60035BB36 /* YRDropdownView */,
 				FDC4853D154DEFF90035BB36 /* Icon.png */,
 				FDC4853B154DEFA90035BB36 /* Icon@2x.png */,
 				FDC48520154DCB4C0035BB36 /* FLImageView.h */,
@@ -209,10 +233,8 @@
 		FDC484BF154D065E0035BB36 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				FDC48540154E08A50035BB36 /* eat.png */,
-				FDC48541154E08A50035BB36 /* play.png */,
-				FDC48542154E08A50035BB36 /* shop.png */,
-				FDC48543154E08A50035BB36 /* watch.png */,
+				FDC48586154F11AA0035BB36 /* dropdown-alert.png */,
+				FDC48587154F11AA0035BB36 /* dropdown-alert@2x.png */,
 				FDC48537154DE4A80035BB36 /* logo.png */,
 				FDC48538154DE4A90035BB36 /* logo@2x.png */,
 				FDC4852F154DE34F0035BB36 /* eat.png */,
@@ -238,6 +260,17 @@
 				FDC484E3154D517E0035BB36 /* CLTickerView.m */,
 			);
 			path = CLTickerView;
+			sourceTree = "<group>";
+		};
+		FDC4858B154F11B60035BB36 /* YRDropdownView */ = {
+			isa = PBXGroup;
+			children = (
+				FDC4858C154F11B60035BB36 /* bg-yellow.png */,
+				FDC4858D154F11B60035BB36 /* bg-yellow@2x.png */,
+				FDC4858E154F11B60035BB36 /* YRDropdownView.h */,
+				FDC4858F154F11B60035BB36 /* YRDropdownView.m */,
+			);
+			path = YRDropdownView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,10 +340,10 @@
 				FDC4853A154DE4A90035BB36 /* logo@2x.png in Resources */,
 				FDC4853C154DEFAA0035BB36 /* Icon@2x.png in Resources */,
 				FDC4853E154DEFF90035BB36 /* Icon.png in Resources */,
-				FDC48544154E08A50035BB36 /* eat.png in Resources */,
-				FDC48545154E08A50035BB36 /* play.png in Resources */,
-				FDC48546154E08A50035BB36 /* shop.png in Resources */,
-				FDC48547154E08A50035BB36 /* watch.png in Resources */,
+				FDC48588154F11AA0035BB36 /* dropdown-alert.png in Resources */,
+				FDC48589154F11AA0035BB36 /* dropdown-alert@2x.png in Resources */,
+				FDC48590154F11B60035BB36 /* bg-yellow.png in Resources */,
+				FDC48591154F11B60035BB36 /* bg-yellow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,13 +359,16 @@
 				FDC4845D154CFBE00035BB36 /* SGViewController.m in Sources */,
 				FDC48473154CFD530035BB36 /* SGMapViewController.m in Sources */,
 				FDC484B2154D02FF0035BB36 /* SVHTTPClient.m in Sources */,
+				FDC48598154F33920035BB36 /* NVPolylineAnnotation.m in Sources */,
 				FDC48526154DCB640035BB36 /* FullyLoaded.m in Sources */,
 				FDC48525154DCB630035BB36 /* FLImageView.m in Sources */,
+				FDC48597154F33900035BB36 /* NVPolylineAnnotationView.m in Sources */,
 				FDC484DE154D447C0035BB36 /* CTLocationDataManagerResult.m in Sources */,
 				FDC484B3154D02FF0035BB36 /* SVHTTPRequest.m in Sources */,
 				FDC484CD154D10D40035BB36 /* SGDetailCardView.m in Sources */,
 				FDC484E4154D517E0035BB36 /* CLScrollview.m in Sources */,
 				FDC484E5154D517E0035BB36 /* CLTickerView.m in Sources */,
+				FDC48592154F11B60035BB36 /* YRDropdownView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +445,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
 				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -420,6 +460,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
 				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

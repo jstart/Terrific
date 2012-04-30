@@ -9,6 +9,8 @@
 #endif
 
 #ifdef __OBJC__
+  #import "TestFlight.h"
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
+  #define NSLog TFLog
 #endif
