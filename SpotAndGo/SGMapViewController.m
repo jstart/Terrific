@@ -9,9 +9,7 @@
 #import "SGMapViewController.h"
 #import "SGDetailCardView.h"
 #import "SVHTTPClient.h"
-#import "CTLocationDataManagerResult.h"
-#import "CLTickerView.h"
-#import "FLImageView.h"
+#import "SGAnnotation.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "YRDropdownView.h"
@@ -37,12 +35,20 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  NSError *error;
+  
+  if (![[GANTracker sharedTracker] trackPageview:@"/map"
+                                       withError:&error]) {
+    NSLog(@"error in trackPageview");
+  }
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chosePlace:) name:@"choice" object:nil];
   [self.mapView setShowsUserLocation:YES];
 
   [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
   [self.navigationController setNavigationBarHidden:NO animated:YES];
   [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:226/255.0f green:225/255.0f blue:222/255.0f alpha:1]];
+
+  
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotgo_logo.png"]];
   self.placeResultCardView = [[SGDetailCardView alloc] initWithFrame:CGRectMake(0, 216, 320, 200)];
   [[self view] addSubview:placeResultCardView];
@@ -51,7 +57,12 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-[TestFlight passCheckpoint:@"SGMapViewController Appeared"];
+  NSDictionary * appearance = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [UIColor blackColor], UITextAttributeTextColor,
+                               [UIColor grayColor], UITextAttributeTextShadowColor, nil];
+  UIBarButtonItem * item = self.navigationController.navigationItem.backBarButtonItem;
+  [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
+  [TestFlight passCheckpoint:@"SGMapViewController Appeared"];
   if (authStatus == kCLAuthorizationStatusAuthorized) {
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters)];
     
@@ -76,12 +87,20 @@
   [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
   [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSError * error){
      NSLog (@"%@", response);
-     if ([(NSArray*) response count]>0) {
-       self.currentPlaces = (NSMutableArray*)response;
+     if ([(NSArray*) response count]>0 && response != nil) {
+       self.currentPlaces = [[NSMutableArray alloc] initWithArray:response copyItems:YES];
        NSMutableArray * array = [NSMutableArray array];
-       for (NSDictionary * dict in response) {
-         CTLocationDataManagerResult * annotation = [[CTLocationDataManagerResult alloc] init];
+       for (NSDictionary * dict in self.currentPlaces) {
+         SGAnnotation * annotation = [[SGAnnotation alloc] init];
          [annotation setTitle:[dict objectForKey:@"name"]];
+         NSError *error;
+         if (![[GANTracker sharedTracker] trackEvent:@"show_square"
+                                              action:@"flip"
+                                               label:[dict objectForKey:@"name"]
+                                               value:99
+                                           withError:&error]) {
+           NSLog(@"error in trackEvent");
+         }
          CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake ([[dict objectForKey:@"latitude"] floatValue], [[dict objectForKey:@"longitude"] floatValue]);
          [annotation setCoordinate:coordinate];
          [array addObject:annotation];
@@ -121,44 +140,31 @@
     float lon = [[dict objectForKey:@"longitude"] floatValue];
 
     NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 155, 95,lat, lon];
-
-    UIImageFromURL( [NSURL URLWithString:googleMapURL], ^(UIImage * image)
-                    {
-                      [currentView setImage:image forState:UIControlStateNormal];
-		    }, ^(void){
-                      [currentView setBackgroundColor:[UIColor blackColor]];
-                      NSLog (@"%@",@"error!");
-		    });
+    [currentView setUserInteractionEnabled:NO];
+    [currentView loadImageFromURL:googleMapURL withActivityIndicator:YES style:UIActivityIndicatorViewStyleGray];
     [currentView addSubview:label];
     [currentView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
   }
 }
 
-void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
-{
-  dispatch_async( dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0 ), ^(void)
-                  {
-                    NSData * data = [[NSData alloc] initWithContentsOfURL:URL];
-                    UIImage * image = [[UIImage alloc] initWithData:data];
-                    dispatch_async (dispatch_get_main_queue (), ^(void){
-                                      if( image != nil )
-                                      {
-                                        imageBlock (image);
-				      } else {
-                                        errorBlock ();
-				      }
-				    });
-		  });
-}
-
-
 - (void)chosePlace:(NSNotification*)notification {
   int choice = [[[notification userInfo] objectForKey:@"choice"] intValue];
   if ([[self.mapView annotations] count] >= choice) {
-    CTLocationDataManagerResult * chosenAnnotation;
-    for (CTLocationDataManagerResult * annotation in [self.mapView annotations]) {
+    SGAnnotation * chosenAnnotation;
+    for (SGAnnotation * annotation in [self.mapView annotations]) {
       if ([annotation.title isEqualToString:[[currentPlaces objectAtIndex:choice] objectForKey:@"name"]]) {
+        NSError *error;
+        if (![[GANTracker sharedTracker] trackEvent:@"show_directions"
+                                             action:@"flip"
+                                              label:[[currentPlaces objectAtIndex:choice] objectForKey:@"name"]
+                                              value:99
+                                          withError:&error]) {
+          NSLog(@"error in trackEvent");
+        }
+
         [TestFlight passCheckpoint:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
+        [[MixpanelAPI sharedAPI] track:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
+        [FlurryAnalytics logEvent:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
 	chosenAnnotation = annotation;
       }
     }
@@ -193,9 +199,12 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
      [nameLabel setFont:font];
      [nameLabel setLineBreakMode:UILineBreakModeWordWrap];
      [nameLabel setNumberOfLines:2];
+     [yourView addSubview:nameLabel];
 
-     if ([currentPlaceDict objectForKey:@"phone"]) {
-       UILabel * phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake (0, 0, 150, 20)];
+     if (![[currentPlaceDict objectForKey:@"phone"] isKindOfClass:[NSNull class]]) {
+       OHAttributedLabel * phoneLabel = [[OHAttributedLabel alloc] initWithFrame:CGRectMake (0, 0, 150, 20)];
+       phoneLabel.automaticallyAddLinksForType = NSTextCheckingTypePhoneNumber;
+       phoneLabel.delegate = self;
        [phoneLabel setBackgroundColor:[UIColor clearColor]];
        phoneLabel.layer.transform = CATransform3DMakeRotation (M_PI, 1.0f, 0.0f, 0.0f);
        phoneLabel.layer.shouldRasterize = TRUE;
@@ -204,8 +213,15 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
        [phoneLabel setFont:font];
        [yourView addSubview:phoneLabel];
      }
-
-     [yourView addSubview:nameLabel];
+     
+     UIButton * directionsButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 50, 150, 20)];
+     [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
+     directionsButton.tag = yourView.tag;
+     [directionsButton addTarget:self action:@selector(getDirections:) forControlEvents:UIControlEventTouchUpInside];
+     directionsButton.layer.transform = CATransform3DMakeRotation (M_PI, 1.0f, 0.0f, 0.0f);
+     directionsButton.layer.shouldRasterize = TRUE;
+     directionsButton.layer.rasterizationScale = [[UIScreen mainScreen] scale];     [yourView addSubview:directionsButton];
+     [yourView addSubview:directionsButton];
      [UIView animateWithDuration:duration animations:^{
         yourView.layer.transform = CATransform3DMakeRotation (M_PI,1.0,0.0,0.0); //finish the flip
       } completion:^(BOOL complete){
@@ -215,44 +231,45 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 }
 
 - (void)getDirections:(int)placeInteger {
-  NSString * start_latitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.latitude];
-  NSString * start_longitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.longitude];
-  NSString * destination_latitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"latitude"] floatValue]];
-  NSString * destionation_longitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"longitude"] floatValue]];
-  NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   start_latitude,@"current_latitude",
-                                   start_longitude,@"current_longitude",
-                                   destination_latitude,
-                                   @"destination_latitude",
-                                   destionation_longitude
-                                   ,@"destination_longitude", nil];
-  [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
-  [[SVHTTPClient sharedClient] POST:@"location" parameters:postDictionary completion:^(id response, NSError * error){
-     NSLog (@"%@", (NSArray*)response);
-
-     if (![response isKindOfClass:[NSData class]]&&![response isKindOfClass:[NSArray class]]) {
-       [TestFlight passCheckpoint:[NSString stringWithFormat:@"gotDirections for %@", [[currentPlaces objectAtIndex:placeInteger] objectForKey:@"name"]]];
-       self.polylineArray = [[response objectForKey:@"polylines"] componentsSeparatedByString:@";"];
-       NSMutableArray * locationArray = [[NSMutableArray alloc] init];
-       for (NSString * polyline in polylineArray) {
-         NSArray * array = [polyline componentsSeparatedByString:@","];
-         [locationArray addObject:[[CLLocation alloc] initWithLatitude:[[array objectAtIndex:0] floatValue] longitude:[[array objectAtIndex:1] floatValue]]];
-       }
-       
-       NVPolylineAnnotation *annotation = [[NVPolylineAnnotation alloc] initWithPoints:locationArray mapView:self.mapView];
-       [self.mapView addAnnotation:annotation];
-       if (![self coordinateIsVisible:[self.mapView userLocation].coordinate]) {
-         MKCoordinateRegion region = [self adjustRegionForAnnotations:[self.mapView  annotations]];
-         
-         [self.mapView setRegion:region animated:YES];
-       }
-
-       [UIView animateWithDuration:1 delay:3 options:UIViewAnimationCurveEaseIn animations:^{
+  if (currentPlaces != nil && [currentPlaces count]>0) {
+    NSString * start_latitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.latitude];
+    NSString * start_longitude = [NSString stringWithFormat:@"%f",[self.mapView userLocation].coordinate.longitude];
+    NSString * destination_latitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"latitude"] floatValue]];
+    NSString * destionation_longitude = [NSString stringWithFormat:@"%f",[[[currentPlaces objectAtIndex:placeInteger] objectForKey:@"longitude"] floatValue]];
+    NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     start_latitude,@"current_latitude",
+                                     start_longitude,@"current_longitude",
+                                     destination_latitude,
+                                     @"destination_latitude",
+                                     destionation_longitude
+                                     ,@"destination_longitude", nil];
+    [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
+    [[SVHTTPClient sharedClient] POST:@"location" parameters:postDictionary completion:^(id response, NSError * error){
+      NSLog (@"%@", (NSArray*)response);
+      
+      if ((![response isKindOfClass:[NSData class]]&&![response isKindOfClass:[NSArray class]]) && [[[[[response objectForKey:@"status"] objectForKey:@"Details"] objectAtIndex:0] objectForKey:@"Code"] intValue] != 5) {
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"gotDirections for %@", [[currentPlaces objectAtIndex:placeInteger] objectForKey:@"name"]]];
+        self.polylineArray = [[response objectForKey:@"polylines"] componentsSeparatedByString:@";"];
+        NSMutableArray * locationArray = [[NSMutableArray alloc] init];
+        for (NSString * polyline in polylineArray) {
+          NSArray * array = [polyline componentsSeparatedByString:@","];
+          [locationArray addObject:[[CLLocation alloc] initWithLatitude:[[array objectAtIndex:0] floatValue] longitude:[[array objectAtIndex:1] floatValue]]];
+        }
+        
+        NVPolylineAnnotation *annotation = [[NVPolylineAnnotation alloc] initWithPoints:locationArray mapView:self.mapView];
+        [self.mapView addAnnotation:annotation];
+        if (![self coordinateIsVisible:[self.mapView userLocation].coordinate]) {
+          MKCoordinateRegion region = [self adjustRegionForAnnotations:[self.mapView  annotations]];
+          
+          [self.mapView setRegion:region animated:YES];
+        }
+        
+        [UIView animateWithDuration:1 delay:3 options:UIViewAnimationCurveEaseIn animations:^{
           self.placeResultCardView.layer.transform = CATransform3DMakeRotation (M_PI_2,1.0,0.0,0.0); //flip halfway
-	} completion:^(BOOL complete){
-    
+        } completion:^(BOOL complete){
+          
           while ([self.placeResultCardView.subviews count] > 0)
-	    [[self.placeResultCardView.subviews lastObject] removeFromSuperview];  // remove all subviews
+            [[self.placeResultCardView.subviews lastObject] removeFromSuperview];  // remove all subviews
           NSArray * directionsArray = [response objectForKey:@"directions"];
           UITextView * scrollv = [[UITextView alloc] initWithFrame:CGRectMake (0, 0, 320, 200)];
           [scrollv setEditable:NO];
@@ -261,7 +278,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
           for (NSString * aString in directionsArray) {
             [string appendString:aString];
             [string appendString:@"\n"];
-	  }
+          }
           [self.placeResultCardView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
           UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake (0, 0, 320, 200)];
           [label setText:string];
@@ -281,12 +298,13 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
             self.placeResultCardView.layer.transform = CATransform3DMakeRotation (M_PI,1.0,0.0,0.0); //finish the flip
             self.placeResultCardView.layer.shouldRasterize = TRUE;
             self.placeResultCardView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-	  } completion:^(BOOL complete){
-      // Flip completion code here
+          } completion:^(BOOL complete){
+            // Flip completion code here
+          }];
+        }];
+      }
     }];
-	}];
-     }
-   }];
+  }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -498,6 +516,32 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
   [UIView commitAnimations];
 }
 
+-(BOOL)attributedLabel:(OHAttributedLabel *)attributedLabel shouldFollowLink:(NSTextCheckingResult *)linkInfo {
+	[attributedLabel setNeedsDisplay];
+
+		switch (linkInfo.resultType) {
+			case NSTextCheckingTypeLink: // use default behavior
+				break;
+			case NSTextCheckingTypeAddress:
+				[self displayAlert:@"Address" message:[linkInfo.addressComponents description]];
+				break;
+
+			case NSTextCheckingTypePhoneNumber:
+				[self displayAlert:@"Phone Number" message:linkInfo.phoneNumber];
+				break;
+			default:
+				[self displayAlert:@"Unknown link type" message:[NSString stringWithFormat:@"You typed on an unknown link type (NSTextCheckingType %d)",linkInfo.resultType]];
+				break;
+		}
+
+		return YES;
+}
+
+-(void) displayAlert:(NSString*) title message:(NSString*) message {
+	UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+	[alert show];
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -510,6 +554,22 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
   [self setPlaceResultCardView:nil];
   [super viewDidUnload];
   // Release any retained subviews of the main view.
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+  switch (buttonIndex) {
+    case 1:
+    {
+      NSString * trimmedString = [[[[alertView.message stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+      NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", trimmedString];
+      NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+      [[UIApplication sharedApplication] openURL:phoneURL];
+    }
+      break;
+      
+    default:
+      break;
+  }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

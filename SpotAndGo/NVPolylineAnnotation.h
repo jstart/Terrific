@@ -11,7 +11,7 @@
 
 
 @interface NVPolylineAnnotation : NSObject<MKAnnotation> {
-	NSMutableArray* _points; 
+	NSArray* _points; 
 	MKMapView* _mapView;
 }
 

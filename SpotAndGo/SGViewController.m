@@ -7,6 +7,7 @@
 //
 
 #import "SGViewController.h"
+#import "FlurryAnalytics.h"
 
 @interface SGViewController ()
 
@@ -16,15 +17,27 @@
 @synthesize logoImageView, categoryButtons, locationManager;
 
 -(void)viewWillAppear:(BOOL)animated{
+  NSError *error;
+
+  if (![[GANTracker sharedTracker] trackPageview:@"/menu"
+                                       withError:&error]) {
+    NSLog(@"error in trackPageview");
+  }
+  [FlurryAnalytics logAllPageViews:self.navigationController];
+  [[MixpanelAPI sharedAPI] track:@"Main Menu Appeared"];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:226/255.0f green:225/255.0f blue:222/255.0f alpha:1]];
-  [self.navigationController setNavigationBarHidden:YES animated:YES];
+  if ([self.navigationController isNavigationBarHidden]) {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+  }else{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+  }
   [TestFlight passCheckpoint:@"SGViewController Appeared"];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  if ([self.navigationController isNavigationBarHidden]) {
+  if ([self.navigationController isViewLoaded]) {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
   }else{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -34,7 +47,8 @@
   [self.locationManager setDelegate:self];
   [self.locationManager setDesiredAccuracy:10];
   [self.locationManager startUpdatingLocation];
-  
+  CLLocation *location = locationManager.location;
+[FlurryAnalytics setLatitude:location.coordinate.latitude            longitude:location.coordinate.longitude            horizontalAccuracy:location.horizontalAccuracy            verticalAccuracy:location.verticalAccuracy]; 
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -51,6 +65,8 @@
     case 0:
       chosenCategory = @"eat";
       [TestFlight passCheckpoint:@"eat"];
+      [[MixpanelAPI sharedAPI] track:@"eat"];
+
       break;
     case 1:
       chosenCategory = @"shop";
@@ -69,9 +85,18 @@
       [TestFlight passCheckpoint:@"invalid category"];
       break;
   }
+  [[MixpanelAPI sharedAPI] track:@"chose" properties:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
+  [FlurryAnalytics logEvent:@"chose" withParameters:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
   [[NSUserDefaults standardUserDefaults] setObject:chosenCategory forKey:@"category"];
   [self performSegueWithIdentifier:@"map" sender:self];
-
+  NSError *error;
+  if (![[GANTracker sharedTracker] trackEvent:@"tap"
+                                       action:@"menu_tap"
+                                        label:chosenCategory
+                                        value:99
+                                    withError:&error]) {
+    NSLog(@"error in trackEvent");
+  }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

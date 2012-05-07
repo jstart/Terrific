@@ -10,17 +10,8 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "SGDetailCardView.h"
-
-@interface SGMapViewController : UIViewController<MKMapViewDelegate>{
-  MKCoordinateRegion lastAnnotationsMapRegion;  
-}
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) SGDetailCardView *placeResultCardView;
-@property (strong, nonatomic) NSMutableArray *currentPlaces;
-@property (strong, nonatomic) NSString * currentCategory;
-@property (nonatomic) CLAuthorizationStatus authStatus;
-@property (nonatomic, retain) NSArray * polylineArray;
-@end
+#import "OHAttributedLabel.h"
+#import "UIButton+AsyncLoader.h"
 
 #pragma mark MapViewController
 
@@ -37,3 +28,15 @@
 #define kCenterPercentDeltaThreshold .6
 #define kMinDegreeSpan .001
 #define kSpanPercentDeltaThreshold .4
+
+@interface SGMapViewController : UIViewController<MKMapViewDelegate, OHAttributedLabelDelegate>{
+  MKCoordinateRegion lastAnnotationsMapRegion;  
+}
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) SGDetailCardView *placeResultCardView;
+@property (strong, nonatomic) NSMutableArray *currentPlaces;
+@property (strong, nonatomic) NSString * currentCategory;
+@property (nonatomic) CLAuthorizationStatus authStatus;
+@property (nonatomic, retain) NSArray * polylineArray;
+@end
+

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "CTLocationDataManagerResult.h"
+#import "SGAnnotation.h"
 
-@implementation CTLocationDataManagerResult
+@implementation SGAnnotation
 @synthesize coordinate = _coordinate;
 @synthesize title = _title, subtitle = _subtitle;
 
@@ -20,8 +20,8 @@
   return self;
 }
 
-+ (CTLocationDataManagerResult*)resultWithTitle:(NSString*)title Coordinate:(CLLocationCoordinate2D)coordinate {
-  return [[CTLocationDataManagerResult alloc] initWithTitle:title Coordinate:coordinate];
++ (SGAnnotation*)resultWithTitle:(NSString*)title Coordinate:(CLLocationCoordinate2D)coordinate {
+  return [[SGAnnotation alloc] initWithTitle:title Coordinate:coordinate];
 }
 
 // Properties
@@ -44,14 +44,6 @@
 
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
   _coordinate = newCoordinate;
-}
-
-- (NSString *)groupTag {
-  return _groupTag;
-}
-
-- (void)setGroupTag:(NSString *)tag {
-  _groupTag = tag;
 }
 
 - (NSString*) description {

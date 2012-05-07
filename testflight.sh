@@ -1,0 +1,1 @@
+curl http://testflightapp.com/api/builds.json -F file=@SpotAndGo.ipa -F api_token='f4a1a8d70570740993945f5919f8ce6a_MzU2NDc1MjAxMi0wMy0xNCAxMzozNzo0MS41MjM4NTg' -F team_token='30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ' -F notes='Not on your iPhone?  Try our web demo here: http://bit.ly/KajxJ3' -F notify=False -F distribution_lists='Internal, QA'
