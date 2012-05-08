@@ -14,7 +14,7 @@
 @end
 
 @implementation SGViewController
-@synthesize logoImageView, categoryButtons, locationManager;
+@synthesize logoImageView, categoryButtons, locationManager, mapViewController;
 
 -(void)viewWillAppear:(BOOL)animated{
   NSError *error;
@@ -50,6 +50,7 @@
   CLLocation *location = locationManager.location;
 [FlurryAnalytics setLatitude:location.coordinate.latitude            longitude:location.coordinate.longitude            horizontalAccuracy:location.horizontalAccuracy            verticalAccuracy:location.verticalAccuracy]; 
 	// Do any additional setup after loading the view, typically from a nib.
+  self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
 }
 
 - (void)viewDidUnload
@@ -88,7 +89,7 @@
   [[MixpanelAPI sharedAPI] track:@"chose" properties:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
   [FlurryAnalytics logEvent:@"chose" withParameters:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
   [[NSUserDefaults standardUserDefaults] setObject:chosenCategory forKey:@"category"];
-  [self performSegueWithIdentifier:@"map" sender:self];
+  [self.navigationController pushViewController:mapViewController animated:YES];
   NSError *error;
   if (![[GANTracker sharedTracker] trackEvent:@"tap"
                                        action:@"menu_tap"

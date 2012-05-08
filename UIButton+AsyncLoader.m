@@ -25,6 +25,7 @@
   if (activityIndicator) {
     view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
     view.frame = self.frame;
+    view.tag = 500;
     [self addSubview:view];
     [view startAnimating];
   }
@@ -33,16 +34,18 @@
    {
      [self setImage:image forState:UIControlStateNormal];
      [self setUserInteractionEnabled:YES];
-     if (view != nil) {
-       [view stopAnimating];
-       [view removeFromSuperview];
+     UIActivityIndicatorView * activityView = [self viewWithTag:500];
+     if (activityView != nil) {
+       [activityView stopAnimating];
+       [activityView removeFromSuperview];
      }
    }
    ErrorBlock:^(void){
      NSLog (@"error! could not load url: %@", urlString);
-     if (view != nil) {
-       [view stopAnimating];
-       [view removeFromSuperview];
+     UIActivityIndicatorView * activityView = [self viewWithTag:500];
+     if (activityView != nil) {
+       [activityView stopAnimating];
+       [activityView removeFromSuperview];
      }
    }];
 }

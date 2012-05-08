@@ -64,7 +64,7 @@
   [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
   [TestFlight passCheckpoint:@"SGMapViewController Appeared"];
   if (authStatus == kCLAuthorizationStatusAuthorized) {
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters)];
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
     
     [self performSearch];
   } else{
@@ -76,6 +76,10 @@
      animated:YES
      hideAfter:3];
   }
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+  [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
 - (void)performSearch {
@@ -108,7 +112,7 @@
        [self updateResultCards];
        //adjust map region
        lastAnnotationsMapRegion = [self regionOfAnnotations:array];
-       [self.mapView setRegion:lastAnnotationsMapRegion];
+       [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
        [self.mapView addAnnotations:array];
      } else{
        [YRDropdownView showDropdownInView:self.view
@@ -141,7 +145,7 @@
 
     NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 155, 95,lat, lon];
     [currentView setUserInteractionEnabled:NO];
-    [currentView loadImageFromURL:googleMapURL withActivityIndicator:YES style:UIActivityIndicatorViewStyleGray];
+    [currentView loadImageFromURL:googleMapURL];
     [currentView addSubview:label];
     [currentView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
   }

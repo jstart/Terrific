@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "SGMapViewController.h"
 
 @interface SGViewController : UIViewController <CLLocationManagerDelegate>{
   NSArray  *categoryButtons;
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, retain) IBOutletCollection(UIButton) NSArray *categoryButtons;
 @property (nonatomic, retain) CLLocationManager * locationManager;
+@property (nonatomic, retain) SGMapViewController * mapViewController;
 
 - (IBAction)buttonSelected:(id)sender;
 
