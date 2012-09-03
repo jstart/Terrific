@@ -24,28 +24,6 @@
   return [[SGAnnotation alloc] initWithTitle:title Coordinate:coordinate];
 }
 
-// Properties
-- (NSString *)title {
-  return _title;
-}
-
-- (void)setTitle:(NSString *)text {
-  _title = text;
-}
-
-- (NSString *)subtitle {
-  return _subtitle;
-}
-
-- (void)setSubtitle:(NSString *)text {
-
-  _subtitle = text;
-}
-
-- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-  _coordinate = newCoordinate;
-}
-
 - (NSString*) description {
   return [NSString stringWithFormat:@"LocationResult Name: %@ Coordinate: %f, %f", self.title, self.coordinate.latitude, self.coordinate.longitude];
 }

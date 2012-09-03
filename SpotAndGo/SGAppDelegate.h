@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SGAppDelegate : UIResponder <UIApplicationDelegate>
+#import "RCLocationManager.h"
+
+@interface SGAppDelegate : UIResponder <UIApplicationDelegate, RCLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) RCLocationManager * locationManager;
+@property (strong, nonatomic) CLGeocoder * geocoder;
+@property (strong, nonatomic) CLLocation * currentLocation;
 
 @end

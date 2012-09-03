@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "SGDetailCardView.h"
-#import "OHAttributedLabel.h"
-#import "UIButton+AsyncLoader.h"
+#import "SGDetailCardViewController.h"
 
 #pragma mark MapViewController
 
@@ -29,11 +27,11 @@
 #define kMinDegreeSpan .001
 #define kSpanPercentDeltaThreshold .4
 
-@interface SGMapViewController : UIViewController<MKMapViewDelegate, OHAttributedLabelDelegate>{
+@interface SGMapViewController : UIViewController<MKMapViewDelegate, SGDetailCardViewDelegate>{
   MKCoordinateRegion lastAnnotationsMapRegion;  
 }
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) SGDetailCardView *placeResultCardView;
+@property (strong, nonatomic) SGDetailCardViewController *placeResultCardViewController;
 @property (strong, nonatomic) NSMutableArray *currentPlaces;
 @property (strong, nonatomic) NSString * currentCategory;
 @property (nonatomic) CLAuthorizationStatus authStatus;
