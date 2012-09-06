@@ -83,7 +83,11 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-  [self.mapView removeAnnotations:self.mapView.annotations];
+    for (id <MKAnnotation> annotation in self.mapView.annotations) {
+        if (![annotation isKindOfClass:[MKUserLocation class]]) {
+            [self.mapView removeAnnotation:annotation];
+        }
+    }
 }
 
 - (void)performSearch {
@@ -106,9 +110,10 @@
             [annotation setCoordinate:coordinate];
             [annotationsArray addObject:annotation];
         }
+        
+        [self.mapView addAnnotations:annotationsArray];
         lastAnnotationsMapRegion = [self regionOfAnnotations:annotationsArray];
         [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
-        [self.mapView addAnnotations:annotationsArray];
         [self updateResultCards];
     } failure:^(NSError* error){
         NSLog(@"error searching categories %@", error);
@@ -217,7 +222,7 @@
     CLLocationCoordinate2D newCenter;
     newCenter.latitude = 0.5 *(minLat + maxLat);
     newCenter.longitude = 0.5 * (minLon + maxLon);
-    return MKCoordinateRegionMake(newCenter, MKCoordinateSpanMake(fabs(minLat - maxLat), fabs(minLon - maxLon)));
+    return MKCoordinateRegionMake(newCenter, MKCoordinateSpanMake(fabs(minLat - maxLat) + kPinEdgePaddingSpan, fabs(minLon - maxLon) + kPinEdgePaddingSpan));
   } else {
     return self.mapView.region;
   }

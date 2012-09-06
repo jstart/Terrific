@@ -8,8 +8,8 @@
 
 
 
-//#define kBaseURL @"http://stark-lake-3361.herokuapp.com/"
-#define kBaseURL @"http://localhost:4567/"
+#define kBaseURL @"http://stark-lake-3361.herokuapp.com/"
+//#define kBaseURL @"http://localhost:4567/"
 
 static NSString* drinkCategories[] = {
   @"Food & Beverage > Beer, Wine & Spirits", 

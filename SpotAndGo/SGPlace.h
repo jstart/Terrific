@@ -15,7 +15,6 @@
 @property (nonatomic, strong) NSString * postal_code;
 @property (nonatomic, strong) NSString * street;
 
-@property (nonatomic, strong) NSString * factual_id;
 @property (nonatomic, strong) NSString * latitude;
 @property (nonatomic, strong) NSString * longitude;
 @property (nonatomic, strong) NSString * name;

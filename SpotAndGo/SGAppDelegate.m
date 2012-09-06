@@ -7,6 +7,8 @@
 //
 
 #import "SGAppDelegate.h"
+#import <Crashlytics/Crashlytics.h>
+#import "Countly.h"
 #import "SVHTTPClient.h"
 #import "SGConstants.h"
 #import "RCLocationManager.h"
@@ -32,6 +34,8 @@ static NSString* const kAnalyticsAccountId = @"UA-31324397-1";
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
 
     [[SVHTTPClient sharedClient] setBasePath:kBaseURL];
+    [[Countly sharedInstance] start:@"cd841b695c8d8e17858fd3cf6adf3b3bc3acb939" withHost:@"http://fast-coast-8722.herokuapp.com"];
+    [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
     [MixpanelAPI sharedAPIWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
     [[MixpanelAPI sharedAPI] identifyUser:[OpenUDID value]];
     [FlurryAnalytics startSession:@"FJX9G2A6P8VGCM5736M7"];
@@ -41,6 +45,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [TestFlight setDeviceIdentifier:[OpenUDID value]];
     [[MixpanelAPI sharedAPI] track:@"Launched"];
+    [[Countly sharedInstance] recordEvent:@"launched" count:1];
+
         
     [[GANTracker sharedTracker] startTrackerWithAccountID:kAnalyticsAccountId
                                            dispatchPeriod:kGANDispatchPeriodSec
@@ -124,12 +130,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #pragma mark - RCLocationManagerDelegate
 
 - (void)locationManager:(RCLocationManager *)manager didFailWithError:(NSError *)error{
-    [YRDropdownView showDropdownInView:self.window.rootViewController.view
-                                 title:@"Location Disabled"
-                                detail:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."
-                                 image:[UIImage imageNamed:@"dropdown-alert"]
-                              animated:YES
-                             hideAfter:3];
+    NSLog(@"rclocationmanager failed with error: %@", error);
 }
 
 - (void)locationManager:(RCLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{

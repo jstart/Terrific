@@ -29,18 +29,19 @@
 
 +(SGPlaceDetailsViewController*)placeDetailsViewControllerWithPlace:(SGPlace*)place{
     SGPlaceDetailsViewController * placeDetailsViewController = [[SGPlaceDetailsViewController alloc] init];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:placeDetailsViewController action:@selector(handleTap)];
-	tap.delegate = placeDetailsViewController;
-	[placeDetailsViewController.view addGestureRecognizer:tap];
-    
+
     placeDetailsViewController.place = place;
     [[placeDetailsViewController view] setFrame:CGRectMake(0, 0, 155, 95)];
     [placeDetailsViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
     
     UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:18];
 
-    if (![place.phone_number isKindOfClass:[NSNull class]]) {
+    if (![place.phone_number isKindOfClass:[NSNull class]] && ![place.phone_number isEqualToString:@""]) {
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:placeDetailsViewController action:@selector(handleTap)];
+        tap.delegate = placeDetailsViewController;
+        [placeDetailsViewController.view addGestureRecognizer:tap];
+        
         placeDetailsViewController.phoneLabel = [[NIAttributedLabel alloc] initWithFrame:CGRectMake (0, 10, 150, 30)];
         placeDetailsViewController.phoneLabel.delegate = placeDetailsViewController;
         [placeDetailsViewController.phoneLabel setTextAlignment:NSTextAlignmentCenter];
@@ -80,10 +81,15 @@
 
 -(void)handleTap{
     NSString * cleanedPhoneString = [[[self.phoneLabel.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@"-"];
-    NSString * telephoneSchemeString = [NSString stringWithFormat:@"tel:+%@", cleanedPhoneString];
+    NSString * telephoneSchemeString = [NSString stringWithFormat:@"tel:1-%@", cleanedPhoneString];
     NSLog(@"%@", telephoneSchemeString);
     NSURL * phoneURL = [NSURL URLWithString:telephoneSchemeString];
     if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
+        [[GANTracker sharedTracker] trackEvent:@"phone_call"
+                                        action:@"launch_phone"
+                                         label:self.place.phone_number
+                                         value:0
+                                     withError:nil];
         [[UIApplication sharedApplication] openURL:phoneURL];
     }else{
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your device can't make phone calls" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -101,9 +107,24 @@
                                             self.place.postal_code,kABPersonAddressZIPKey, nil];
         MKPlacemark * placemark = [[MKPlacemark alloc] initWithCoordinate:coord addressDictionary:addressDictionary];
         MKMapItem * mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:self.place.name];
+        [mapItem setPhoneNumber:self.place.phone_number];
+        if (![self.place.website isKindOfClass:[NSNull class]]) {
+            [mapItem setUrl:[NSURL URLWithString:self.place.website]];
+        }
         [MKMapItem openMapsWithItems:@[ mapItem ] launchOptions:nil];
+        [[GANTracker sharedTracker] trackEvent:@"get_directions"
+                                        action:@"launch_apple_maps"
+                                         label:self.place.street
+                                         value:0
+                                     withError:nil];
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mapsURLFormatted]];
+        [[GANTracker sharedTracker] trackEvent:@"get_directions"
+                                        action:@"launch_google_maps"
+                                         label:self.place.street
+                                         value:0
+                                     withError:nil];
     }
 }
 

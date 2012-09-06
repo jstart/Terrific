@@ -56,6 +56,7 @@
 		FD5380BF15F221ED0016447B /* DCFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5380B815F221ED0016447B /* DCFrameView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FD5380C015F221ED0016447B /* DCIntrospect.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5380BA15F221ED0016447B /* DCIntrospect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FD5380C115F221ED0016447B /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5380BD15F221ED0016447B /* DCStatusBarOverlay.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 		FD8D60C8154F471B00F4B326 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D60C7154F471B00F4B326 /* libTestFlight.a */; };
 		FD8D60CB154F4A6200F4B326 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */; };
 		FD8D610D15505A6600F4B326 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D610C15505A6600F4B326 /* libFlurryAnalytics.a */; };
@@ -74,6 +75,11 @@
 		FD8D61FA1551F86E00F4B326 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D61F91551F86E00F4B326 /* CoreText.framework */; };
 		FD8FA61615F4871D000ECBEC /* SGPlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8FA61515F4871D000ECBEC /* SGPlaceDetailsViewController.m */; };
 		FD8FA61915F49B0C000ECBEC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8FA61815F49B0C000ECBEC /* AddressBook.framework */; };
+		FDB3FFF615F72F8A0003CC60 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = FDB3FFF015F72F8A0003CC60 /* .gitattributes */; };
+		FDB3FFF715F72F8A0003CC60 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFF215F72F8A0003CC60 /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDB3FFF815F72F8A0003CC60 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFF415F72F8A0003CC60 /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FDB3FFF915F72F8A0003CC60 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FDB3FFF515F72F8A0003CC60 /* README.md */; };
+		FDB3FFFC15F72FBD0003CC60 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB3FFFB15F72FBD0003CC60 /* CoreTelephony.framework */; };
 		FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48446154CFBE00035BB36 /* UIKit.framework */; };
 		FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48448154CFBE00035BB36 /* Foundation.framework */; };
 		FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */; };
@@ -221,6 +227,7 @@
 		FD5380BC15F221ED0016447B /* DCStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCStatusBarOverlay.h; sourceTree = "<group>"; };
 		FD5380BD15F221ED0016447B /* DCStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCStatusBarOverlay.m; sourceTree = "<group>"; };
 		FD5907EE155488A000678CB7 /* SGAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAnnotation.h; sourceTree = "<group>"; };
+		FD8D133315F4C04700A4C749 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		FD8D60C7154F471B00F4B326 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../libTestFlight.a; sourceTree = "<group>"; };
 		FD8D60C9154F472600F4B326 /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../TestFlight.h; sourceTree = "<group>"; };
 		FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
@@ -250,6 +257,13 @@
 		FD8FA61415F4871D000ECBEC /* SGPlaceDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlaceDetailsViewController.h; sourceTree = "<group>"; };
 		FD8FA61515F4871D000ECBEC /* SGPlaceDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceDetailsViewController.m; sourceTree = "<group>"; };
 		FD8FA61815F49B0C000ECBEC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FDB3FFF015F72F8A0003CC60 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		FDB3FFF115F72F8A0003CC60 /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
+		FDB3FFF215F72F8A0003CC60 /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly.m; sourceTree = "<group>"; };
+		FDB3FFF315F72F8A0003CC60 /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
+		FDB3FFF415F72F8A0003CC60 /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
+		FDB3FFF515F72F8A0003CC60 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		FDB3FFFB15F72FBD0003CC60 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		FDC48442154CFBE00035BB36 /* SpotAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC48446154CFBE00035BB36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FDC48448154CFBE00035BB36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -306,6 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDB3FFFC15F72FBD0003CC60 /* CoreTelephony.framework in Frameworks */,
 				FD8FA61915F49B0C000ECBEC /* AddressBook.framework in Frameworks */,
 				FD8D61FA1551F86E00F4B326 /* CoreText.framework in Frameworks */,
 				FD8D61391550ACBA00F4B326 /* CFNetwork.framework in Frameworks */,
@@ -321,6 +336,7 @@
 				FD8D610D15505A6600F4B326 /* libFlurryAnalytics.a in Frameworks */,
 				FD8D61341550AAFE00F4B326 /* libGoogleAnalytics.a in Frameworks */,
 				FD8D61351550AAFE00F4B326 /* libGoogleAnalytics_NoThumb.a in Frameworks */,
+				FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +355,7 @@
 		FD537FC315F1FB330016447B /* Production */ = {
 			isa = PBXGroup;
 			children = (
+				FDB3FFEF15F72F8A0003CC60 /* Countly */,
 				FD537FD715F1FB9F0016447B /* nimbus */,
 				FD537FD315F1FB6A0016447B /* RCLocationManager */,
 				FD537FD215F1FB520016447B /* MPFlipViewController */,
@@ -662,10 +679,23 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		FDB3FFEF15F72F8A0003CC60 /* Countly */ = {
+			isa = PBXGroup;
+			children = (
+				FDB3FFF015F72F8A0003CC60 /* .gitattributes */,
+				FDB3FFF115F72F8A0003CC60 /* Countly.h */,
+				FDB3FFF215F72F8A0003CC60 /* Countly.m */,
+				FDB3FFF315F72F8A0003CC60 /* Countly_OpenUDID.h */,
+				FDB3FFF415F72F8A0003CC60 /* Countly_OpenUDID.m */,
+				FDB3FFF515F72F8A0003CC60 /* README.md */,
+			);
+			name = Countly;
+			path = Vendor/Production/Countly;
+			sourceTree = SOURCE_ROOT;
+		};
 		FDC48437154CFBDF0035BB36 = {
 			isa = PBXGroup;
 			children = (
-				FD8FA61815F49B0C000ECBEC /* AddressBook.framework */,
 				FDC4844C154CFBE00035BB36 /* SpotAndGo */,
 				FDC48445154CFBE00035BB36 /* Frameworks */,
 				FDC48443154CFBE00035BB36 /* Products */,
@@ -683,6 +713,9 @@
 		FDC48445154CFBE00035BB36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FDB3FFFB15F72FBD0003CC60 /* CoreTelephony.framework */,
+				FD8FA61815F49B0C000ECBEC /* AddressBook.framework */,
+				FD8D133315F4C04700A4C749 /* Crashlytics.framework */,
 				FD8D61361550ACAF00F4B326 /* libsqlite3.0.dylib */,
 				FD8D60CA154F4A6200F4B326 /* libz.1.2.5.dylib */,
 				FD8D61F91551F86E00F4B326 /* CoreText.framework */,
@@ -791,6 +824,7 @@
 				FDC4843E154CFBE00035BB36 /* Sources */,
 				FDC4843F154CFBE00035BB36 /* Frameworks */,
 				FDC48440154CFBE00035BB36 /* Resources */,
+				FD8D133115F4BF0800A4C749 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -854,10 +888,28 @@
 				FD8D61181550A4A900F4B326 /* README.md in Resources */,
 				FD53809815F201F00016447B /* CHANGELOG.md in Resources */,
 				FD53809A15F201F00016447B /* README.md in Resources */,
+				FDB3FFF615F72F8A0003CC60 /* .gitattributes in Resources */,
+				FDB3FFF915F72F8A0003CC60 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FD8D133115F4BF0800A4C749 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run ff6f76d45da103570f8070443d1760ea5199fc81";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FDC4843E154CFBE00035BB36 /* Sources */ = {
@@ -929,6 +981,8 @@
 				FD5380C015F221ED0016447B /* DCIntrospect.m in Sources */,
 				FD5380C115F221ED0016447B /* DCStatusBarOverlay.m in Sources */,
 				FD8FA61615F4871D000ECBEC /* SGPlaceDetailsViewController.m in Sources */,
+				FDB3FFF715F72F8A0003CC60 /* Countly.m in Sources */,
+				FDB3FFF815F72F8A0003CC60 /* Countly_OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,6 +1049,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
 				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";
@@ -1014,6 +1072,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpotAndGo/SpotAndGo-Prefix.pch";
 				INFOPLIST_FILE = "SpotAndGo/SpotAndGo-Info.plist";

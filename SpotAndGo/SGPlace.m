@@ -23,10 +23,9 @@
     self.postal_code = [addressDictionary objectForKey:@"postal_code"];
     self.state = [addressDictionary objectForKey:@"state"];
     self.street = [addressDictionary objectForKey:@"street"];
-    self.factual_id = [dictionary objectForKey:@"factual_id"];
     self.latitude = [dictionary objectForKey:@"latitude"];
     self.longitude = [dictionary objectForKey:@"longitude"];
-    self.name = [dictionary objectForKey:@"name"];
+    self.name = [[dictionary objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     self.phone_number = [dictionary objectForKey:@"phone_number"];
     self.website = [dictionary objectForKey:@"website"];
 }
