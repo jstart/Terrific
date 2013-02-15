@@ -80,6 +80,8 @@
 		FDB3FFF815F72F8A0003CC60 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB3FFF415F72F8A0003CC60 /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FDB3FFF915F72F8A0003CC60 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FDB3FFF515F72F8A0003CC60 /* README.md */; };
 		FDB3FFFC15F72FBD0003CC60 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDB3FFFB15F72FBD0003CC60 /* CoreTelephony.framework */; };
+		FDB4398816CEDE190040B95A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FDB4398716CEDE190040B95A /* Icon.png */; };
+		FDB4398A16CEDE1D0040B95A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDB4398916CEDE1D0040B95A /* Icon@2x.png */; };
 		FDC48447154CFBE00035BB36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48446154CFBE00035BB36 /* UIKit.framework */; };
 		FDC48449154CFBE00035BB36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC48448154CFBE00035BB36 /* Foundation.framework */; };
 		FDC4844B154CFBE00035BB36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDC4844A154CFBE00035BB36 /* CoreGraphics.framework */; };
@@ -264,6 +266,8 @@
 		FDB3FFF415F72F8A0003CC60 /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
 		FDB3FFF515F72F8A0003CC60 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		FDB3FFFB15F72FBD0003CC60 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		FDB4398716CEDE190040B95A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FDB4398916CEDE1D0040B95A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FDC48442154CFBE00035BB36 /* SpotAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC48446154CFBE00035BB36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FDC48448154CFBE00035BB36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -696,6 +700,8 @@
 		FDC48437154CFBDF0035BB36 = {
 			isa = PBXGroup;
 			children = (
+				FDB4398916CEDE1D0040B95A /* Icon@2x.png */,
+				FDB4398716CEDE190040B95A /* Icon.png */,
 				FDC4844C154CFBE00035BB36 /* SpotAndGo */,
 				FDC48445154CFBE00035BB36 /* Frameworks */,
 				FDC48443154CFBE00035BB36 /* Products */,
@@ -890,6 +896,8 @@
 				FD53809A15F201F00016447B /* README.md in Resources */,
 				FDB3FFF615F72F8A0003CC60 /* .gitattributes in Resources */,
 				FDB3FFF915F72F8A0003CC60 /* README.md in Resources */,
+				FDB4398816CEDE190040B95A /* Icon.png in Resources */,
+				FDB4398A16CEDE1D0040B95A /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1056,7 @@
 		FDC48461154CFBE00035BB36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1064,6 +1073,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1071,7 +1081,9 @@
 		FDC48462154CFBE00035BB36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ARCHS = armv7;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1087,6 +1099,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

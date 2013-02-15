@@ -30,11 +30,14 @@ static NSString* const kAnalyticsAccountId = @"UA-31324397-1";
 
 @synthesize window = _window;
 
++ (SGAppDelegate *)sharedAppDelegate {
+	return (SGAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
 -(BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
 
     [[SVHTTPClient sharedClient] setBasePath:kBaseURL];
-    [[Countly sharedInstance] start:@"cd841b695c8d8e17858fd3cf6adf3b3bc3acb939" withHost:@"http://fast-coast-8722.herokuapp.com"];
     [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
     [MixpanelAPI sharedAPIWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
     [[MixpanelAPI sharedAPI] identifyUser:[OpenUDID value]];

@@ -11,6 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <AddressBook/AddressBook.h>
+#include <QuartzCore/QuartzCore.h>
 
 @interface SGPlaceDetailsViewController ()
 
@@ -57,13 +58,13 @@
     UIButton * directionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [directionsButton setFrame:CGRectMake(10, 55, 135, 30)];
     [directionsButton.titleLabel setFont:font];
-    directionsButton.backgroundColor = [UIColor grayColor];
+    directionsButton.backgroundColor = [UIColor clearColor];
     directionsButton.alpha = 0.8;
     directionsButton.layer.borderColor = [UIColor blackColor].CGColor;
     directionsButton.layer.borderWidth = 2;
     directionsButton.layer.cornerRadius = 10;
     [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
-    [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
+    [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchDown];
     [placeDetailsViewController.view addSubview:directionsButton];
     
 //    placeDetailsViewController.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake (0, 115/2, 150, 40)];
@@ -149,10 +150,12 @@
 }
 
 // called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    return YES;
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ((touch.view == self.phoneLabel)) {//change it to your condition
+        return YES;
+    }
+    return NO;
 }
-
 
 - (void)viewDidLoad
 {

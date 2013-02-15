@@ -36,14 +36,16 @@ static SGNetworkManager * sharedManager;
         if (error) {
             NSLog(@"category search error %@", error);
         }
-        if ([response isKindOfClass:[NSArray class]] && [[response objectAtIndex:0] isKindOfClass:[NSDictionary class]]) {
-            NSMutableArray * placeArray = [NSMutableArray array];
-            for (NSDictionary * placeDictionary in response) {
-                SGPlace * place = [SGPlace objectWithDictionary:placeDictionary];
-                [placeArray addObject:place];
+        if ([response isKindOfClass:[NSArray class]] && [response count] > 0) {
+            if ([[response objectAtIndex:0] isKindOfClass:[NSDictionary class]]) {
+                NSMutableArray * placeArray = [NSMutableArray array];
+                for (NSDictionary * placeDictionary in response) {
+                    SGPlace * place = [SGPlace objectWithDictionary:placeDictionary];
+                    [placeArray addObject:place];
+                }
+                success(placeArray);
+                [self checkForDupes:placeArray];
             }
-            success(placeArray);
-            [self checkForDupes:placeArray];
         }else{
             failure(error);
         }

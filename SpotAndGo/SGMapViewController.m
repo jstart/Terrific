@@ -5,8 +5,7 @@
 //  Created by Truman, Christopher on 4/28/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-#import <CoreLocation/CoreLocation.h>
-#import <QuartzCore/QuartzCore.h>
+#import "SGAppDelegate.h"
 #import "SGMapViewController.h"
 #import "SGDetailCardViewController.h"
 #import "SGPlaceImageViewController.h"
@@ -92,7 +91,8 @@
 
 - (void)performSearch {
   [TestFlight passCheckpoint:@"performSearch"];
-  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude] ?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+  CLLocation * currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
+  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ?[NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
 
 //  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     [[SGNetworkManager sharedManager]categorySearchWithCategory:currentCategory locationArray:locationArray success:^(NSArray * placeArray){
@@ -112,7 +112,7 @@
         }
         
         [self.mapView addAnnotations:annotationsArray];
-        lastAnnotationsMapRegion = [self regionOfAnnotations:annotationsArray];
+        lastAnnotationsMapRegion = [self region];
         [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
         [self updateResultCards];
     } failure:^(NSError* error){
@@ -226,6 +226,55 @@
   } else {
     return self.mapView.region;
   }
+}
+
+-(MKCoordinateRegion)region{
+    MKCoordinateRegion region;
+
+    CLLocationDegrees maxLat = -90;
+    CLLocationDegrees maxLon = -180;
+    CLLocationDegrees minLat = 90;
+    CLLocationDegrees minLon = 180;
+    for (id<MKAnnotation> annotation in self.mapView.annotations) {
+        if (annotation.coordinate.latitude > maxLat) {
+            maxLat = annotation.coordinate.latitude;
+        }
+        if (annotation.coordinate.latitude < minLat) {
+            minLat = annotation.coordinate.latitude;
+        }
+        if (annotation.coordinate.longitude > maxLon) {
+            maxLon = annotation.coordinate.longitude;
+        }
+        if (annotation.coordinate.longitude < minLon) {
+            minLon = annotation.coordinate.longitude;
+        }
+    }
+    if ([self.mapView.annotations count] > 0) {
+        CLLocationCoordinate2D newCenter;
+        newCenter.latitude = 0.5 *(minLat + maxLat);
+        newCenter.longitude = 0.5 * (minLon + maxLon);
+
+    // pad our map by 10% around the farthest annotations
+#define MAP_PADDING 1.1
+    
+    // we'll make sure that our minimum vertical span is about a kilometer
+    // there are ~111km to a degree of latitude. regionThatFits will take care of
+    // longitude, which is more complicated, anyway. 
+#define MINIMUM_VISIBLE_LATITUDE 0.01
+    
+    region.center.latitude = (minLat + maxLat) / 2;
+    region.center.longitude = (minLon + maxLon) / 2;
+    
+    region.span.latitudeDelta = (maxLat - minLat) * MAP_PADDING;
+    
+    region.span.latitudeDelta = (region.span.latitudeDelta < MINIMUM_VISIBLE_LATITUDE)
+    ? MINIMUM_VISIBLE_LATITUDE 
+    : region.span.latitudeDelta;
+    
+    region.span.longitudeDelta = (maxLon - minLon) * MAP_PADDING;
+    }
+    MKCoordinateRegion scaledRegion = [self.mapView regionThatFits:region];
+    return scaledRegion;
 }
 
 //return true if  the region contains the coorinate

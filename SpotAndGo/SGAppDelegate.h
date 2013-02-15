@@ -17,4 +17,6 @@
 @property (strong, nonatomic) CLGeocoder * geocoder;
 @property (strong, nonatomic) CLLocation * currentLocation;
 
++ (SGAppDelegate *)sharedAppDelegate;
+
 @end

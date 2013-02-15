@@ -21,7 +21,7 @@
 #define kDefaultZoomToStreetLonMeters 1600*1
 #define kMinLeftEdgePadding 40
 #define kMinRightEdgePadding 40
-#define kPinEdgePaddingSpan 0.04
+#define kPinEdgePaddingSpan 0.002
 #define kPinEdgePaddingPercent 15
 #define kCenterPercentDeltaThreshold .6
 #define kMinDegreeSpan .001
