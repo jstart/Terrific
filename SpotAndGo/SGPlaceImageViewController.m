@@ -27,9 +27,9 @@
 +(SGPlaceImageViewController*)placeImageViewControllerWithPlace:(SGPlace*)place{
     SGPlaceImageViewController * placeImageViewController = [[SGPlaceImageViewController alloc] init];
     placeImageViewController.place = place;
-    [[placeImageViewController view] setFrame:CGRectMake(0, 0, 155, 95)];
+    [[placeImageViewController view] setFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
-    placeImageViewController.mapImageView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 155, 95)];
+    placeImageViewController.mapImageView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view addSubview:placeImageViewController.mapImageView];
     
     CGRect overlayFrame = placeImageViewController.mapImageView.frame;
@@ -42,6 +42,7 @@
     
     placeImageViewController.nameLabel = [[UILabel alloc] initWithFrame:overlayFrame];
     placeImageViewController.nameLabel.backgroundColor = [UIColor clearColor];
+    placeImageViewController.nameLabel.textAlignment = NSTextAlignmentCenter;
     UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:14];
     [placeImageViewController.nameLabel setFont:font];
     [placeImageViewController.nameLabel setTextColor:[UIColor whiteColor]];
@@ -51,7 +52,7 @@
     float lat = [place.latitude floatValue];
     float lon = [place.longitude floatValue];
     
-    NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 155, 95,lat, lon];
+    NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 160, 100, lat, lon];
     [placeImageViewController.mapImageView setPathToNetworkImage:googleMapURL];
     return placeImageViewController;
 }
@@ -59,6 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  self.trackedViewName = self.place.name;
 	// Do any additional setup after loading the view.
 }
 

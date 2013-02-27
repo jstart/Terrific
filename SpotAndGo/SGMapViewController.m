@@ -12,7 +12,7 @@
 #import "SGNetworkManager.h"
 #import "SGPlace.h"
 #import "SGAnnotation.h"
-
+#import "SGConstants.h"
 #import "YRDropdownView.h"
 
 
@@ -35,28 +35,72 @@
   return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  [self.mapView setDelegate:self];
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  self.trackedViewName = self.currentCategory;
+  // Do any additional setup after loading the view.
+
   self.placeResultCardViewController = [[SGDetailCardViewController alloc] init];
   [self.placeResultCardViewController setDelegate:self];
-  [self.placeResultCardViewController.view setFrame:CGRectMake(0, 216, 320, 244)];
+  
+  int rowNumber = isPhone568 ? 3:2;
+  int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
+  self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
+  [self.mapView setDelegate:self];
+  [self.view addSubview:self.mapView];
+  
+  int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - mapHeight;
+  [self.placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, 320, resultsHeight)];
+  
+  [self.placeResultCardViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
   [self addChildViewController:self.placeResultCardViewController];
   [[self view] addSubview:self.placeResultCardViewController.view];
   [self.placeResultCardViewController didMoveToParentViewController:self];
-  [[GANTracker sharedTracker] trackPageview:@"/map"
-                                  withError:nil];
-  [self.mapView setShowsUserLocation:YES];
+}
 
-  [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
-    
+- (void)viewDidUnload
+{
+  [super viewDidUnload];
+  // Release any retained subviews of the main view.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+  [self.mapView setShowsUserLocation:YES];
   [self.navigationController setNavigationBarHidden:NO animated:YES];
   [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:226/255.0f green:225/255.0f blue:222/255.0f alpha:1]];
-
-  
   self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotgo_logo.png"]];
   
-  currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
-  authStatus = [CLLocationManager authorizationStatus];
+  self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+  self.authStatus = [CLLocationManager authorizationStatus];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+  if([keyPath isEqualToString:@"view.frame"]) {
+    CGRect oldFrame = CGRectNull;
+    CGRect newFrame = CGRectNull;
+    if([change objectForKey:@"old"] != [NSNull null]) {
+	    oldFrame = [[change objectForKey:@"old"] CGRectValue];
+    }
+    if([object valueForKeyPath:keyPath] != [NSNull null]) {
+	    newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+      int rowNumber = isPhone568 ? 3:2;
+      int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
+      int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - mapHeight - 20;
+      if (newFrame.size.height != resultsHeight) {
+        CGRect frame = ((UIViewController *) object).view.frame;
+        frame.size.height = resultsHeight;
+        [((UIViewController *) object).view setFrame:frame];
+	    }
+    }
+  }
+}
+
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+  [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -95,39 +139,37 @@
   NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ?[NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
 
 //  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
-    [[SGNetworkManager sharedManager]categorySearchWithCategory:currentCategory locationArray:locationArray success:^(NSArray * placeArray){
-        self.currentPlaces = [placeArray mutableCopy];
-        NSMutableArray * annotationsArray = [NSMutableArray array];
-        for (SGPlace * place in self.currentPlaces) {
-            SGAnnotation * annotation = [[SGAnnotation alloc] init];
-            [annotation setTitle:place.name];
-            [[GANTracker sharedTracker] trackEvent:@"show_square"
-                                                 action:@"flip"
-                                                  label:place.name
-                                                  value:0
-                                         withError:nil];
-            CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake ([place.latitude floatValue], [place.longitude floatValue]);
-            [annotation setCoordinate:coordinate];
-            [annotationsArray addObject:annotation];
-        }
-        
-        [self.mapView addAnnotations:annotationsArray];
-        lastAnnotationsMapRegion = [self region];
-        [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
-        [self updateResultCards];
-    } failure:^(NSError* error){
-        NSLog(@"error searching categories %@", error);
-        [YRDropdownView showDropdownInView:self.view
-                                     title:@"No Spots Found"
-                                    detail:@"No great spots were found :( Try again!"
-                                     image:[UIImage imageNamed:@"dropdown-alert"]
-                                  animated:YES
-                                 hideAfter:3];
-    }];       
+  int numOfResults = isPhone568 ? 6 : 4;
+  [[SGNetworkManager sharedManager]categorySearchWithCategory:currentCategory locationArray:locationArray resultCount:numOfResults success:^(NSArray * placeArray){
+      self.currentPlaces = [placeArray mutableCopy];
+      NSMutableArray * annotationsArray = [NSMutableArray array];
+      for (SGPlace * place in self.currentPlaces) {
+          SGAnnotation * annotation = [[SGAnnotation alloc] init];
+          [annotation setTitle:place.name];
+        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Show Results" withAction:place.name withLabel:@"Show Square" withValue:@(0)];
+
+          CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake ([place.latitude floatValue], [place.longitude floatValue]);
+          [annotation setCoordinate:coordinate];
+          [annotationsArray addObject:annotation];
+      }
+      
+      [self.mapView addAnnotations:annotationsArray];
+      lastAnnotationsMapRegion = [self region];
+      [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
+      [self updateResultCards];
+  } failure:^(NSError* error){
+      NSLog(@"error searching categories %@", error);
+      [YRDropdownView showDropdownInView:self.view
+                                   title:@"No Spots Found"
+                                  detail:@"No great spots were found :( Try again!"
+                                   image:[UIImage imageNamed:@"dropdown-alert"]
+                                animated:YES
+                               hideAfter:3];
+  }];       
 }
 
 - (void)updateResultCards {
-  for (int i = 0; i< [self.currentPlaces count]; i++) {
+  for (int i = 0; i < [self.currentPlaces count]; i++) {
     SGPlace * place = [self.currentPlaces objectAtIndex:i];
     NSLog(@"updating... %@", place.name);
     MPFlipViewController * currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
@@ -255,7 +297,7 @@
         newCenter.longitude = 0.5 * (minLon + maxLon);
 
     // pad our map by 10% around the farthest annotations
-#define MAP_PADDING 1.1
+#define MAP_PADDING 1.2
     
     // we'll make sure that our minimum vertical span is about a kilometer
     // there are ~111km to a degree of latitude. regionThatFits will take care of
@@ -330,18 +372,16 @@
 -(void)placeSelected:(SGPlace*)place{
     SGAnnotation * chosenAnnotation;
     for (SGAnnotation * annotation in [self.mapView annotations]) {
+      if ([annotation respondsToSelector:@selector(title)]) {
         if ([annotation.title isEqualToString:place.name]) {
-            if (![[GANTracker sharedTracker] trackEvent:@"show_directions"
-                                                 action:@"flip"
-                                                  label:place.name
-                                                  value:0
-                                              withError:nil])
+            [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:place.name withLabel:@"Tap Directions" withValue:@(0)];
             
             [TestFlight passCheckpoint:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
-            [[MixpanelAPI sharedAPI] track:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
-            [FlurryAnalytics logEvent:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
+            [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
+            [Flurry logEvent:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
             chosenAnnotation = annotation;
         }
+      }
     }
     if (chosenAnnotation != nil) {
         [self.mapView selectAnnotation:chosenAnnotation animated:YES];
@@ -351,19 +391,6 @@
 -(void) displayAlert:(NSString*) title message:(NSString*) message {
 	UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
 	[alert show];
-}
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  // Do any additional setup after loading the view.
-}
-
-- (void)viewDidUnload
-{
-  [self setMapView:nil];
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

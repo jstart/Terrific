@@ -32,7 +32,6 @@
     SGPlaceDetailsViewController * placeDetailsViewController = [[SGPlaceDetailsViewController alloc] init];
 
     placeDetailsViewController.place = place;
-    [[placeDetailsViewController view] setFrame:CGRectMake(0, 0, 155, 95)];
     [placeDetailsViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
     
     UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:18];
@@ -86,11 +85,7 @@
     NSLog(@"%@", telephoneSchemeString);
     NSURL * phoneURL = [NSURL URLWithString:telephoneSchemeString];
     if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-        [[GANTracker sharedTracker] trackEvent:@"phone_call"
-                                        action:@"launch_phone"
-                                         label:self.place.phone_number
-                                         value:0
-                                     withError:nil];
+        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Phone Call" withValue:@(0)];
         [[UIApplication sharedApplication] openURL:phoneURL];
     }else{
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your device can't make phone calls" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -114,18 +109,10 @@
             [mapItem setUrl:[NSURL URLWithString:self.place.website]];
         }
         [MKMapItem openMapsWithItems:@[ mapItem ] launchOptions:nil];
-        [[GANTracker sharedTracker] trackEvent:@"get_directions"
-                                        action:@"launch_apple_maps"
-                                         label:self.place.street
-                                         value:0
-                                     withError:nil];
+        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Directions Apple Maps" withValue:@(0)];
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mapsURLFormatted]];
-        [[GANTracker sharedTracker] trackEvent:@"get_directions"
-                                        action:@"launch_google_maps"
-                                         label:self.place.street
-                                         value:0
-                                     withError:nil];
+      [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Directions Google Maps" withValue:@(0)];
     }
 }
 
@@ -160,6 +147,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  self.trackedViewName = self.place.name;
 	// Do any additional setup after loading the view.
 }
 

@@ -10,7 +10,7 @@
 
 @class SGPlace;
 
-@interface SGPlaceImageViewController : UIViewController
+@interface SGPlaceImageViewController : GAITrackedViewController
 
 @property (nonatomic, strong) SGPlace * place;
 @property (nonatomic, strong) NINetworkImageView * mapImageView;

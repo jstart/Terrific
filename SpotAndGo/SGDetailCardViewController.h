@@ -17,7 +17,7 @@
 
 @end
 
-@interface SGDetailCardViewController : UIViewController <MPFlipViewControllerDataSource, MPFlipViewControllerDelegate>
+@interface SGDetailCardViewController : GAITrackedViewController <MPFlipViewControllerDataSource, MPFlipViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray * flipViewControllerArray;
 @property (nonatomic, strong) id <SGDetailCardViewDelegate> delegate;

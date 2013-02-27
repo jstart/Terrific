@@ -21,18 +21,15 @@ static SGNetworkManager * sharedManager;
     return sharedManager;
 }
 
--(void)categorySearchWithCategory:(NSString*)category locationArray:(NSArray*)locationArray success:(void (^)(NSArray * placeArray))success failure:(void (^)(NSError * error))failure {
-    NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:category,@"category",locationArray,@"location", nil];
+-(void)categorySearchWithCategory:(NSString*)category locationArray:(NSArray*)locationArray resultCount:(int)resultCount success:(void (^)(NSArray * placeArray))success failure:(void (^)(NSError * error))failure {
+    NSDictionary * postDictionary = [NSDictionary dictionaryWithObjectsAndKeys:category,@"category",locationArray,@"location", @(resultCount), @"result_count", nil];
     NSString * trackingString = [NSString stringWithFormat:@"%@ %@,%@", category, [locationArray objectAtIndex:0], [locationArray objectAtIndex:1]];
     [TestFlight passCheckpoint:trackingString];
-    [[MixpanelAPI sharedAPI] track:@"category_search" properties:postDictionary];
-    [[GANTracker sharedTracker] trackEvent:@"place_search"
-                                    action:@"flip"
-                                     label:trackingString
-                                     value:0
-                                 withError:nil];
+    [[Mixpanel sharedInstance] track:@"category_search" properties:postDictionary];
+    [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Category Search" withAction:trackingString withLabel:@"Category Search" withValue:@(0)];
+
     [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
-    [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSError * error){
+    [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error){
         if (error) {
             NSLog(@"category search error %@", error);
         }
@@ -60,26 +57,13 @@ static SGNetworkManager * sharedManager;
             }
             NSRange nameRange = [place.name rangeOfString:otherPlace.name options:NSCaseInsensitiveSearch];
             if(nameRange.location != NSNotFound) {
-                [[GANTracker sharedTracker] trackEvent:@"duplicate"
-                                                action:@"name"
-                                                 label:place.name
-                                                 value:0
-                                             withError:nil];
+              [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate Name" withValue:@(0)];
             }
             if ([place.latitude isEqualToString: otherPlace.latitude] && [place.longitude isEqualToString: otherPlace.longitude]) {
-                [[GANTracker sharedTracker] trackEvent:@"duplicate"
-                                                action:@"latlon"
-                                                 label:place.name
-                                                 value:0
-                                             withError:nil];
-                
+              [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate LatLon" withValue:@(0)];
             }
             if ([place.phone_number isEqualToString: otherPlace.phone_number]) {
-                [[GANTracker sharedTracker] trackEvent:@"duplicate"
-                                                action:@"phone"
-                                                 label:place.name
-                                                 value:0
-                                             withError:nil];
+[[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate Phone" withValue:@(0)];
             }
         }
     }

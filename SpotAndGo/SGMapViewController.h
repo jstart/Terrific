@@ -27,10 +27,10 @@
 #define kMinDegreeSpan .001
 #define kSpanPercentDeltaThreshold .4
 
-@interface SGMapViewController : UIViewController<MKMapViewDelegate, SGDetailCardViewDelegate>{
+@interface SGMapViewController : GAITrackedViewController <MKMapViewDelegate, SGDetailCardViewDelegate>{
   MKCoordinateRegion lastAnnotationsMapRegion;  
 }
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) SGDetailCardViewController *placeResultCardViewController;
 @property (strong, nonatomic) NSMutableArray *currentPlaces;
 @property (strong, nonatomic) NSString * currentCategory;

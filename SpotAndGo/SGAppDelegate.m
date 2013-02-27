@@ -8,7 +8,6 @@
 
 #import "SGAppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "Countly.h"
 #import "SVHTTPClient.h"
 #import "SGConstants.h"
 #import "RCLocationManager.h"
@@ -39,24 +38,27 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [[SVHTTPClient sharedClient] setBasePath:kBaseURL];
     [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
-    [MixpanelAPI sharedAPIWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
-    [[MixpanelAPI sharedAPI] identifyUser:[OpenUDID value]];
-    [FlurryAnalytics startSession:@"FJX9G2A6P8VGCM5736M7"];
-    [FlurryAnalytics setUserID:[OpenUDID value]];
+    [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
+    [[Mixpanel sharedInstance] identify:[OpenUDID value]];
+    [Flurry startSession:@"FJX9G2A6P8VGCM5736M7"];
+    [Flurry setUserID:[OpenUDID value]];
     
-    [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
+    [TestFlight takeOff:@"149fea64-54e2-4696-8c05-844a849d7f6a"];
 
     [TestFlight setDeviceIdentifier:[OpenUDID value]];
-    [[MixpanelAPI sharedAPI] track:@"Launched"];
-    [[Countly sharedInstance] recordEvent:@"launched" count:1];
-
+    [[Mixpanel sharedInstance] track:@"Launched"];
         
-    [[GANTracker sharedTracker] startTrackerWithAccountID:kAnalyticsAccountId
-                                           dispatchPeriod:kGANDispatchPeriodSec
-                                                 delegate:nil];
+  // Optional: automatically send uncaught exceptions to Google Analytics.
+  [GAI sharedInstance].trackUncaughtExceptions = YES;
+  // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+  [GAI sharedInstance].dispatchInterval = 20;
+  // Optional: set debug to YES for extra debugging information.
+//  [GAI sharedInstance].debug = YES;
+  // Create tracker instance.
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
+  
     NSError *error;
-    [[GANTracker sharedTracker] trackPageview:@"/app_entry_point"
-                                    withError:&error];
+  [tracker trackEventWithCategory:@"Launcg" withAction:@"app_entry_point" withLabel:@"Lancg" withValue:@(0)];
     if (error) {
         NSLog(@"error in trackPageview %@", error);
     }
@@ -83,31 +85,16 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  
-  NSError *error;
-  if (![[GANTracker sharedTracker] trackEvent:@"Application iOS"
-                                      action:@"Background iOS"
-                                       label:@"Example iOS"
-                                       value:0
-                                   withError:&error]) {
-  NSLog(@"error in trackEvent");
-  }
-  [[MixpanelAPI sharedAPI] track:@"Sent to Background"];
+  [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Background" withLabel:@"Sent to Background" withValue:@(0)];
+  [[Mixpanel sharedInstance] track:@"Sent to Background"];
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  NSError *error;
-  if (![[GANTracker sharedTracker] trackEvent:@"Application iOS"
-                                       action:@"Foreground iOS"
-                                        label:@"Example iOS"
-                                        value:0
-                                    withError:&error]) {
-    NSLog(@"error in trackEvent");
-  }
-  [[MixpanelAPI sharedAPI] track:@"Brought to foreground"];
+  [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Foreground" withLabel:@"Sent to Foreground" withValue:@(0)];
+  [[Mixpanel sharedInstance] track:@"Brought to foreground"];
 
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
@@ -119,14 +106,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-  NSError *error;
-  if (![[GANTracker sharedTracker] trackEvent:@"Application iOS"
-                                       action:@"Quit iOS"
-                                        label:@"Example iOS"
-                                        value:0
-                                    withError:&error]) {
-    NSLog(@"error in trackEvent");
-  }
+[[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Quit" withLabel:@"Quit" withValue:@(0)];
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

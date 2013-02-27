@@ -12,6 +12,6 @@
 
 +(SGNetworkManager*)sharedManager;
 
--(void)categorySearchWithCategory:(NSString*)category locationArray:(NSArray*)locationArray success:(void (^)(NSArray * placeArray))success failure:(void (^)(NSError * error))failure;
+-(void)categorySearchWithCategory:(NSString*)category locationArray:(NSArray*)locationArray resultCount:(int)resultCount success:(void (^)(NSArray * placeArray))success failure:(void (^)(NSError * error))failure;
 
 @end

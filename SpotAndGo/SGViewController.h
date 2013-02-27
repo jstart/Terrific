@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SGMapViewController.h"
 
-@interface SGViewController : UIViewController <CLLocationManagerDelegate>{
+@interface SGViewController : GAITrackedViewController <CLLocationManagerDelegate>{
   NSArray  *categoryButtons;
   CLLocationManager * locationManager;
 }
