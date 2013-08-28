@@ -13,7 +13,9 @@
 #import "RCLocationManager.h"
 #import "OpenUDID.h"
 #import "YRDropdownView.h"
-#import "DCIntrospect.h"
+//#import "DCIntrospect.h"
+//#import <PonyDebugger.h>
+#import <UIBarButtonItem+FlatUI.h>
 
 @interface SGAppDelegate()
 
@@ -47,7 +49,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [TestFlight setDeviceIdentifier:[OpenUDID value]];
     [[Mixpanel sharedInstance] track:@"Launched"];
-        
+    
+//    PDDebugger *debugger = [PDDebugger defaultInstance];
+//    [debugger enableNetworkTrafficDebugging];
+//    [debugger forwardAllNetworkTraffic];
+//    [debugger enableViewHierarchyDebugging];
+//    [debugger enableRemoteLogging];
+//    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+
   // Optional: automatically send uncaught exceptions to Google Analytics.
   [GAI sharedInstance].trackUncaughtExceptions = YES;
   // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
@@ -58,7 +67,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
   
     NSError *error;
-  [tracker trackEventWithCategory:@"Launcg" withAction:@"app_entry_point" withLabel:@"Lancg" withValue:@(0)];
     if (error) {
         NSLog(@"error in trackPageview %@", error);
     }
@@ -70,9 +78,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if (!self.geocoder) {
         self.geocoder = [[CLGeocoder alloc] init];
     }
+    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor colorWithWhite:0.475 alpha:1.000] highlightedColor:[UIColor colorWithWhite:0.658 alpha:1.000] cornerRadius:3];
     
 #if TARGET_IPHONE_SIMULATOR
-    [[DCIntrospect sharedIntrospector] start];
+//    [[DCIntrospect sharedIntrospector] start];
 #endif
     return YES;
 }
@@ -85,7 +94,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Background" withLabel:@"Sent to Background" withValue:@(0)];
   [[Mixpanel sharedInstance] track:@"Sent to Background"];
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -93,7 +101,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-  [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Foreground" withLabel:@"Sent to Foreground" withValue:@(0)];
   [[Mixpanel sharedInstance] track:@"Brought to foreground"];
 
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
@@ -106,7 +113,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-[[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"App State" withAction:@"Quit" withLabel:@"Quit" withValue:@(0)];
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 

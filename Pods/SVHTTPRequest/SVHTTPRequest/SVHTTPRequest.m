@@ -11,6 +11,10 @@
 
 @interface NSData (Base64)
 - (NSString*)base64EncodingWithLineLength:(unsigned int)lineLength;
+- (NSString *)getImageType;
+- (BOOL)isJPG;
+- (BOOL)isPNG;
+- (BOOL)isGIF;
 @end
 
 @interface NSString (OAURLEncodingAdditions)
@@ -26,8 +30,8 @@ enum {
 typedef NSUInteger SVHTTPRequestState;
 
 static NSUInteger taskCount = 0;
-static NSTimeInterval defaultTimeoutInterval = 20;
 static NSString *defaultUserAgent;
+static NSTimeInterval SVHTTPRequestTimeoutInterval = 20;
 
 @interface SVHTTPRequest ()
 
@@ -75,29 +79,28 @@ static NSString *defaultUserAgent;
 
 @implementation SVHTTPRequest
 
-// public properties
-@synthesize sendParametersAsJSON, cachePolicy, timeoutInterval;
-
-// private properties
-@synthesize operationRequest, operationData, operationConnection, operationParameters, operationURLResponse, operationFileHandle, state;
-@synthesize operationSavePath, operationCompletionBlock, operationProgressBlock, timeoutTimer;
-@synthesize expectedContentLength, receivedContentLength, saveDataDispatchGroup, saveDataDispatchQueue;
-@synthesize requestPath, userAgent, client;
+@synthesize state = _state;
 
 - (void)dealloc {
-    [operationConnection cancel];
+    [_operationConnection cancel];
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
-    dispatch_release(saveDataDispatchGroup);
-    dispatch_release(saveDataDispatchQueue);
+    dispatch_release(_saveDataDispatchGroup);
+    dispatch_release(_saveDataDispatchQueue);
 #endif
 }
 
 + (void)setDefaultTimeoutInterval:(NSTimeInterval)interval {
-    defaultTimeoutInterval = interval;
+    SVHTTPRequestTimeoutInterval = interval;
 }
 
 + (void)setDefaultUserAgent:(NSString *)userAgent {
     defaultUserAgent = userAgent;
+}
+
+- (NSUInteger)timeoutInterval {
+    if(_timeoutInterval == 0)
+        return SVHTTPRequestTimeoutInterval;
+    return _timeoutInterval;
 }
 
 - (void)increaseTaskCount {
@@ -134,21 +137,21 @@ static NSString *defaultUserAgent;
     return requestObject;
 }
 
-+ (SVHTTPRequest*)POST:(NSString *)address parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)block {
++ (SVHTTPRequest*)POST:(NSString *)address parameters:(NSObject *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:nil completion:block];
     [requestObject start];
     
     return requestObject;
 }
 
-+ (SVHTTPRequest*)POST:(NSString *)address parameters:(NSDictionary *)parameters progress:(void (^)(float))progressBlock completion:(void (^)(id, NSHTTPURLResponse*, NSError *))completionBlock {
++ (SVHTTPRequest*)POST:(NSString *)address parameters:(NSObject *)parameters progress:(void (^)(float))progressBlock completion:(void (^)(id, NSHTTPURLResponse*, NSError *))completionBlock {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:progressBlock completion:completionBlock];
     [requestObject start];
     
     return requestObject;
 }
 
-+ (SVHTTPRequest*)PUT:(NSString *)address parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)block {
++ (SVHTTPRequest*)PUT:(NSString *)address parameters:(NSObject *)parameters completion:(SVHTTPRequestCompletionHandler)block {
     SVHTTPRequest *requestObject = [[self alloc] initWithAddress:address method:SVHTTPRequestMethodPUT parameters:parameters saveToPath:nil progress:nil completion:block];
     [requestObject start];
     
@@ -181,7 +184,6 @@ static NSString *defaultUserAgent;
     self.operationProgressBlock = progressBlock;
     self.operationSavePath = savePath;
     self.operationParameters = parameters;
-    self.timeoutInterval = defaultTimeoutInterval;
     
     self.saveDataDispatchGroup = dispatch_group_create();
     self.saveDataDispatchQueue = dispatch_queue_create("com.samvermette.SVHTTPRequest", DISPATCH_QUEUE_SERIAL);
@@ -208,23 +210,25 @@ static NSString *defaultUserAgent;
 }
 
 
-- (void)addParametersToRequest:(NSDictionary*)paramsDict {
+- (void)addParametersToRequest:(NSObject*)parameters {
     
     NSString *method = self.operationRequest.HTTPMethod;
     
     if([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"]) {
         if(self.sendParametersAsJSON) {
-            [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-            NSError *jsonError;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:paramsDict options:0 error:&jsonError];
-            
-            if(jsonData && jsonError)
-                [NSException raise:NSInvalidArgumentException format:@"Request parameters couldn't be serialized into JSON."];
-            
-            [self.operationRequest setHTTPBody:jsonData];
-        } else {
+            if([parameters isKindOfClass:[NSArray class]] || [parameters isKindOfClass:[NSDictionary class]]) {
+                [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                NSError *jsonError;
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
+                [self.operationRequest setHTTPBody:jsonData];
+            }
+            else
+                [NSException raise:NSInvalidArgumentException format:@"POST and PUT parameters must be provided as NSDictionary or NSArray when sendParametersAsJSON is set to YES."];
+        }
+        else if([parameters isKindOfClass:[NSDictionary class]]) {
             __block BOOL hasData = NO;
-            
+            NSDictionary *paramsDict = (NSDictionary*)parameters;
+        
             [paramsDict.allValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 if([obj isKindOfClass:[NSData class]])
                     hasData = YES;
@@ -235,6 +239,7 @@ static NSString *defaultUserAgent;
             if(!hasData) {
                 const char *stringData = [[self parameterStringForDictionary:paramsDict] UTF8String];
                 NSMutableData *postData = [NSMutableData dataWithBytes:stringData length:strlen(stringData)];
+                [self.operationRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"]; //added by uzys
                 [self.operationRequest setHTTPBody:postData];
             }
             else {
@@ -243,7 +248,7 @@ static NSString *defaultUserAgent;
                 [self.operationRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
                 
                 __block NSMutableData *postData = [NSMutableData data];
-                
+                __block int dataIdx = 0;
                 // add string parameters
                 [paramsDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     if(![obj isKindOfClass:[NSData class]]) {
@@ -253,10 +258,20 @@ static NSString *defaultUserAgent;
                         [postData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
                     } else {
                         [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: attachment; name=\"%@\"; filename=\"userfile\"\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [postData appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        NSString *imageExtension = [obj getImageType];
+                        if(imageExtension != nil) {
+                            [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: attachment; name=\"%@\"; filename=\"userfile%d%x.%@\"\r\n", key,dataIdx,(int)[[NSDate date] timeIntervalSince1970],imageExtension] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [postData appendData:[[NSString stringWithFormat:@"Content-Type: image/%@\r\n\r\n",imageExtension] dataUsingEncoding:NSUTF8StringEncoding]];                            
+                        }
+                        else {
+                            [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: attachment; name=\"%@\"; filename=\"userfile%d%x\"\r\n", key,dataIdx,(int)[[NSDate date] timeIntervalSince1970]] dataUsingEncoding:NSUTF8StringEncoding]];
+                            [postData appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                        }
+
                         [postData appendData:obj];
                         [postData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                        dataIdx++;
                     }
                 }];
                 
@@ -264,12 +279,18 @@ static NSString *defaultUserAgent;
                 [self.operationRequest setHTTPBody:postData];
             }
         }
-    } else {
+        else
+            [NSException raise:NSInvalidArgumentException format:@"POST and PUT parameters must be provided as NSDictionary when sendParametersAsJSON is set to NO."];
+    }
+    else if([parameters isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *paramsDict = (NSDictionary*)parameters;
         NSString *baseAddress = self.operationRequest.URL.absoluteString;
         if(paramsDict.count > 0)
             baseAddress = [baseAddress stringByAppendingFormat:@"?%@", [self parameterStringForDictionary:paramsDict]];
         [self.operationRequest setURL:[NSURL URLWithString:baseAddress]];
     }
+    else
+        [NSException raise:NSInvalidArgumentException format:@"GET and DELETE parameters must be provided as NSDictionary."];
 }
 
 - (NSString*)parameterStringForDictionary:(NSDictionary*)parameters {
@@ -303,11 +324,11 @@ static NSString *defaultUserAgent;
 
 - (void)setTimeoutTimer:(NSTimer *)newTimer {
     
-    if(timeoutTimer)
-        [timeoutTimer invalidate], timeoutTimer = nil;
+    if(_timeoutTimer)
+        [_timeoutTimer invalidate], _timeoutTimer = nil;
     
     if(newTimer)
-        timeoutTimer = newTimer;
+        _timeoutTimer = newTimer;
 }
 
 #pragma mark - NSOperation methods
@@ -337,7 +358,7 @@ static NSString *defaultUserAgent;
         [self addParametersToRequest:self.operationParameters];
     
     if(self.userAgent)
-        [self.operationRequest setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+        [self.operationRequest setValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
     else if(defaultUserAgent)
         [self.operationRequest setValue:defaultUserAgent forHTTPHeaderField:@"User-Agent"];
     
@@ -382,7 +403,7 @@ static NSString *defaultUserAgent;
 // private method; not part of NSOperation
 - (void)finish {
     [self.operationConnection cancel];
-    operationConnection = nil;
+    self.operationConnection = nil;
     
     [self decreaseTaskCount];
     
@@ -423,14 +444,14 @@ static NSString *defaultUserAgent;
 
 - (SVHTTPRequestState)state {
     @synchronized(self) {
-        return state;
+        return _state;
     }
 }
 
 - (void)setState:(SVHTTPRequestState)newState {
     @synchronized(self) {
         [self willChangeValueForKey:@"state"];
-        state = newState;
+        _state = newState;
         [self didChangeValueForKey:@"state"];
     }
 }
@@ -497,7 +518,7 @@ static NSString *defaultUserAgent;
         id response = [NSData dataWithData:self.operationData];
         NSError *error = nil;
         
-        if ([[operationURLResponse MIMEType] isEqualToString:@"application/json"]) {
+        if ([[self.operationURLResponse MIMEType] isEqualToString:@"application/json"]) {
             if(self.operationData && self.operationData.length > 0) {
                 NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
                 
@@ -619,6 +640,63 @@ static char encodingTable[64] = {
 	}
     
 	return result;
+}
+
+- (BOOL)isJPG {
+    if (self.length > 4) {
+        unsigned char buffer[4];
+        [self getBytes:&buffer length:4];
+        
+        return buffer[0]==0xff &&
+        buffer[1]==0xd8 &&
+        buffer[2]==0xff &&
+        buffer[3]==0xe0;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isPNG {
+    if (self.length > 4) {
+        unsigned char buffer[4];
+        [self getBytes:&buffer length:4];
+        
+        return buffer[0]==0x89 &&
+        buffer[1]==0x50 &&
+        buffer[2]==0x4e &&
+        buffer[3]==0x47;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isGIF {
+    if(self.length >3) {
+        unsigned char buffer[4];
+        [self getBytes:&buffer length:4];
+        
+        return buffer[0]==0x47 &&
+        buffer[1]==0x49 &&
+        buffer[2]==0x46; //Signature ASCII 'G','I','F'
+    }
+    return  NO;
+}
+
+- (NSString *)getImageType {
+    NSString *ret;
+    if([self isJPG]) {
+        ret=@"jpg";
+    }
+    else if([self isGIF]) {
+        ret=@"gif";
+    }
+    else if([self isPNG]) {
+        ret=@"png";
+    }
+    else {
+        ret=nil;
+    }
+    return ret;
 }
 
 @end

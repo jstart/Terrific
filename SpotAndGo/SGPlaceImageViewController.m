@@ -8,6 +8,7 @@
 
 #import "SGPlaceImageViewController.h"
 #import "SGPlace.h"
+#import <UIImageView+AFNetworking.h>
 
 @interface SGPlaceImageViewController ()
 
@@ -29,7 +30,7 @@
     placeImageViewController.place = place;
     [[placeImageViewController view] setFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
-    placeImageViewController.mapImageView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 160, 100)];
+    placeImageViewController.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view addSubview:placeImageViewController.mapImageView];
     
     CGRect overlayFrame = placeImageViewController.mapImageView.frame;
@@ -53,14 +54,14 @@
     float lon = [place.longitude floatValue];
     
     NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 160, 100, lat, lon];
-    [placeImageViewController.mapImageView setPathToNetworkImage:googleMapURL];
+    [placeImageViewController.mapImageView setImageWithURL:[NSURL URLWithString:googleMapURL]];
     return placeImageViewController;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  self.trackedViewName = self.place.name;
+  self.screenName = self.place.name;
 	// Do any additional setup after loading the view.
 }
 

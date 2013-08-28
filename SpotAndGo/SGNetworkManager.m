@@ -26,7 +26,6 @@ static SGNetworkManager * sharedManager;
     NSString * trackingString = [NSString stringWithFormat:@"%@ %@,%@", category, [locationArray objectAtIndex:0], [locationArray objectAtIndex:1]];
     [TestFlight passCheckpoint:trackingString];
     [[Mixpanel sharedInstance] track:@"category_search" properties:postDictionary];
-    [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Category Search" withAction:trackingString withLabel:@"Category Search" withValue:@(0)];
 
     [[SVHTTPClient sharedClient] setSendParametersAsJSON:YES];
     [[SVHTTPClient sharedClient] POST:@"category" parameters:postDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error){
@@ -57,13 +56,10 @@ static SGNetworkManager * sharedManager;
             }
             NSRange nameRange = [place.name rangeOfString:otherPlace.name options:NSCaseInsensitiveSearch];
             if(nameRange.location != NSNotFound) {
-              [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate Name" withValue:@(0)];
             }
             if ([place.latitude isEqualToString: otherPlace.latitude] && [place.longitude isEqualToString: otherPlace.longitude]) {
-              [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate LatLon" withValue:@(0)];
             }
             if ([place.phone_number isEqualToString: otherPlace.phone_number]) {
-[[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Found Duplicate" withAction:place.name withLabel:@"Found Duplicate Phone" withValue:@(0)];
             }
         }
     }

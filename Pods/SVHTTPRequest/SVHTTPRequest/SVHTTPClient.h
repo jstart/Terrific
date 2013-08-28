@@ -15,27 +15,26 @@ typedef void (^SVHTTPRequestCompletionHandler)(id response, NSHTTPURLResponse *u
 
 @interface SVHTTPClient : NSObject
 
-+ (SVHTTPClient*)sharedClient;
-+ (SVHTTPClient*)sharedClientWithIdentifier:(NSString*)identifier;
++ (instancetype)sharedClient;
++ (instancetype)sharedClientWithIdentifier:(NSString*)identifier;
 
 - (void)setBasicAuthWithUsername:(NSString*)username password:(NSString*)password;
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
 - (SVHTTPRequest*)GET:(NSString*)path parameters:(NSDictionary*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
 - (SVHTTPRequest*)GET:(NSString*)path parameters:(NSDictionary*)parameters saveToPath:(NSString*)savePath progress:(void (^)(float progress))progressBlock completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
-- (SVHTTPRequest*)POST:(NSString*)path parameters:(NSDictionary*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
-- (SVHTTPRequest*)POST:(NSString*)path parameters:(NSDictionary*)parameters progress:(void (^)(float progress))progressBlock completion:(void (^)(id response, NSHTTPURLResponse *urlResponse, NSError *error))completionBlock;
+- (SVHTTPRequest*)POST:(NSString*)path parameters:(NSObject*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
+- (SVHTTPRequest*)POST:(NSString*)path parameters:(NSObject*)parameters progress:(void (^)(float progress))progressBlock completion:(void (^)(id response, NSHTTPURLResponse *urlResponse, NSError *error))completionBlock;
+- (SVHTTPRequest*)PUT:(NSString*)path parameters:(NSObject*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
-- (SVHTTPRequest*)PUT:(NSString*)path parameters:(NSDictionary*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
 - (SVHTTPRequest*)DELETE:(NSString*)path parameters:(NSDictionary*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
-
 - (SVHTTPRequest*)HEAD:(NSString*)path parameters:(NSDictionary*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
 - (void)cancelRequestsWithPath:(NSString*)path;
 - (void)cancelAllRequests;
 
-// header values common to all requests, e.g. API keys
-- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+
 @property (nonatomic, strong) NSDictionary *baseParameters;
 
 @property (nonatomic, strong) NSString *username;

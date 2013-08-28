@@ -14,7 +14,8 @@
 #import "SGAnnotation.h"
 #import "SGConstants.h"
 #import "YRDropdownView.h"
-
+#import <UINavigationBar+FlatUI.h>
+#import <UIBarButtonItem+FlatUI.h>
 
 @interface SGMapViewController ()
 
@@ -39,7 +40,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.trackedViewName = self.currentCategory;
+  self.screenName = self.currentCategory;
   // Do any additional setup after loading the view.
 
   self.placeResultCardViewController = [[SGDetailCardViewController alloc] init];
@@ -70,10 +71,9 @@
 
   [self.mapView setShowsUserLocation:YES];
   [self.navigationController setNavigationBarHidden:NO animated:YES];
-  [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:226/255.0f green:225/255.0f blue:222/255.0f alpha:1]];
-  self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotgo_logo.png"]];
-  
-  self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+  [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor colorWithRed:0.719 green:0.716 blue:0.707 alpha:1.000]];
+    self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+  self.title = self.currentCategory;
   self.authStatus = [CLLocationManager authorizationStatus];
 }
 
@@ -146,7 +146,6 @@
       for (SGPlace * place in self.currentPlaces) {
           SGAnnotation * annotation = [[SGAnnotation alloc] init];
           [annotation setTitle:place.name];
-        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Show Results" withAction:place.name withLabel:@"Show Square" withValue:@(0)];
 
           CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake ([place.latitude floatValue], [place.longitude floatValue]);
           [annotation setCoordinate:coordinate];
@@ -374,7 +373,6 @@
     for (SGAnnotation * annotation in [self.mapView annotations]) {
       if ([annotation respondsToSelector:@selector(title)]) {
         if ([annotation.title isEqualToString:place.name]) {
-            [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:place.name withLabel:@"Tap Directions" withValue:@(0)];
             
             [TestFlight passCheckpoint:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];
             [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"tapped tile for business %@",annotation.title]];

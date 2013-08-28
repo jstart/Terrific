@@ -13,7 +13,7 @@
 @interface SGPlaceDetailsViewController : GAITrackedViewController <NIAttributedLabelDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) SGPlace * place;
-@property (nonatomic, strong) NINetworkImageView * mapImageView;
+@property (nonatomic, strong) UIImageView * mapImageView;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) NIAttributedLabel * phoneLabel;
 @property (nonatomic, strong) UIButton * directionsButton;

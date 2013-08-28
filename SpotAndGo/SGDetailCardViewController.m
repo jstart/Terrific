@@ -23,7 +23,7 @@
 }
 
 - (void)viewDidLoad {
-    self.trackedViewName = @"Detail Card View";
+    self.screenName = @"Detail Card View";
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {

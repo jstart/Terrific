@@ -1,51 +1,51 @@
+PODS:
+  - AFNetworking (1.1.0)
+  - FlatUIKit (1.2)
+  - FlurrySDK (4.2.3)
+  - GoogleAnalytics-iOS-SDK (3.0)
+  - Mixpanel (2.0.0)
+  - MPFlipViewController (0.0.2)
+  - Nimbus/AttributedLabel (1.0.0):
+    - Nimbus/Core
+  - Nimbus/Core (1.0.0)
+  - OpenUDID (1.0.0)
+  - PonyDebugger (0.3.0):
+    - SocketRocket
+  - RCLocationManager (0.1)
+  - SocketRocket (0.3.1-beta2)
+  - SVHTTPRequest (0.5)
+  - TestFlightSDK (2.0)
+  - YRDropdownView (0.0.1)
 
-PODS: 
-- AFNetworking (1.1.0)
-- DCIntrospect (0.0.2)
-- FlurrySDK (4.1.0)
-- GoogleAnalytics-iOS-SDK (2.0beta4)
-- MPFlipViewController (0.0.2)
-- Mixpanel (1.1.1)
-- Nimbus/AttributedLabel (1.0.0): 
-  - Nimbus/Core
-- Nimbus/Core (1.0.0)
-- Nimbus/NetworkImage (1.0.0): 
-  - Nimbus/Core
-- OpenUDID (1.0.0)
-- RCLocationManager (0.1)
-- SVHTTPRequest (0.4)
-- TestFlightSDK (1.2.4.beta)
-- YRDropdownView (0.0.1)
+DEPENDENCIES:
+  - AFNetworking (~> 1.1.0)
+  - FlatUIKit (~> 1.0)
+  - FlurrySDK (~> 4.2.3)
+  - GoogleAnalytics-iOS-SDK (~> 3.0)
+  - Mixpanel (~> 2.0.0)
+  - MPFlipViewController (~> 0.0.2)
+  - Nimbus/AttributedLabel (~> 1.0.0)
+  - OpenUDID (~> 1.0.0)
+  - PonyDebugger (~> 0.3.0)
+  - RCLocationManager (~> 0.1)
+  - SVHTTPRequest (~> 0.5)
+  - TestFlightSDK (~> 2.0)
+  - YRDropdownView (~> 0.0.1)
 
-SPEC CHECKSUMS: 
-  Nimbus/Core: 196175ecaddf4e88925c9e0441aa58e4e40a2b89
-  RCLocationManager: f02bd426e93e87693fe8a2adf76f917a74d774c9
-  SVHTTPRequest: 02a4b2fa523d3071618b017655c1ebb2ced7406b
-  Nimbus/AttributedLabel: 196175ecaddf4e88925c9e0441aa58e4e40a2b89
-  Mixpanel: 388e78ffe1c4878b65a86127b5dab70be36479ad
-  DCIntrospect: 2f5cab0b58b170459ebcb200f59042306fcb0c0d
-  YRDropdownView: 6cd453679912af8d45cf73ea8d9e079885b99012
-  FlurrySDK: 52245ae8c6fa31825dc74a6afb94b861da2435fa
-  TestFlightSDK: aeec97fd81096753d53b942f030a443520a087f4
+SPEC CHECKSUMS:
   AFNetworking: 761a418233d280c1e0580bcb76ff9cb4c3073d17
+  FlatUIKit: 43b2acaa6f4ef57539b51b00e4ce62d506e33e11
+  FlurrySDK: 20b3fd669eeafd005ca8ff65a1406d1befbc8031
+  GoogleAnalytics-iOS-SDK: f8d5faf4862b679667be0c270531a189572275d1
+  Mixpanel: e4af97adb60a10541b7869929a83d734025058a6
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  Nimbus/NetworkImage: 196175ecaddf4e88925c9e0441aa58e4e40a2b89
-  GoogleAnalytics-iOS-SDK: 11332eedcffb0c88b2dd9bff0ac1444e3a85e890
-  OpenUDID: f165620593a53aa44e04ad95f15687b959af3a57
+  Nimbus: 3cab0289af9fab0674a95c0d161c223bd47697c6
+  OpenUDID: 13ab988776ef38dca1e2e799e961448cf83a8111
+  PonyDebugger: bafc25809ade389d0d1c1f1147877145cc26bd78
+  RCLocationManager: f02bd426e93e87693fe8a2adf76f917a74d774c9
+  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  SVHTTPRequest: 608eb4519b496c54f7cf065961760c4cc25c7b12
+  TestFlightSDK: 940906d4b2550cf397c6f2d2fcc4ebfdcd8ae858
+  YRDropdownView: 6cd453679912af8d45cf73ea8d9e079885b99012
 
-DEPENDENCIES: 
-- AFNetworking (~> 1.1.0)
-- DCIntrospect (~> 0.0.2)
-- FlurrySDK (~> 4.1.0)
-- GoogleAnalytics-iOS-SDK (~> 2.0beta4)
-- MPFlipViewController (~> 0.0.2)
-- Mixpanel (~> 1.1.1)
-- Nimbus/AttributedLabel (~> 1.0.0)
-- Nimbus/NetworkImage (~> 1.0.0)
-- OpenUDID (~> 1.0.0)
-- RCLocationManager (~> 0.1)
-- SVHTTPRequest (~> 0.4)
-- TestFlightSDK (~> 1.2.4.beta)
-- YRDropdownView (~> 0.0.1)
-
-COCOAPODS: 0.16.2
+COCOAPODS: 0.19.1

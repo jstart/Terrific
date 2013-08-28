@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <gpx version="1.1" creator="Xcode"> 
-
-    <wpt lat="34.018661" lon="-118.49596">
-         <name>Cupertino</name>
+    <wpt lat="33.8989652" lon="-118.31787170000001">
+        <name>Gardena</name>
 	</wpt>
-    
+    <wpt lat="34.018661" lon="-118.49596">
+         <name>Santa Monica</name>
+	</wpt>
 </gpx>

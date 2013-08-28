@@ -85,7 +85,6 @@
     NSLog(@"%@", telephoneSchemeString);
     NSURL * phoneURL = [NSURL URLWithString:telephoneSchemeString];
     if ([[UIApplication sharedApplication] canOpenURL:phoneURL]) {
-        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Phone Call" withValue:@(0)];
         [[UIApplication sharedApplication] openURL:phoneURL];
     }else{
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your device can't make phone calls" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
@@ -109,10 +108,8 @@
             [mapItem setUrl:[NSURL URLWithString:self.place.website]];
         }
         [MKMapItem openMapsWithItems:@[ mapItem ] launchOptions:nil];
-        [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Directions Apple Maps" withValue:@(0)];
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mapsURLFormatted]];
-      [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:@"Tap" withAction:self.place.name withLabel:@"Tap Directions Google Maps" withValue:@(0)];
     }
 }
 
@@ -147,7 +144,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  self.trackedViewName = self.place.name;
+  self.screenName = self.place.name;
 	// Do any additional setup after loading the view.
 }
 

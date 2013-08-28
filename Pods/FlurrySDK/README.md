@@ -1,8 +1,4 @@
-FlurryAnalytics
-===============
+FlurrySDK-iOS
+=============
 
-Unofficial repository for FlurryAnalytics
-
-##License
-
-Usage is provided under Flurry License. See LICENSE for full details.
+FlurrySDK for iOS repository for Cocoapods podspec

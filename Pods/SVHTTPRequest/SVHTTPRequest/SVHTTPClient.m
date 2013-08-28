@@ -28,15 +28,11 @@
 
 @implementation SVHTTPClient
 
-@synthesize username, password, basePath, baseParameters, userAgent, sendParametersAsJSON, cachePolicy, timeoutInterval;
-@synthesize operationQueue, HTTPHeaderFields;
-
-
-+ (id)sharedClient {
++ (instancetype)sharedClient {
     return [self sharedClientWithIdentifier:@"master"];
 }
 
-+ (id)sharedClientWithIdentifier:(NSString *)identifier {
++ (instancetype)sharedClientWithIdentifier:(NSString *)identifier {
     SVHTTPClient *sharedClient = [[self sharedClients] objectForKey:identifier];
     
     if(!sharedClient) {
@@ -68,17 +64,8 @@
 
 
 - (void)setBasicAuthWithUsername:(NSString *)newUsername password:(NSString *)newPassword {
-    
-    if(username)
-        username = nil;
-    
-    if(password)
-        password = nil;
-    
-    if(newUsername && newPassword) {
-        username = newUsername;
-        password = newPassword;
-    }
+    self.username = newUsername;
+    self.password = newPassword;
 }
 
 #pragma mark - Request Methods
@@ -128,10 +115,10 @@
 #pragma mark -
 
 - (NSMutableDictionary *)HTTPHeaderFields {
-    if(HTTPHeaderFields == nil)
-        HTTPHeaderFields = [NSMutableDictionary new];
+    if(_HTTPHeaderFields == nil)
+        _HTTPHeaderFields = [NSMutableDictionary new];
     
-    return HTTPHeaderFields;
+    return _HTTPHeaderFields;
 }
 
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
@@ -146,20 +133,31 @@
                     completion:(SVHTTPRequestCompletionHandler)completionBlock  {
     
     NSString *completeURLString = [NSString stringWithFormat:@"%@%@", self.basePath, path];
+    id mergedParameters;
     
-    NSMutableDictionary *mergedParameters = [NSMutableDictionary dictionary];
-    [mergedParameters addEntriesFromDictionary:parameters];
-    [mergedParameters addEntriesFromDictionary:self.baseParameters];
+    if((method == SVHTTPRequestMethodPOST || method == SVHTTPRequestMethodPUT) && self.sendParametersAsJSON && ![parameters isKindOfClass:[NSDictionary class]])
+        mergedParameters = parameters;
+    else {
+        mergedParameters = [NSMutableDictionary dictionary];
+        [mergedParameters addEntriesFromDictionary:parameters];
+        [mergedParameters addEntriesFromDictionary:self.baseParameters];
+    }
     
-    SVHTTPRequest *requestOperation = [(id<SVHTTPRequestPrivateMethods>)[SVHTTPRequest alloc] initWithAddress:completeURLString method:method parameters:mergedParameters saveToPath:savePath progress:progressBlock completion:completionBlock];
+    SVHTTPRequest *requestOperation = [(id<SVHTTPRequestPrivateMethods>)[SVHTTPRequest alloc] initWithAddress:completeURLString
+                                                                                                       method:method
+                                                                                                   parameters:mergedParameters
+                                                                                                   saveToPath:savePath
+                                                                                                     progress:progressBlock
+                                                                                                   completion:completionBlock];
     requestOperation.sendParametersAsJSON = self.sendParametersAsJSON;
     requestOperation.cachePolicy = self.cachePolicy;
     requestOperation.userAgent = self.userAgent;
+    requestOperation.timeoutInterval = self.timeoutInterval;
     
     [(id<SVHTTPRequestPrivateMethods>)requestOperation setClient:self];
     
     [self.HTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
-        [(id<SVHTTPRequestPrivateMethods>)requestOperation setValue:value forHTTPHeaderField:field];
+        [requestOperation setValue:value forHTTPHeaderField:field];
     }];
     
     if(self.username && self.password)
