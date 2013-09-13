@@ -18,7 +18,6 @@
 -(void)viewWillAppear:(BOOL)animated{
   [Flurry logAllPageViews:self.navigationController];
   [[Mixpanel sharedInstance] track:@"Main Menu Appeared"];
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.719 green:0.716 blue:0.707 alpha:1.000]];
   if ([self.navigationController isNavigationBarHidden]) {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
   }else{

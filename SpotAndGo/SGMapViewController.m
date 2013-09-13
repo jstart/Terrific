@@ -47,12 +47,12 @@
   [self.placeResultCardViewController setDelegate:self];
   
   int rowNumber = isPhone568 ? 3:2;
-  int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
+  int mapHeight = SYSTEM_VERSION_GREATER_THAN(@"6.1.3") ? [UIScreen mainScreen].bounds.size.height - 100 * rowNumber : [UIScreen mainScreen].bounds.size.height - 100 * rowNumber - 44 - 20;
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
   [self.mapView setDelegate:self];
   [self.view addSubview:self.mapView];
   
-  int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - mapHeight;
+  int resultsHeight = [UIScreen mainScreen].bounds.size.height - mapHeight;
   [self.placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, 320, resultsHeight)];
   
   [self.placeResultCardViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
@@ -68,34 +68,36 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
   [self.mapView setShowsUserLocation:YES];
   [self.navigationController setNavigationBarHidden:NO animated:YES];
-  [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor colorWithRed:0.719 green:0.716 blue:0.707 alpha:1.000]];
-    self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+    if (SYSTEM_VERSION_LESS_THAN(@"6.1.4")) {
+        [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor colorWithRed:0.719 green:0.716 blue:0.707 alpha:1.000]];
+    }
+
+  self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
   self.title = self.currentCategory;
   self.authStatus = [CLLocationManager authorizationStatus];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  if([keyPath isEqualToString:@"view.frame"]) {
-    CGRect oldFrame = CGRectNull;
-    CGRect newFrame = CGRectNull;
-    if([change objectForKey:@"old"] != [NSNull null]) {
-	    oldFrame = [[change objectForKey:@"old"] CGRectValue];
-    }
-    if([object valueForKeyPath:keyPath] != [NSNull null]) {
-	    newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
-      int rowNumber = isPhone568 ? 3:2;
-      int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
-      int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - mapHeight - 20;
-      if (newFrame.size.height != resultsHeight) {
-        CGRect frame = ((UIViewController *) object).view.frame;
-        frame.size.height = resultsHeight;
-        [((UIViewController *) object).view setFrame:frame];
-	    }
-    }
-  }
+//  if([keyPath isEqualToString:@"view.frame"]) {
+//    CGRect oldFrame = CGRectNull;
+//    CGRect newFrame = CGRectNull;
+//    if([change objectForKey:@"old"] != [NSNull null]) {
+//	    oldFrame = [[change objectForKey:@"old"] CGRectValue];
+//    }
+//    if([object valueForKeyPath:keyPath] != [NSNull null]) {
+//	    newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
+//      int rowNumber = isPhone568 ? 3:2;
+//      int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
+//      int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - mapHeight - 20;
+//      if (newFrame.size.height != resultsHeight) {
+//        CGRect frame = ((UIViewController *) object).view.frame;
+//        frame.size.height = resultsHeight;
+//        [((UIViewController *) object).view setFrame:frame];
+//	    }
+//    }
+//  }
 }
 
 
@@ -153,8 +155,22 @@
       }
       
       [self.mapView addAnnotations:annotationsArray];
-      lastAnnotationsMapRegion = [self region];
-      [self.mapView setRegion:lastAnnotationsMapRegion animated:YES];
+      
+      MKMapPoint annotationPoint = MKMapPointForCoordinate(mapView.userLocation.coordinate);
+      MKMapRect zoomRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+      for (id <MKAnnotation> annotation in mapView.annotations)
+      {
+          MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+          MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+          zoomRect = MKMapRectUnion(zoomRect, pointRect);
+      }
+      
+      if (SYSTEM_VERSION_LESS_THAN(@"6.1.4")) {
+          [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(35, 5, 5, 5) animated:YES];
+      }else{
+          [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
+      }
+      
       [self updateResultCards];
   } failure:^(NSError* error){
       NSLog(@"error searching categories %@", error);
@@ -168,6 +184,13 @@
 }
 
 - (void)updateResultCards {
+    NSInteger totalPlaces = isPhone568 ? 6:4;
+    NSInteger remainingPlaces = totalPlaces - [self.currentPlaces count];
+    for (int i = totalPlaces - 1; i > remainingPlaces; i--) {
+        MPFlipViewController * currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
+        SGPlaceImageViewController * placeImageViewController = [SGPlaceImageViewController blankViewController];
+        [currentView setViewController:placeImageViewController direction:MPFlipViewControllerDirectionForward animated:NO completion:nil];
+    }
   for (int i = 0; i < [self.currentPlaces count]; i++) {
     SGPlace * place = [self.currentPlaces objectAtIndex:i];
     NSLog(@"updating... %@", place.name);
@@ -191,180 +214,6 @@
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 }
 
-// Returns a adjust region of the map view that contains at least one annotation, with the same center point.
-// if there are annotations fall into the current mapview region, it will return the current mapview region,
-// otherwise, it will zoom to the region that contain all the annotations.
-
-- (MKCoordinateRegion)adjustRegionForAnnotations:(NSArray*)annotations {
-  MKCoordinateRegion adjustRegion = [self minRegionThatHasAnnotations:annotations];
-  if ([self hasVisibleAnnotations] && self.mapView.region.span.latitudeDelta < 0.1 && self.mapView.region.span.longitudeDelta < 0.1) {
-    return self.mapView.region;
-  } else {
-    return adjustRegion;
-  }
-}
-
-- (MKCoordinateRegion)regionThatFitAnnotations:(NSArray*)annotations {
-  CLLocationDegrees latDistanceMin = fabs(lastAnnotationsMapRegion.center.latitude - 0.5 * lastAnnotationsMapRegion.span.latitudeDelta - self.mapView.centerCoordinate.latitude);
-  CLLocationDegrees latDistanceMax = fabs(lastAnnotationsMapRegion.center.latitude + 0.5 * lastAnnotationsMapRegion.span.latitudeDelta - self.mapView.centerCoordinate.latitude);
-  CLLocationDegrees lonDistanceMin = fabs(lastAnnotationsMapRegion.center.longitude - 0.5 * lastAnnotationsMapRegion.span.longitudeDelta - self.mapView.centerCoordinate.longitude);
-  CLLocationDegrees lonDistanceMax = fabs(lastAnnotationsMapRegion.center.longitude + 0.5 * lastAnnotationsMapRegion.span.longitudeDelta - self.mapView.centerCoordinate.longitude);
-
-  CLLocationDegrees latDistance = kPinEdgePaddingSpan + ((latDistanceMax > latDistanceMin) ? latDistanceMax : latDistanceMin);
-  CLLocationDegrees lonDistance = kPinEdgePaddingSpan + ((lonDistanceMax > lonDistanceMin) ? lonDistanceMax : lonDistanceMin);
-
-
-  MKCoordinateSpan span;
-  span.latitudeDelta =  2 * latDistance;
-  span.longitudeDelta = 2 * lonDistance;
-
-  MKCoordinateRegion newRegion = MKCoordinateRegionMake(self.mapView.centerCoordinate, span);
-  return newRegion;
-}
-
-//return a mapRegion that has at least one annotations
-- (MKCoordinateRegion)minRegionThatHasAnnotations:(NSArray*)annotations {
-  id<MKAnnotation> minAnnotation = nil;
-  if (![annotations count]) {
-    return self.mapView.region;
-  } else {
-    //the first one is nearest onle
-    minAnnotation = [annotations objectAtIndex:0];
-
-    MKCoordinateSpan span;
-    span.latitudeDelta = 2 * fabs(minAnnotation.coordinate.latitude - self.mapView.centerCoordinate.latitude) + kPinEdgePaddingSpan;
-    span.longitudeDelta = 2 * fabs(minAnnotation.coordinate.longitude  - self.mapView.centerCoordinate.longitude) + kPinEdgePaddingSpan;
-    MKCoordinateRegion newRegion = MKCoordinateRegionMake(self.mapView.centerCoordinate, span);
-    return [self.mapView regionThatFits:newRegion];
-  }
-}
-
-- (MKCoordinateRegion)regionOfAnnotations:(NSArray*)annotations {
-
-  CLLocationDegrees maxLat = -90;
-  CLLocationDegrees maxLon = -180;
-  CLLocationDegrees minLat = 90;
-  CLLocationDegrees minLon = 180;
-  for (id<MKAnnotation> annotation in annotations) {
-    if (annotation.coordinate.latitude > maxLat) {
-      maxLat = annotation.coordinate.latitude;
-    }
-    if (annotation.coordinate.latitude < minLat) {
-      minLat = annotation.coordinate.latitude;
-    }
-    if (annotation.coordinate.longitude > maxLon) {
-      maxLon = annotation.coordinate.longitude;
-    }
-    if (annotation.coordinate.longitude < minLon) {
-      minLon = annotation.coordinate.longitude;
-    }
-  }
-  if ([annotations count] > 0) {
-    CLLocationCoordinate2D newCenter;
-    newCenter.latitude = 0.5 *(minLat + maxLat);
-    newCenter.longitude = 0.5 * (minLon + maxLon);
-    return MKCoordinateRegionMake(newCenter, MKCoordinateSpanMake(fabs(minLat - maxLat) + kPinEdgePaddingSpan, fabs(minLon - maxLon) + kPinEdgePaddingSpan));
-  } else {
-    return self.mapView.region;
-  }
-}
-
--(MKCoordinateRegion)region{
-    MKCoordinateRegion region;
-
-    CLLocationDegrees maxLat = -90;
-    CLLocationDegrees maxLon = -180;
-    CLLocationDegrees minLat = 90;
-    CLLocationDegrees minLon = 180;
-    for (id<MKAnnotation> annotation in self.mapView.annotations) {
-        if (annotation.coordinate.latitude > maxLat) {
-            maxLat = annotation.coordinate.latitude;
-        }
-        if (annotation.coordinate.latitude < minLat) {
-            minLat = annotation.coordinate.latitude;
-        }
-        if (annotation.coordinate.longitude > maxLon) {
-            maxLon = annotation.coordinate.longitude;
-        }
-        if (annotation.coordinate.longitude < minLon) {
-            minLon = annotation.coordinate.longitude;
-        }
-    }
-    if ([self.mapView.annotations count] > 0) {
-        CLLocationCoordinate2D newCenter;
-        newCenter.latitude = 0.5 *(minLat + maxLat);
-        newCenter.longitude = 0.5 * (minLon + maxLon);
-
-    // pad our map by 10% around the farthest annotations
-#define MAP_PADDING 1.2
-    
-    // we'll make sure that our minimum vertical span is about a kilometer
-    // there are ~111km to a degree of latitude. regionThatFits will take care of
-    // longitude, which is more complicated, anyway. 
-#define MINIMUM_VISIBLE_LATITUDE 0.01
-    
-    region.center.latitude = (minLat + maxLat) / 2;
-    region.center.longitude = (minLon + maxLon) / 2;
-    
-    region.span.latitudeDelta = (maxLat - minLat) * MAP_PADDING;
-    
-    region.span.latitudeDelta = (region.span.latitudeDelta < MINIMUM_VISIBLE_LATITUDE)
-    ? MINIMUM_VISIBLE_LATITUDE 
-    : region.span.latitudeDelta;
-    
-    region.span.longitudeDelta = (maxLon - minLon) * MAP_PADDING;
-    }
-    MKCoordinateRegion scaledRegion = [self.mapView regionThatFits:region];
-    return scaledRegion;
-}
-
-//return true if  the region contains the coorinate
-- (BOOL)mapRegion:(MKCoordinateRegion)mapRegion containsCoordinate:(CLLocationCoordinate2D)coordinate {
-  return ((fabs(coordinate.latitude - mapRegion.center.latitude) <= 0.5 * mapRegion.span.latitudeDelta) &&
-          (fabs(coordinate.longitude - mapRegion.center.longitude) <= 0.5 * mapRegion.span.longitudeDelta));
-}
-
-//current mapview has visible annotations
-- (BOOL)hasVisibleAnnotations {
-
-  for (id<MKAnnotation> annotation in self.mapView.annotations) {
-    if ([self coordinateIsVisible:annotation.coordinate]) {
-
-      //we found a visible annotation, just return;
-      return YES;
-    }
-  }
-  return NO;
-}
-
-- (BOOL)coordinateIsVisible:(CLLocationCoordinate2D)coordinate {
-  CGPoint annPoint = [self.mapView convertCoordinate:coordinate
-                      toPointToView:self.mapView];
-
-  return (annPoint.x > 0.0 && annPoint.y > 0.0 &&
-          annPoint.x < self.mapView.frame.size.width &&
-          annPoint.y < self.mapView.frame.size.height);
-}
-
-- (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
-{
-  CGPoint newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x, view.bounds.size.height * anchorPoint.y);
-  CGPoint oldPoint = CGPointMake(view.bounds.size.width * view.layer.anchorPoint.x, view.bounds.size.height * view.layer.anchorPoint.y);
-
-  newPoint = CGPointApplyAffineTransform(newPoint, view.transform);
-  oldPoint = CGPointApplyAffineTransform(oldPoint, view.transform);
-
-  CGPoint position = view.layer.position;
-
-  position.x -= oldPoint.x;
-  position.x += newPoint.x;
-
-  position.y -= oldPoint.y;
-  position.y += newPoint.y;
-
-  view.layer.position = position;
-  view.layer.anchorPoint = anchorPoint;
-}
 
 #pragma mark - SGDetailCardViewDelegate
 

@@ -27,7 +27,7 @@
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
-static NSString* const kAnalyticsAccountId = @"UA-31324397-1";
+static NSString* const kAnalyticsAccountId = @"UA-31324397-4";
 
 @synthesize window = _window;
 
@@ -65,7 +65,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //  [GAI sharedInstance].debug = YES;
   // Create tracker instance.
   id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
-  
+    [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
     NSError *error;
     if (error) {
         NSLog(@"error in trackPageview %@", error);
@@ -78,7 +78,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if (!self.geocoder) {
         self.geocoder = [[CLGeocoder alloc] init];
     }
+    if (SYSTEM_VERSION_LESS_THAN(@"6.1.4")) {
+
     [UIBarButtonItem configureFlatButtonsWithColor:[UIColor colorWithWhite:0.475 alpha:1.000] highlightedColor:[UIColor colorWithWhite:0.658 alpha:1.000] cornerRadius:3];
+    }
     
 #if TARGET_IPHONE_SIMULATOR
 //    [[DCIntrospect sharedIntrospector] start];

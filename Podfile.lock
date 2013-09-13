@@ -3,7 +3,7 @@ PODS:
   - FlatUIKit (1.2)
   - FlurrySDK (4.2.3)
   - GoogleAnalytics-iOS-SDK (3.0)
-  - Mixpanel (2.0.0)
+  - Mixpanel (2.0.1)
   - MPFlipViewController (0.0.2)
   - Nimbus/AttributedLabel (1.0.0):
     - Nimbus/Core
@@ -37,9 +37,9 @@ SPEC CHECKSUMS:
   FlatUIKit: 43b2acaa6f4ef57539b51b00e4ce62d506e33e11
   FlurrySDK: 20b3fd669eeafd005ca8ff65a1406d1befbc8031
   GoogleAnalytics-iOS-SDK: f8d5faf4862b679667be0c270531a189572275d1
-  Mixpanel: e4af97adb60a10541b7869929a83d734025058a6
+  Mixpanel: e0311534e33c62dd7aa1486d71b499adbfcf1a40
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  Nimbus: 3cab0289af9fab0674a95c0d161c223bd47697c6
+  Nimbus: 5396b75b180a4bf6fe813553d533121d42bdd9d9
   OpenUDID: 13ab988776ef38dca1e2e799e961448cf83a8111
   PonyDebugger: bafc25809ade389d0d1c1f1147877145cc26bd78
   RCLocationManager: f02bd426e93e87693fe8a2adf76f917a74d774c9
@@ -48,4 +48,4 @@ SPEC CHECKSUMS:
   TestFlightSDK: 940906d4b2550cf397c6f2d2fcc4ebfdcd8ae858
   YRDropdownView: 6cd453679912af8d45cf73ea8d9e079885b99012
 
-COCOAPODS: 0.19.1
+COCOAPODS: 0.24.0

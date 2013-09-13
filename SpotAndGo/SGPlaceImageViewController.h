@@ -17,5 +17,6 @@
 @property (nonatomic, strong) UILabel * nameLabel;
 
 +(SGPlaceImageViewController*)placeImageViewControllerWithPlace:(SGPlace*)place;
++(SGPlaceImageViewController*)blankViewController;
 
 @end
