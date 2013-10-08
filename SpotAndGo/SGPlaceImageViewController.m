@@ -58,7 +58,7 @@
     return placeImageViewController;
 }
 
-+(SGPlaceImageViewController*)blankViewController{
++(UIViewController*)blankViewController{
     UIViewController * blankViewController = [[UIViewController alloc] init];
     [[blankViewController view] setFrame:CGRectMake(0, 0, 160, 100)];
     [[blankViewController view] setAlpha:0.0];

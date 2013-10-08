@@ -8,12 +8,12 @@ install_resource()
 {
   case $1 in
     *.storyboard)
-      echo "ibtool --errors --warnings --notices --output-format human-readable-text --compile ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .storyboard`.storyboardc ${PODS_ROOT}/$1 --sdk ${SDKROOT}"
-      ibtool --errors --warnings --notices --output-format human-readable-text --compile "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .storyboard`.storyboardc" "${PODS_ROOT}/$1" --sdk "${SDKROOT}"
+      echo "ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .storyboard`.storyboardc ${PODS_ROOT}/$1 --sdk ${SDKROOT}"
+      ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .storyboard`.storyboardc" "${PODS_ROOT}/$1" --sdk "${SDKROOT}"
       ;;
     *.xib)
-        echo "ibtool --errors --warnings --notices --output-format human-readable-text --compile ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .xib`.nib ${PODS_ROOT}/$1 --sdk ${SDKROOT}"
-      ibtool --errors --warnings --notices --output-format human-readable-text --compile "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .xib`.nib" "${PODS_ROOT}/$1" --sdk "${SDKROOT}"
+        echo "ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .xib`.nib ${PODS_ROOT}/$1 --sdk ${SDKROOT}"
+      ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .xib`.nib" "${PODS_ROOT}/$1" --sdk "${SDKROOT}"
       ;;
     *.framework)
       echo "mkdir -p ${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
@@ -39,6 +39,14 @@ install_resource()
       ;;
   esac
 }
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerAlert.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerAlert@2x.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerFailure.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerFailure@2x.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerNotify.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerNotify@2x.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess.png"
+install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess@2x.png"
 install_resource "FlatUIKit/Resources/Lato-Black.ttf"
 install_resource "FlatUIKit/Resources/Lato-BlackItalic.ttf"
 install_resource "FlatUIKit/Resources/Lato-Bold.ttf"
@@ -49,8 +57,9 @@ install_resource "FlatUIKit/Resources/Lato-Italic.ttf"
 install_resource "FlatUIKit/Resources/Lato-Light.ttf"
 install_resource "FlatUIKit/Resources/Lato-LightItalic.ttf"
 install_resource "FlatUIKit/Resources/Lato-Regular.ttf"
-install_resource "YRDropdownView/YRDropdownView/bg-yellow.png"
-install_resource "YRDropdownView/YRDropdownView/bg-yellow@2x.png"
 
-rsync -avr --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+if [[ "${ACTION}" == "install" ]]; then
+  rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${INSTALL_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+fi
 rm -f "$RESOURCES_TO_COPY"

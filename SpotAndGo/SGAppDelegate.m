@@ -8,14 +8,14 @@
 
 #import "SGAppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import "SVHTTPClient.h"
 #import "SGConstants.h"
 #import "RCLocationManager.h"
-#import "OpenUDID.h"
-#import "YRDropdownView.h"
 //#import "DCIntrospect.h"
 //#import <PonyDebugger.h>
 #import <UIBarButtonItem+FlatUI.h>
+#import <AdSupport/AdSupport.h>
+#import <GroundControl/NSUserDefaults+GroundControl.h>
+#import <PonyDebugger/PonyDebugger.h>
 
 @interface SGAppDelegate()
 
@@ -25,9 +25,17 @@
 
 @implementation SGAppDelegate
 
+#define TESTFLIGHT 1
+
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
+#if TARGET_IPHONE_SIMULATOR
+static NSString* const kAnalyticsAccountId = @"UA-31324397-2";
+#elif TESTFLIGHT
+static NSString* const kAnalyticsAccountId = @"UA-31324397-3";
+#else
 static NSString* const kAnalyticsAccountId = @"UA-31324397-4";
+#endif
 
 @synthesize window = _window;
 
@@ -38,24 +46,35 @@ static NSString* const kAnalyticsAccountId = @"UA-31324397-4";
 -(BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions { 
 
-    [[SVHTTPClient sharedClient] setBasePath:kBaseURL];
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"eat"]) {
+        NSDictionary * defaultsDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Search_Params.plist"]];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsDictionary];
+    }
+    
+//    NSURL *URL = [NSURL URLWithString:@"http://countdown-plist.herokuapp.com/defaults.plist"];
+//    [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL success:^(NSDictionary * defaults){
+//    }failure:^(NSError * error){
+//    }];
+    
     [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
+#if !TESTFLIGHT
     [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
-    [[Mixpanel sharedInstance] identify:[OpenUDID value]];
+    [[Mixpanel sharedInstance] identify:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
     [Flurry startSession:@"FJX9G2A6P8VGCM5736M7"];
-    [Flurry setUserID:[OpenUDID value]];
+    [Flurry setUserID:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
+#endif
     
     [TestFlight takeOff:@"149fea64-54e2-4696-8c05-844a849d7f6a"];
 
-    [TestFlight setDeviceIdentifier:[OpenUDID value]];
+    [TestFlight setDeviceIdentifier:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
     [[Mixpanel sharedInstance] track:@"Launched"];
     
-//    PDDebugger *debugger = [PDDebugger defaultInstance];
-//    [debugger enableNetworkTrafficDebugging];
-//    [debugger forwardAllNetworkTraffic];
-//    [debugger enableViewHierarchyDebugging];
-//    [debugger enableRemoteLogging];
-//    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+    PDDebugger *debugger = [PDDebugger defaultInstance];
+    [debugger enableNetworkTrafficDebugging];
+    [debugger forwardAllNetworkTraffic];
+    [debugger enableViewHierarchyDebugging];
+    [debugger enableRemoteLogging];
+    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
 
   // Optional: automatically send uncaught exceptions to Google Analytics.
   [GAI sharedInstance].trackUncaughtExceptions = YES;

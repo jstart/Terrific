@@ -13,7 +13,7 @@
 #import "SGPlace.h"
 #import "SGAnnotation.h"
 #import "SGConstants.h"
-#import "YRDropdownView.h"
+#import <ALAlertBanner/ALAlertBanner.h>
 #import <UINavigationBar+FlatUI.h>
 #import <UIBarButtonItem+FlatUI.h>
 
@@ -79,28 +79,6 @@
   self.authStatus = [CLLocationManager authorizationStatus];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-//  if([keyPath isEqualToString:@"view.frame"]) {
-//    CGRect oldFrame = CGRectNull;
-//    CGRect newFrame = CGRectNull;
-//    if([change objectForKey:@"old"] != [NSNull null]) {
-//	    oldFrame = [[change objectForKey:@"old"] CGRectValue];
-//    }
-//    if([object valueForKeyPath:keyPath] != [NSNull null]) {
-//	    newFrame = [[object valueForKeyPath:keyPath] CGRectValue];
-//      int rowNumber = isPhone568 ? 3:2;
-//      int mapHeight = [UIScreen mainScreen].bounds.size.height - 44 - 20 - 100 * rowNumber;
-//      int resultsHeight = [UIScreen mainScreen].bounds.size.height - 44 - mapHeight - 20;
-//      if (newFrame.size.height != resultsHeight) {
-//        CGRect frame = ((UIViewController *) object).view.frame;
-//        frame.size.height = resultsHeight;
-//        [((UIViewController *) object).view setFrame:frame];
-//	    }
-//    }
-//  }
-}
-
-
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
   [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 }
@@ -118,12 +96,12 @@
     [self performSearch];
   } else{
     [TestFlight passCheckpoint:@"locationDisabled"];
-    [YRDropdownView showDropdownInView:self.view
-     title:@"Location Disabled"
-     detail:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."
-     image:[UIImage imageNamed:@"dropdown-alert"]
-     animated:YES
-     hideAfter:3];
+    ALAlertBanner *banner = [ALAlertBanner alertBannerForView:self.view
+                                                         style:ALAlertBannerStyleFailure
+                                                      position:ALAlertBannerPositionTop
+                                                         title:@"Location Disabled"
+                                                      subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."];
+    [banner show];
   }
 }
 
@@ -136,6 +114,14 @@
 }
 
 - (void)performSearch {
+    if ([self.mapView userLocation].coordinate.latitude == 0.0 && [self.mapView userLocation].coordinate.longitude == 0.0) {
+        ALAlertBanner *banner = [ALAlertBanner alertBannerForView:self.view
+                                                            style:ALAlertBannerStyleFailure
+                                                         position:ALAlertBannerPositionTop
+                                                            title:@"Location Disabled"
+                                                         subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."];
+        [banner show];
+    }
   [TestFlight passCheckpoint:@"performSearch"];
   CLLocation * currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
   NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ?[NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ?[NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
@@ -174,12 +160,12 @@
       [self updateResultCards];
   } failure:^(NSError* error){
       NSLog(@"error searching categories %@", error);
-      [YRDropdownView showDropdownInView:self.view
-                                   title:@"No Spots Found"
-                                  detail:@"No great spots were found :( Try again!"
-                                   image:[UIImage imageNamed:@"dropdown-alert"]
-                                animated:YES
-                               hideAfter:3];
+      ALAlertBanner *banner = [ALAlertBanner alertBannerForView:self.view
+                                                          style:ALAlertBannerStyleFailure
+                                                       position:ALAlertBannerPositionTop
+                                                          title:@"No Spots Found"
+                                                       subtitle:@"No great spots were found :( Try again!"];
+      [banner show];
   }];       
 }
 
@@ -188,7 +174,7 @@
     NSInteger remainingPlaces = totalPlaces - [self.currentPlaces count];
     for (int i = totalPlaces - 1; i > remainingPlaces; i--) {
         MPFlipViewController * currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
-        SGPlaceImageViewController * placeImageViewController = [SGPlaceImageViewController blankViewController];
+        UIViewController * placeImageViewController = [SGPlaceImageViewController blankViewController];
         [currentView setViewController:placeImageViewController direction:MPFlipViewControllerDirectionForward animated:NO completion:nil];
     }
   for (int i = 0; i < [self.currentPlaces count]; i++) {

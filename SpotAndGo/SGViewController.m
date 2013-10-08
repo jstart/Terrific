@@ -7,6 +7,7 @@
 //
 
 #import "SGViewController.h"
+#import <ALAlertBanner/ALAlertBannerManager.h>
 
 @interface SGViewController ()
 
@@ -18,6 +19,8 @@
 -(void)viewWillAppear:(BOOL)animated{
   [Flurry logAllPageViews:self.navigationController];
   [[Mixpanel sharedInstance] track:@"Main Menu Appeared"];
+  [[ALAlertBannerManager sharedManager] hideAllAlertBanners];
+    
   if ([self.navigationController isNavigationBarHidden]) {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
   }else{
