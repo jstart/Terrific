@@ -34,36 +34,37 @@
     placeDetailsViewController.place = place;
     [placeDetailsViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
     
-    UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:18];
-
     if (![place.phone_number isKindOfClass:[NSNull class]] && ![place.phone_number isEqualToString:@""]) {
+        
+        placeDetailsViewController.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake (0, 10, 160, 30)];
+        
+        NSAttributedString * attrString = [[NSAttributedString alloc] initWithString:place.phone_number attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}];
+        [placeDetailsViewController.phoneLabel setAttributedText:attrString];
+        
+        [placeDetailsViewController.phoneLabel setFont:[UIFont systemFontOfSize:18]];
+        [placeDetailsViewController.phoneLabel setTextColor:[UIColor colorWithRed:0.268 green:0.260 blue:1.000 alpha:1.000]];
+        [placeDetailsViewController.phoneLabel setContentMode:UIViewContentModeCenter];
+        [placeDetailsViewController.phoneLabel setTextAlignment:NSTextAlignmentCenter];
+        [placeDetailsViewController.phoneLabel setBackgroundColor:[UIColor clearColor]];
+        [placeDetailsViewController.phoneLabel setUserInteractionEnabled:YES];
+
+        [placeDetailsViewController.view addSubview:placeDetailsViewController.phoneLabel];
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:placeDetailsViewController action:@selector(handleTap)];
         tap.delegate = placeDetailsViewController;
-        [placeDetailsViewController.view addGestureRecognizer:tap];
-        
-        placeDetailsViewController.phoneLabel = [[NIAttributedLabel alloc] initWithFrame:CGRectMake (0, 10, 150, 30)];
-        placeDetailsViewController.phoneLabel.delegate = placeDetailsViewController;
-        [placeDetailsViewController.phoneLabel setTextAlignment:NSTextAlignmentCenter];
-        [placeDetailsViewController.phoneLabel setBackgroundColor:[UIColor clearColor]];
-        [placeDetailsViewController.phoneLabel setText:place.phone_number];
-        [placeDetailsViewController.phoneLabel setFont:font];
-        [placeDetailsViewController.phoneLabel setAutoDetectLinks:YES];
-        [placeDetailsViewController.phoneLabel setDataDetectorTypes:NSTextCheckingTypePhoneNumber];
-        [placeDetailsViewController.phoneLabel setLinksHaveUnderlines:YES];
-        [placeDetailsViewController.view addSubview:placeDetailsViewController.phoneLabel];
+        [placeDetailsViewController.phoneLabel addGestureRecognizer:tap];
     }
     
     UIButton * directionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [directionsButton setFrame:CGRectMake(10, 55, 135, 30)];
-    [directionsButton.titleLabel setFont:font];
+    [directionsButton.titleLabel setFont:[UIFont systemFontOfSize:18]];
     directionsButton.backgroundColor = [UIColor clearColor];
     directionsButton.alpha = 0.8;
     directionsButton.layer.borderColor = [UIColor blackColor].CGColor;
     directionsButton.layer.borderWidth = 2;
     directionsButton.layer.cornerRadius = 10;
     [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
-    [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchDown];
+    [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [placeDetailsViewController.view addSubview:directionsButton];
     
 //    placeDetailsViewController.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake (0, 115/2, 150, 40)];
@@ -78,6 +79,14 @@
 
     return placeDetailsViewController;
 }
+
+//#pragma mark -
+//#pragma mark TTTAttributedLabelDelegate
+//
+//- (void)attributedLabel:(TTTAttributedLabel *)label
+//didSelectLinkWithPhoneNumber:(NSString *)phoneNumber{
+//    [self handleTap];
+//}
 
 -(void)handleTap{
     NSString * cleanedPhoneString = [[[self.phoneLabel.text stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@"-"];
@@ -111,14 +120,6 @@
     }else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mapsURLFormatted]];
     }
-}
-
-- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point{
-    
-}
-
-- (BOOL)attributedLabel:(NIAttributedLabel *)attributedLabel shouldPresentActionSheet:(UIActionSheet *)actionSheet withTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point{
-    return YES;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{

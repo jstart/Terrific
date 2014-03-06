@@ -25,7 +25,7 @@
 
 @implementation SGAppDelegate
 
-#define TESTFLIGHT 1
+#define TESTFLIGHT 0
 
 // Dispatch period in seconds
 static const NSInteger kGANDispatchPeriodSec = 10;
@@ -59,12 +59,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     }];
     
     [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
-#if !TESTFLIGHT
     [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
     [[Mixpanel sharedInstance] identify:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
     [Flurry startSession:@"FJX9G2A6P8VGCM5736M7"];
     [Flurry setUserID:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
-#endif
     
     [TestFlight takeOff:@"149fea64-54e2-4696-8c05-844a849d7f6a"];
 

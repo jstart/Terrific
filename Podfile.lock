@@ -18,43 +18,38 @@ PODS:
   - AFNetworking/UIKit (2.2.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - ALAlertBanner (0.3.0)
+  - ALAlertBanner (0.3.1)
   - FlatUIKit (1.3)
   - FlurrySDK (4.3.2)
-  - GoogleAnalytics-iOS-SDK (3.0.1)
+  - GoogleAnalytics-iOS-SDK (3.0.3)
   - GroundControl (2.0.0):
     - AFNetworking (~> 2.0)
   - Mixpanel (2.3.2)
   - MPFlipViewController (0.0.2)
-  - Nimbus/AttributedLabel (1.0.0):
-    - Nimbus/Core
-  - Nimbus/Core (1.0.0)
   - RCLocationManager (0.1)
   - TestFlightSDK (3.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.0)
-  - ALAlertBanner (~> 0.3.0)
+  - ALAlertBanner (~> 0.3.1)
   - FlatUIKit (~> 1.3)
   - FlurrySDK (~> 4.3.2)
-  - GoogleAnalytics-iOS-SDK (~> 3.0)
+  - GoogleAnalytics-iOS-SDK (~> 3.0.3)
   - GroundControl
   - Mixpanel (~> 2.3.2)
   - MPFlipViewController (~> 0.0.2)
-  - Nimbus/AttributedLabel (~> 1.0.0)
   - RCLocationManager (~> 0.1)
   - TestFlightSDK (~> 3.0)
 
 SPEC CHECKSUMS:
   AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
-  ALAlertBanner: 13d4bf464a845fa8845338291807df97f4b9939d
+  ALAlertBanner: 16235298226059cd876a9de0a5d7f9bac6a79459
   FlatUIKit: 3b32b52bb3c266477709cfe4812ab2c877ae942b
   FlurrySDK: 508afbd655fe2ff935d3e9543cb1c8aa432794de
-  GoogleAnalytics-iOS-SDK: 4a788a66154b395717a31bfec1050f8c47b6d122
+  GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
   GroundControl: 7246542fbddc789a448c7a60e4f4df94881972f9
   Mixpanel: ddd79df92245a14d2b3064544d1e9ff037d8ac3a
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  Nimbus: 01c4339214b2f35be2e9284cb6e98beb7fe0f08a
   RCLocationManager: f02bd426e93e87693fe8a2adf76f917a74d774c9
   TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
 

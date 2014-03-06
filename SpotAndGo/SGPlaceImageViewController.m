@@ -44,7 +44,7 @@
     placeImageViewController.nameLabel = [[UILabel alloc] initWithFrame:overlayFrame];
     placeImageViewController.nameLabel.backgroundColor = [UIColor clearColor];
     placeImageViewController.nameLabel.textAlignment = NSTextAlignmentCenter;
-    UIFont * font = [UIFont fontWithName:@"Futura-Medium" size:14];
+    UIFont * font = [UIFont systemFontOfSize:14];
     [placeImageViewController.nameLabel setFont:font];
     [placeImageViewController.nameLabel setTextColor:[UIColor whiteColor]];
     placeImageViewController.nameLabel.text = place.name;

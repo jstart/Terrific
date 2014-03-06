@@ -15,7 +15,7 @@
 @property (nonatomic, strong) SGPlace * place;
 @property (nonatomic, strong) UIImageView * mapImageView;
 @property (nonatomic, strong) UILabel * nameLabel;
-@property (nonatomic, strong) NIAttributedLabel * phoneLabel;
+@property (nonatomic, strong) UILabel * phoneLabel;
 @property (nonatomic, strong) UIButton * directionsButton;
 
 +(SGPlaceDetailsViewController*)placeDetailsViewControllerWithPlace:(SGPlace*)place;
