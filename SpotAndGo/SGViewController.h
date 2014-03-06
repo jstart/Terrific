@@ -7,18 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "SGMapViewController.h"
 
-@interface SGViewController : GAITrackedViewController <CLLocationManagerDelegate>{
-  NSArray  *categoryButtons;
-  CLLocationManager * locationManager;
+@interface SGViewController : GAITrackedViewController {
+    NSArray * categoryButtons;
 }
-@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
-@property (nonatomic, retain) IBOutletCollection(UIButton) NSArray *categoryButtons;
-@property (nonatomic, retain) CLLocationManager * locationManager;
+
+@property (strong, nonatomic) IBOutlet UIImageView * logoImageView;
+@property (nonatomic, retain)IBOutletCollection(UIButton) NSArray * categoryButtons;
 @property (nonatomic, retain) SGMapViewController * mapViewController;
 
-- (IBAction)buttonSelected:(id)sender;
+- (IBAction) buttonSelected:(id)sender;
 
 @end

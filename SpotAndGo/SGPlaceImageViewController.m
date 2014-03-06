@@ -16,23 +16,26 @@
 
 @implementation SGPlaceImageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
 }
 
-+(SGPlaceImageViewController*)placeImageViewControllerWithPlace:(SGPlace*)place{
++ (SGPlaceImageViewController *) placeImageViewControllerWithPlace:(SGPlace *)place
+{
     SGPlaceImageViewController * placeImageViewController = [[SGPlaceImageViewController alloc] init];
+
     placeImageViewController.place = place;
     [[placeImageViewController view] setFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"gplaypattern.png"]]];
     placeImageViewController.mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 160, 100)];
     [placeImageViewController.view addSubview:placeImageViewController.mapImageView];
-    
+
     CGRect overlayFrame = placeImageViewController.mapImageView.frame;
     overlayFrame.size.height = overlayFrame.size.height * 0.3;
     overlayFrame.origin.y = placeImageViewController.mapImageView.frame.size.height - overlayFrame.size.height;
@@ -40,7 +43,7 @@
     [overlayView setBackgroundColor:[UIColor blackColor]];
     [overlayView setAlpha:0.75];
     [placeImageViewController.mapImageView addSubview:overlayView];
-    
+
     placeImageViewController.nameLabel = [[UILabel alloc] initWithFrame:overlayFrame];
     placeImageViewController.nameLabel.backgroundColor = [UIColor clearColor];
     placeImageViewController.nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -52,33 +55,35 @@
 
     float lat = [place.latitude floatValue];
     float lon = [place.longitude floatValue];
-    
+
     NSString * googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 160, 100, lat, lon];
     [placeImageViewController.mapImageView setImageWithURL:[NSURL URLWithString:googleMapURL]];
     return placeImageViewController;
 }
 
-+(UIViewController*)blankViewController{
++ (UIViewController *) blankViewController
+{
     UIViewController * blankViewController = [[UIViewController alloc] init];
+
     [[blankViewController view] setFrame:CGRectMake(0, 0, 160, 100)];
     [[blankViewController view] setAlpha:0.0];
     return blankViewController;
 }
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
-  self.screenName = self.place.name;
-	// Do any additional setup after loading the view.
+    self.screenName = self.place.name;
+    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
+- (void) didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }

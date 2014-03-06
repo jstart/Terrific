@@ -18,6 +18,6 @@
 @property (nonatomic, strong) UILabel * phoneLabel;
 @property (nonatomic, strong) UIButton * directionsButton;
 
-+(SGPlaceDetailsViewController*)placeDetailsViewControllerWithPlace:(SGPlace*)place;
++ (SGPlaceDetailsViewController *) placeDetailsViewControllerWithPlace:(SGPlace *)place;
 
 @end

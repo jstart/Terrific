@@ -24,9 +24,9 @@ PODS:
   - GoogleAnalytics-iOS-SDK (3.0.3)
   - GroundControl (2.0.0):
     - AFNetworking (~> 2.0)
+  - MBLocationManager (0.1.1)
   - Mixpanel (2.3.2)
   - MPFlipViewController (0.0.2)
-  - RCLocationManager (0.1)
   - TestFlightSDK (3.0.0)
 
 DEPENDENCIES:
@@ -36,9 +36,9 @@ DEPENDENCIES:
   - FlurrySDK (~> 4.3.2)
   - GoogleAnalytics-iOS-SDK (~> 3.0.3)
   - GroundControl
+  - MBLocationManager
   - Mixpanel (~> 2.3.2)
   - MPFlipViewController (~> 0.0.2)
-  - RCLocationManager (~> 0.1)
   - TestFlightSDK (~> 3.0)
 
 SPEC CHECKSUMS:
@@ -48,9 +48,9 @@ SPEC CHECKSUMS:
   FlurrySDK: 508afbd655fe2ff935d3e9543cb1c8aa432794de
   GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
   GroundControl: 7246542fbddc789a448c7a60e4f4df94881972f9
+  MBLocationManager: 5ffd6382e434a6324258c7c263d531c6fd1027e7
   Mixpanel: ddd79df92245a14d2b3064544d1e9ff037d8ac3a
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  RCLocationManager: f02bd426e93e87693fe8a2adf76f917a74d774c9
   TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
 
 COCOAPODS: 0.29.0

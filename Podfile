@@ -1,7 +1,7 @@
 
 platform :ios, "7.0"
 pod 'AFNetworking', '~> 2.2.0'
-pod 'RCLocationManager', '~> 0.1'
+pod 'MBLocationManager'
 pod 'MPFlipViewController', '~> 0.0.2'
 pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.3'
 pod 'ALAlertBanner', '~> 0.3.1'

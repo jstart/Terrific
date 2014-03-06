@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString * phone_number;
 @property (nonatomic, strong) NSString * website;
 
-+(SGPlace*)objectWithDictionary:(NSDictionary*)dictionary;
--(void)unpackDictionary:(NSDictionary*)dictionary;
++ (SGPlace *) objectWithDictionary:(NSDictionary *)dictionary;
+- (void) unpackDictionary:(NSDictionary *)dictionary;
 
 @end

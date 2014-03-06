@@ -13,7 +13,7 @@
 
 @protocol SGDetailCardViewDelegate <NSObject>
 
--(void)placeSelected:(SGPlace*)place;
+- (void) placeSelected:(SGPlace *)place;
 
 @end
 

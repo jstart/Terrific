@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImageView * mapImageView;
 @property (nonatomic, strong) UILabel * nameLabel;
 
-+(SGPlaceImageViewController*)placeImageViewControllerWithPlace:(SGPlace*)place;
-+(UIViewController*)blankViewController;
++ (SGPlaceImageViewController *) placeImageViewControllerWithPlace:(SGPlace *)place;
++ (UIViewController *) blankViewController;
 
 @end

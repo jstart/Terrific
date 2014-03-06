@@ -10,15 +10,18 @@
 
 @implementation SGPlace
 
-+(SGPlace*)objectWithDictionary:(NSDictionary*)dictionary{
++ (SGPlace *) objectWithDictionary:(NSDictionary *)dictionary
+{
     SGPlace * place = [[SGPlace alloc] init];
+
     [place unpackDictionary:dictionary];
     return place;
 }
 
+- (void) unpackDictionary:(NSDictionary *)dictionary
+{
+    NSDictionary * addressDictionary = [dictionary objectForKey:@"address"];
 
--(void)unpackDictionary:(NSDictionary*) dictionary{
-    NSDictionary* addressDictionary = [dictionary objectForKey:@"address"];
     self.city = [addressDictionary objectForKey:@"city"];
     self.postal_code = [addressDictionary objectForKey:@"postal_code"];
     self.state = [addressDictionary objectForKey:@"state"];

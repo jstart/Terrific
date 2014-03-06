@@ -12,20 +12,24 @@
 @synthesize coordinate = _coordinate;
 @synthesize title = _title, subtitle = _subtitle;
 
-- (id) initWithTitle:(NSString*)title Coordinate:(CLLocationCoordinate2D)coordinate {
-  if (self = [super init]) {
-    _title = title;
-    _coordinate = coordinate;
-  }
-  return self;
+- (id) initWithTitle:(NSString *)title Coordinate:(CLLocationCoordinate2D)coordinate
+{
+    if (self = [super init])
+    {
+        _title = title;
+        _coordinate = coordinate;
+    }
+    return self;
 }
 
-+ (SGAnnotation*)resultWithTitle:(NSString*)title Coordinate:(CLLocationCoordinate2D)coordinate {
-  return [[SGAnnotation alloc] initWithTitle:title Coordinate:coordinate];
++ (SGAnnotation *) resultWithTitle:(NSString *)title Coordinate:(CLLocationCoordinate2D)coordinate
+{
+    return [[SGAnnotation alloc] initWithTitle:title Coordinate:coordinate];
 }
 
-- (NSString*) description {
-  return [NSString stringWithFormat:@"LocationResult Name: %@ Coordinate: %f, %f", self.title, self.coordinate.latitude, self.coordinate.longitude];
+- (NSString *) description
+{
+    return [NSString stringWithFormat:@"LocationResult Name: %@ Coordinate: %f, %f", self.title, self.coordinate.latitude, self.coordinate.longitude];
 }
 
 @end
