@@ -8,6 +8,8 @@ Server and API development: Joe Rozner (https://github.com/jrozner)
 
 Design and Product: Hanako Truman (http://about.me/hana.ruth)
 
+Business and Presentation: Peter Kovach (http://www.linkedin.com/pub/peter-kovach/30/385/223)
+
 [![Build Status](https://travis-ci.org/jstart/Spot-Go.png?branch=master)](https://travis-ci.org/jstart/Spot-Go)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jstart/spot-go/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

@@ -11,8 +11,6 @@
 #ifdef __OBJC__
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
-  #import "NimbusCore.h"
-  #import "NimbusAttributedLabel.h"
   #import <Mixpanel.h>
   #import <Flurry.h>
   #import "GAI.h"
