@@ -51,10 +51,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsDictionary];
     }
     
-//    NSURL *URL = [NSURL URLWithString:@"http://countdown-plist.herokuapp.com/defaults.plist"];
-//    [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL success:^(NSDictionary * defaults){
-//    }failure:^(NSError * error){
-//    }];
+    NSURL *URL = [NSURL URLWithString:@"http://spotandgo-plist.herokuapp.com/defaults.plist"];
+    [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL success:^(NSDictionary * defaults){
+        
+    }failure:^(NSError * error){
+        
+    }];
     
     [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
 #if !TESTFLIGHT
