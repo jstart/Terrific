@@ -15,7 +15,7 @@
 #import <UIBarButtonItem+FlatUI.h>
 #import <AdSupport/AdSupport.h>
 #import <GroundControl/NSUserDefaults+GroundControl.h>
-#import <PonyDebugger/PonyDebugger.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 @interface SGAppDelegate()
 
@@ -66,15 +66,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [TestFlight takeOff:@"149fea64-54e2-4696-8c05-844a849d7f6a"];
 
-    [TestFlight setDeviceIdentifier:[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]];
     [[Mixpanel sharedInstance] track:@"Launched"];
     
-    PDDebugger *debugger = [PDDebugger defaultInstance];
-    [debugger enableNetworkTrafficDebugging];
-    [debugger forwardAllNetworkTraffic];
-    [debugger enableViewHierarchyDebugging];
-    [debugger enableRemoteLogging];
-    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+//    PDDebugger *debugger = [PDDebugger defaultInstance];
+//    [debugger enableNetworkTrafficDebugging];
+//    [debugger forwardAllNetworkTraffic];
+//    [debugger enableViewHierarchyDebugging];
+//    [debugger enableRemoteLogging];
+//    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
 
   // Optional: automatically send uncaught exceptions to Google Analytics.
   [GAI sharedInstance].trackUncaughtExceptions = YES;
@@ -83,7 +82,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Optional: set debug to YES for extra debugging information.
 //  [GAI sharedInstance].debug = YES;
   // Create tracker instance.
-  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
+  [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
     [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
     NSError *error;
     if (error) {
@@ -101,6 +100,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [UIBarButtonItem configureFlatButtonsWithColor:[UIColor colorWithWhite:0.475 alpha:1.000] highlightedColor:[UIColor colorWithWhite:0.658 alpha:1.000] cornerRadius:3];
     }
+    
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
 #if TARGET_IPHONE_SIMULATOR
 //    [[DCIntrospect sharedIntrospector] start];

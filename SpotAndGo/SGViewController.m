@@ -39,7 +39,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
   }
   self.locationManager = [[CLLocationManager alloc] init];
-  [self.locationManager setPurpose:@"Spot+Go would like to show you cool spots near you!"];
+//  [self.locationManager setPurpose:@"Spot+Go would like to show you cool spots near you!"];
   [self.locationManager setDelegate:self];
   [self.locationManager setDesiredAccuracy:10];
   [self.locationManager startUpdatingLocation];

@@ -205,7 +205,6 @@ NSString *MPFlipViewControllerDidFinishAnimatingNotification = @"com.markpospese
 	BOOL isHorizontal = [self orientation] == MPFlipViewControllerOrientationHorizontal;
 	CGFloat value = isHorizontal? tapPoint.x : tapPoint.y;
 	CGFloat dimension = isHorizontal? self.view.bounds.size.width : self.view.bounds.size.height;
-	NSLog(@"Tap to flip");
 	if (value <= MARGIN)
 		[self gotoPreviousPage];
 	else if (value >= dimension - MARGIN)

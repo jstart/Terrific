@@ -13,9 +13,9 @@
   #import <Foundation/Foundation.h>
   #import "NimbusCore.h"
   #import "NimbusAttributedLabel.h"
-  #import "Mixpanel.h"
-  #import "Flurry.h"
+  #import <Mixpanel.h>
+  #import <Flurry.h>
   #import "GAI.h"
-  #import "TestFlight.h"
+  #import <TestFlight.h>
   #define NSLog TFLog
 #endif
