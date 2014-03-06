@@ -1,7 +1,11 @@
 Spot-Go
 =======
 
-Spot+Go was an app created for the CityGridLA hackathon.  We built this over a weekend, and it is the worst code I have ever written :D
+Spot+Go was an app created for the CityGridLA hackathon.  When you are in a new place, Spot+Go will show you the 4 closest and best places to eat, shop, watch movies, or be entertained.  You can try the app on the store here:
+[https://itunes.apple.com/us/app/spot+go/id524294513?mt=8]
+
+Server and API development: Joe Rozner (https://github.com/jrozner)
+Design and Product: Hanako Truman http://about.me/hana.ruth
 
 [![Build Status](https://travis-ci.org/jstart/Spot-Go.png?branch=master)](https://travis-ci.org/jstart/Spot-Go)
 
