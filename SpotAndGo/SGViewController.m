@@ -7,7 +7,6 @@
 //
 
 #import "SGViewController.h"
-#import <ALAlertBanner/ALAlertBannerManager.h>
 #import <MBLocationManager/MBLocationManager.h>
 
 @interface SGViewController ()
@@ -21,8 +20,7 @@
 {
     [Flurry logAllPageViews:self.navigationController];
     [[Mixpanel sharedInstance] track:@"Main Menu Appeared"];
-    [[ALAlertBannerManager sharedManager] hideAllAlertBanners];
-
+    
     if ([self.navigationController isNavigationBarHidden])
     {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -51,13 +49,6 @@
     [Flurry setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude horizontalAccuracy:location.horizontalAccuracy verticalAccuracy:location.verticalAccuracy];
     // Do any additional setup after loading the view, typically from a nib.
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
-}
-
-- (void) viewDidUnload
-{
-    [self setLogoImageView:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
 }
 
 - (IBAction) buttonSelected:(id)sender
@@ -97,11 +88,6 @@
     [Flurry logEvent:@"chose" withParameters:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
     [[NSUserDefaults standardUserDefaults] setObject:chosenCategory forKey:@"category"];
     [self.navigationController pushViewController:mapViewController animated:YES];
-}
-
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

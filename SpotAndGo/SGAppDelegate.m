@@ -7,13 +7,14 @@
 //
 
 #import "SGAppDelegate.h"
+
+@import AdSupport;
+
 #import <Crashlytics/Crashlytics.h>
 #import "SGConstants.h"
 #import <MBLocationManager/MBLocationManager.h>
 // #import "DCIntrospect.h"
 // #import <PonyDebugger.h>
-#import <UIBarButtonItem+FlatUI.h>
-#import <AdSupport/AdSupport.h>
 #import <GroundControl/NSUserDefaults+GroundControl.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
@@ -28,7 +29,7 @@
 #define TESTFLIGHT 0
 
 // Dispatch period in seconds
-static const NSInteger kGANDispatchPeriodSec = 10;
+
 #if TARGET_IPHONE_SIMULATOR
 static NSString * const kAnalyticsAccountId = @"UA-31324397-2";
 #elif TESTFLIGHT
@@ -76,14 +77,15 @@ static NSString * const kAnalyticsAccountId = @"UA-31324397-4";
 //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
 
     // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
+//    [GAI sharedInstance].trackUncaughtExceptions = YES;
     // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 20;
+//    [GAI sharedInstance].dispatchInterval = 20;
     // Optional: set debug to YES for extra debugging information.
 //  [GAI sharedInstance].debug = YES;
     // Create tracker instance.
-    [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
-    [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
+//    [[GAI sharedInstance] trackerWithTrackingId:kAnalyticsAccountId];
+//    [[GAI sharedInstance] setTrackUncaughtExceptions:YES];
+    
     NSError * error;
     if (error)
     {
@@ -100,10 +102,6 @@ static NSString * const kAnalyticsAccountId = @"UA-31324397-4";
     if (!self.geocoder)
     {
         self.geocoder = [[CLGeocoder alloc] init];
-    }
-    if (SYSTEM_VERSION_LESS_THAN(@"6.1.4"))
-    {
-        [UIBarButtonItem configureFlatButtonsWithColor:[UIColor colorWithWhite:0.475 alpha:1.000] highlightedColor:[UIColor colorWithWhite:0.658 alpha:1.000] cornerRadius:3];
     }
 
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];

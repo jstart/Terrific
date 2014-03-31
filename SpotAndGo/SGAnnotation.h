@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
+@import MapKit;
+@import CoreLocation;
 
 @interface SGAnnotation : NSObject <MKAnnotation>
 

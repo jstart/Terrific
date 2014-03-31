@@ -11,8 +11,8 @@
 #ifdef __OBJC__
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
-  #import <Mixpanel.h>
-  #import <Flurry.h>
+  #import <Mixpanel/Mixpanel.h>
+  #import <FlurrySDK/Flurry.h>
   #import "GAI.h"
   #import <TestFlight.h>
   #define NSLog TFLog

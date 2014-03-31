@@ -57,10 +57,9 @@ static NSString * LATLON_PATH = @"/content/places/v2/search/latlon";
                      SGPlace * place = [SGPlace objectWithDictionary:placeDictionary];
                      [placeArray addObject:place];
                  }
-//                placeArray = [[self arrayByRemovingDupesFromArray:placeArray] mutableCopy];
-
                  success(placeArray);
              }
+             success(@[]);
          }
      } failure:^(AFHTTPRequestOperation * operation, NSError * error){
          failure(error);

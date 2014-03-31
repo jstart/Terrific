@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
+@import MapKit;
+@import CoreLocation;
 #import "SGDetailCardViewController.h"
 
 #pragma mark MapViewController

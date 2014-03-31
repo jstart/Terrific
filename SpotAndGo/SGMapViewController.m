@@ -13,9 +13,7 @@
 #import "SGPlace.h"
 #import "SGAnnotation.h"
 #import "SGConstants.h"
-#import <ALAlertBanner/ALAlertBanner.h>
-#import <UINavigationBar+FlatUI.h>
-#import <UIBarButtonItem+FlatUI.h>
+#import <TSMessages/TSMessageView.h>
 
 @interface SGMapViewController ()
 
@@ -32,6 +30,7 @@
     if (self)
     {
         // Custom initialization
+        [TSMessage setDefaultViewController:self];
     }
     return self;
 }
@@ -39,14 +38,13 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    self.screenName = self.currentCategory;
     // Do any additional setup after loading the view.
 
     self.placeResultCardViewController = [[SGDetailCardViewController alloc] init];
     [self.placeResultCardViewController setDelegate:self];
 
     int rowNumber = isPhone568 ? 3 : 2;
-    int mapHeight = SYSTEM_VERSION_GREATER_THAN(@"6.1.3") ? [UIScreen mainScreen].bounds.size.height - 100 * rowNumber : [UIScreen mainScreen].bounds.size.height - 100 * rowNumber - 44 - 20;
+    int mapHeight = SYSTEM_VERSION_GREATER_THAN(@"6.1.4") ? [UIScreen mainScreen].bounds.size.height - 100 * rowNumber : [UIScreen mainScreen].bounds.size.height - 100 * rowNumber - 44 - 20;
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
     [self.mapView setDelegate:self];
     [self.view addSubview:self.mapView];
@@ -60,21 +58,10 @@
     [self.placeResultCardViewController didMoveToParentViewController:self];
 }
 
-- (void) viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
 - (void) viewWillAppear:(BOOL)animated
 {
     [self.mapView setShowsUserLocation:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    if (SYSTEM_VERSION_LESS_THAN(@"6.1.4"))
-    {
-        [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor colorWithRed:0.719 green:0.716 blue:0.707 alpha:1.000]];
-    }
-
     self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
     self.title = self.currentCategory;
     self.authStatus = [CLLocationManager authorizationStatus];
@@ -88,8 +75,8 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     NSDictionary * appearance = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [UIColor blackColor], UITextAttributeTextColor,
-                                 [UIColor grayColor], UITextAttributeTextShadowColor, nil];
+                                 [UIColor blackColor], NSForegroundColorAttributeName,
+                                 [UIColor grayColor], NSShadowAttributeName, nil];
     UIBarButtonItem * item = self.navigationController.navigationItem.backBarButtonItem;
 
     [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
@@ -103,13 +90,13 @@
     else
     {
         [TestFlight passCheckpoint:@"locationDisabled"];
-        ALAlertBanner * banner = [ALAlertBanner alertBannerForView:self.view
-                                                             style:ALAlertBannerStyleFailure
-                                                          position:ALAlertBannerPositionTop
-                                                             title:@"Location Disabled"
-                                                          subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."];
-        [banner show];
+        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [TSMessage dismissActiveNotification];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -127,12 +114,7 @@
 {
     if ([self.mapView userLocation].coordinate.latitude == 0.0 && [self.mapView userLocation].coordinate.longitude == 0.0)
     {
-        ALAlertBanner * banner = [ALAlertBanner alertBannerForView:self.view
-                                                             style:ALAlertBannerStyleFailure
-                                                          position:ALAlertBannerPositionTop
-                                                             title:@"Location Disabled"
-                                                          subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"."];
-        [banner show];
+        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
     [TestFlight passCheckpoint:@"performSearch"];
     CLLocation * currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
@@ -155,39 +137,35 @@
 
          [self.mapView addAnnotations:annotationsArray];
 
-         MKMapPoint annotationPoint = MKMapPointForCoordinate(mapView.userLocation.coordinate);
+         MKMapPoint annotationPoint = MKMapPointForCoordinate(self->mapView.userLocation.coordinate);
          MKMapRect zoomRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-         for (id <MKAnnotation> annotation in mapView.annotations)
+         for (id <MKAnnotation> annotation in self->mapView.annotations)
          {
-             MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-             MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+             MKMapPoint newAnnotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+             MKMapRect pointRect = MKMapRectMake(newAnnotationPoint.x, newAnnotationPoint.y, 0.1, 0.1);
              zoomRect = MKMapRectUnion(zoomRect, pointRect);
          }
 
          if (SYSTEM_VERSION_LESS_THAN(@"6.1.4"))
          {
-             [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(35, 5, 5, 5) animated:YES];
+             [self->mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(35, 5, 5, 5) animated:YES];
          }
          else
          {
-             [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
+             [self->mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
          }
 
          [self updateResultCards];
      } failure: ^(NSError * error) {
          NSLog(@"error searching categories %@", error);
-         ALAlertBanner * banner = [ALAlertBanner     alertBannerForView:self.view
-                                                                  style:ALAlertBannerStyleFailure
-                                                               position:ALAlertBannerPositionTop
-                                                                  title:@"No Spots Found"
-                                                               subtitle:@"No great spots were found :( Try again!"];
-         [banner show];
+         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
+         [TSMessage showNotificationInViewController:self title:@"No Spots Found" subtitle:@"No great spots were found :( Try again somewhere else!" type:TSMessageNotificationTypeWarning];
      }];
 }
 
 - (void) updateResultCards
 {
-    NSInteger totalPlaces = isPhone568 ? 6 : 4;
+    int totalPlaces = isPhone568 ? 6 : 4;
     NSInteger remainingPlaces = totalPlaces - [self.currentPlaces count];
 
     for (int i = totalPlaces - 1; i > remainingPlaces; i--)
@@ -196,7 +174,7 @@
         UIViewController * placeImageViewController = [SGPlaceImageViewController blankViewController];
         [currentView setViewController:placeImageViewController direction:MPFlipViewControllerDirectionForward animated:NO completion:nil];
     }
-    for (int i = 0; i < [self.currentPlaces count]; i++)
+    for (int i = 0; i < (int) [self.currentPlaces count]; i++)
     {
         SGPlace * place = [self.currentPlaces objectAtIndex:i];
         NSLog(@"updating... %@", place.name);
@@ -269,11 +247,6 @@
         default :
             break;
     }
-}
-
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
