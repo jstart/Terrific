@@ -27,7 +27,6 @@
 		ADFC15EC18D8FABE00B18F32 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ADFC15DB18D8FABE00B18F32 /* NotificationButtonBackground.png */; };
 		ADFC15ED18D8FABE00B18F32 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADFC15DC18D8FABE00B18F32 /* NotificationButtonBackground@2x.png */; };
 		ADFC15EE18D8FABE00B18F32 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = ADFC15DD18D8FABE00B18F32 /* TSMessagesDefaultDesign.json */; };
-		FD3A93DF16DD77A2005B9976 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3A93DE16DD77A2005B9976 /* Default.png */; };
 		FD3A93E116DD7DE9005B9976 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3A93E016DD7DE8005B9976 /* Default-568h@2x.png */; };
 		FD3A93E416DD9FC3005B9976 /* gplaypattern.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3A93E216DD9FC3005B9976 /* gplaypattern.png */; };
 		FD3A93E516DD9FC3005B9976 /* gplaypattern@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3A93E316DD9FC3005B9976 /* gplaypattern@2X.png */; };
@@ -88,7 +87,6 @@
 		ADFC15DD18D8FABE00B18F32 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
 		B0D7DFF6021B4A21BBAA755A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F98CF40EF0CE46A1BA959525 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD3A93DE16DD77A2005B9976 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FD3A93E016DD7DE8005B9976 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FD3A93E216DD9FC3005B9976 /* gplaypattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gplaypattern.png; sourceTree = "<group>"; };
 		FD3A93E316DD9FC3005B9976 /* gplaypattern@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gplaypattern@2X.png"; sourceTree = "<group>"; };
@@ -322,7 +320,6 @@
 				FDC48530154DE34F0035BB36 /* play.png */,
 				FDC48531154DE34F0035BB36 /* shop.png */,
 				FDC48532154DE3500035BB36 /* watch.png */,
-				FD3A93DE16DD77A2005B9976 /* Default.png */,
 				FDC4852B154DDF7E0035BB36 /* Default@2x.png */,
 				FD3A93E016DD7DE8005B9976 /* Default-568h@2x.png */,
 			);
@@ -413,7 +410,6 @@
 				ADFC15E818D8FABE00B18F32 /* NotificationBackgroundWarning.png in Resources */,
 				FDC4853C154DEFAA0035BB36 /* Icon@2x.png in Resources */,
 				FDC4853E154DEFF90035BB36 /* Icon.png in Resources */,
-				FD3A93DF16DD77A2005B9976 /* Default.png in Resources */,
 				ADFC15E018D8FABE00B18F32 /* NotificationBackgroundErrorIcon.png in Resources */,
 				FD3A93E116DD7DE9005B9976 /* Default-568h@2x.png in Resources */,
 				FD3A93E416DD9FC3005B9976 /* gplaypattern.png in Resources */,
@@ -597,8 +593,8 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8E1092CF-3AA0-464A-871A-FC1F683A3912";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E1092CF-3AA0-464A-871A-FC1F683A3912";
+				PROVISIONING_PROFILE = "826EEB4F-B56B-4764-9124-0036AB95AA26";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "826EEB4F-B56B-4764-9124-0036AB95AA26";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -625,8 +621,8 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4317D4CC-D865-471F-A845-C866FA7AA0AB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4317D4CC-D865-471F-A845-C866FA7AA0AB";
+				PROVISIONING_PROFILE = "544EC413-FF8D-4602-9A36-D36A9AB4BB60";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "544EC413-FF8D-4602-9A36-D36A9AB4BB60";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};

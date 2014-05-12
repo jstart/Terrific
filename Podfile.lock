@@ -1,58 +1,58 @@
 PODS:
-  - AFNetworking (2.2.1):
+  - AFNetworking (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.1):
+  - AFNetworking/NSURLConnection (2.2.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.1):
+  - AFNetworking/NSURLSession (2.2.3):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.1)
-  - AFNetworking/Security (2.2.1)
-  - AFNetworking/Serialization (2.2.1)
-  - AFNetworking/UIKit (2.2.1):
+  - AFNetworking/Reachability (2.2.3)
+  - AFNetworking/Security (2.2.3)
+  - AFNetworking/Serialization (2.2.3)
+  - AFNetworking/UIKit (2.2.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - FlurrySDK (4.3.2):
+  - FlurrySDK (4.4.0):
     - FlurrySDK/FlurrySDK
-  - FlurrySDK/FlurrySDK (4.3.2)
-  - GoogleAnalytics-iOS-SDK (3.0.6)
-  - GroundControl (2.0.0):
-    - AFNetworking (~> 2.0)
+  - FlurrySDK/FlurrySDK (4.4.0)
+  - GoogleAnalytics-iOS-SDK (3.0.7)
+  - GroundControl (2.1.0):
+    - AFNetworking (~> 2.2)
   - HexColors (2.2.1)
   - MBLocationManager (0.1.1)
-  - Mixpanel (2.3.4)
+  - Mixpanel (2.3.6)
   - MPFlipViewController (0.0.2)
   - TestFlightSDK (3.0.0)
-  - TSMessages (0.9.6):
+  - TSMessages (0.9.9):
     - HexColors
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.2.0)
-  - FlurrySDK (~> 4.3.2)
-  - GoogleAnalytics-iOS-SDK (~> 3.0.3)
+  - AFNetworking
+  - FlurrySDK
+  - GoogleAnalytics-iOS-SDK
   - GroundControl
   - MBLocationManager
-  - Mixpanel (~> 2.3.2)
-  - MPFlipViewController (~> 0.0.2)
-  - TestFlightSDK (~> 3.0)
+  - Mixpanel
+  - MPFlipViewController
+  - TestFlightSDK
   - TSMessages
 
 SPEC CHECKSUMS:
-  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
-  FlurrySDK: 0ba42379fd272d69246ae06386a2c5688516ffd8
-  GoogleAnalytics-iOS-SDK: 4f77f2cce5216e590343ce0b75ac491aa249ca89
-  GroundControl: 7246542fbddc789a448c7a60e4f4df94881972f9
-  HexColors: 3a68db077cd6572a8f7d4aa1add284dd2436a934
-  MBLocationManager: 5ffd6382e434a6324258c7c263d531c6fd1027e7
-  Mixpanel: 16e6f1d5f8aeb9282ee864e169557de0bd9549df
+  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  FlurrySDK: 2cd8f2ce2383ca152c5d96fa34cb9ef29706feda
+  GoogleAnalytics-iOS-SDK: 594702aaf93e6ee497140fd31e758c2e2fa44315
+  GroundControl: 6c9ad5f196e61ada7624d5acfbfe0f714d6c7e27
+  HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
+  MBLocationManager: f1f15dea5ababd67c0872dded0c9f4d169d4bb5d
+  Mixpanel: b1c61efa748193777889dfe8b7f80471ceb95e97
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
-  TSMessages: 839edc3164b99ced48c30af9dde9710cd67bea4d
+  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
+  TSMessages: 49f9083df41d320b34e8d66c5ed3ef147e543187
 
-COCOAPODS: 0.31.0
+COCOAPODS: 0.32.1

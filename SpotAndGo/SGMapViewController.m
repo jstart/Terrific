@@ -40,22 +40,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    self.placeResultCardViewController = [[SGDetailCardViewController alloc] init];
     [self.placeResultCardViewController setDelegate:self];
 
     int rowNumber = isPhone568 ? 3 : 2;
-    int mapHeight = SYSTEM_VERSION_GREATER_THAN(@"6.1.4") ? [UIScreen mainScreen].bounds.size.height - 100 * rowNumber : [UIScreen mainScreen].bounds.size.height - 100 * rowNumber - 44 - 20;
+    int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
+    
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
     [self.mapView setDelegate:self];
     [self.view addSubview:self.mapView];
+}
 
-    int resultsHeight = [UIScreen mainScreen].bounds.size.height - mapHeight;
-    [self.placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, 320, resultsHeight)];
+-(SGDetailCardViewController *)placeResultCardViewController{
+    if (_placeResultCardViewController == nil){
+        _placeResultCardViewController = [[SGDetailCardViewController alloc] init];
+        int rowNumber = isPhone568 ? 3 : 2;
+        int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
+        
+        int resultsHeight = [UIScreen mainScreen].bounds.size.height - mapHeight;
+        [_placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, 320, resultsHeight)];
+        
+        [_placeResultCardViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
+        [self addChildViewController:_placeResultCardViewController];
+        [[self view] addSubview:_placeResultCardViewController.view];
+        [_placeResultCardViewController didMoveToParentViewController:self];
+    }
 
-    [self.placeResultCardViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
-    [self addChildViewController:self.placeResultCardViewController];
-    [[self view] addSubview:self.placeResultCardViewController.view];
-    [self.placeResultCardViewController didMoveToParentViewController:self];
+    return _placeResultCardViewController;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -108,6 +118,10 @@
             [self.mapView removeAnnotation:annotation];
         }
     }
+    for (UIView * view in self.placeResultCardViewController.view.subviews) {
+        [view removeFromSuperview];
+    }
+    _placeResultCardViewController = nil;
 }
 
 - (void) performSearch
@@ -116,13 +130,13 @@
     {
         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
-    [TestFlight passCheckpoint:@"performSearch"];
+
     CLLocation * currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
     NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ? [NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat], [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ? [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
 
 //  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     int numOfResults = isPhone568 ? 6 : 4;
-    [[SGNetworkManager sharedManager]categorySearchWithCategory:currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray * placeArray) {
+    [[SGNetworkManager sharedManager] categorySearchWithCategory:currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray * placeArray) {
          self.currentPlaces = [placeArray mutableCopy];
          NSMutableArray * annotationsArray = [NSMutableArray array];
          for (SGPlace * place in self.currentPlaces)
@@ -146,19 +160,11 @@
              zoomRect = MKMapRectUnion(zoomRect, pointRect);
          }
 
-         if (SYSTEM_VERSION_LESS_THAN(@"6.1.4"))
-         {
-             [self->mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(35, 5, 5, 5) animated:YES];
-         }
-         else
-         {
-             [self->mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
-         }
+         [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
 
          [self updateResultCards];
      } failure: ^(NSError * error) {
          NSLog(@"error searching categories %@", error);
-         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
          [TSMessage showNotificationInViewController:self title:@"No Spots Found" subtitle:@"No great spots were found :( Try again somewhere else!" type:TSMessageNotificationTypeWarning];
      }];
 }
@@ -211,9 +217,8 @@
         {
             if ([annotation.title isEqualToString:place.name])
             {
-                [TestFlight passCheckpoint:[NSString stringWithFormat:@"tapped tile for business %@", annotation.title]];
-                [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"tapped tile for business %@", annotation.title]];
-                [Flurry logEvent:[NSString stringWithFormat:@"tapped tile for business %@", annotation.title]];
+                [[Mixpanel sharedInstance] track:@"tapped business" properties:@{@"business": annotation.title}];
+                [Flurry logEvent:@"tapped business"];
                 chosenAnnotation = annotation;
             }
         }

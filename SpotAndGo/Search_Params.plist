@@ -9,7 +9,7 @@
 		<key>tag</key>
 		<string>157</string>
 		<key>radius</key>
-		<string>3</string>
+		<string>10</string>
 	</dict>
 	<key>play</key>
 	<dict>
@@ -18,14 +18,14 @@
 		<key>tag_name</key>
 		<string>Attractions</string>
 		<key>radius</key>
-		<string>3</string>
+		<string>5</string>
 	</dict>
 	<key>shop</key>
 	<dict>
 		<key>tag</key>
 		<string>3849</string>
 		<key>radius</key>
-		<real>0.5</real>
+		<real>1</real>
 		<key>tag_name</key>
 		<string>Retail</string>
 	</dict>
@@ -34,7 +34,7 @@
 		<key>tag</key>
 		<string>1684</string>
 		<key>radius</key>
-		<real>0.25</real>
+		<real>0.5</real>
 		<key>tag_name</key>
 		<string>Restaurants</string>
 	</dict>

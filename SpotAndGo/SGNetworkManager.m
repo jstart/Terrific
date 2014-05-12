@@ -60,6 +60,8 @@ static NSString * LATLON_PATH = @"/content/places/v2/search/latlon";
                  success(placeArray);
              }
              success(@[]);
+         }else{
+             failure(nil);
          }
      } failure:^(AFHTTPRequestOperation * operation, NSError * error){
          failure(error);
