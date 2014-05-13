@@ -3,23 +3,22 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "MPFlipViewController.h"
-
-@class SGPlace;
+@import MapKit;
 
 @protocol SGDetailCardViewDelegate <NSObject>
 
-- (void) placeSelected:(SGPlace *)place;
+- (void) placeSelected:(MKMapItem *)place;
 
 @end
 
-@interface SGDetailCardViewController : GAITrackedViewController <MPFlipViewControllerDataSource, MPFlipViewControllerDelegate>
+@interface SGDetailCardViewController : UIViewController <MPFlipViewControllerDataSource, MPFlipViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray * flipViewControllerArray;
+@property (nonatomic, strong) NSMutableArray *flipViewControllerArray;
 @property (nonatomic, strong) id <SGDetailCardViewDelegate> delegate;
 
 @end

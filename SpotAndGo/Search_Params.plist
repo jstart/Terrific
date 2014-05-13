@@ -9,14 +9,14 @@
 		<key>tag</key>
 		<string>157</string>
 		<key>radius</key>
-		<string>10</string>
+		<string>5</string>
 	</dict>
 	<key>play</key>
 	<dict>
 		<key>tag</key>
 		<string>75</string>
 		<key>tag_name</key>
-		<string>Attractions</string>
+		<string>Entertainment</string>
 		<key>radius</key>
 		<string>5</string>
 	</dict>

@@ -3,19 +3,17 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "SGMapViewController.h"
 
-@interface SGViewController : GAITrackedViewController {
-    NSArray * categoryButtons;
-}
+@interface SGViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UIImageView * logoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, retain)IBOutletCollection(UIButton) NSArray * categoryButtons;
-@property (nonatomic, retain) SGMapViewController * mapViewController;
+@property (nonatomic, retain) SGMapViewController *mapViewController;
 
 - (IBAction) buttonSelected:(id)sender;
 

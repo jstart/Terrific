@@ -3,7 +3,7 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import "SGDetailCardViewController.h"
@@ -23,24 +23,19 @@
     return self;
 }
 
-- (void) viewDidLoad
-{
-    self.screenName = @"Detail Card View";
-}
-
 - (void) didMoveToParentViewController:(UIViewController *)parent
 {
     int numOfCards = isPhone568 ? 6 : 4;
-
+    
     for (int i = 0; i < numOfCards; i++ )
     {
-        MPFlipViewController * flipViewController = [[MPFlipViewController alloc] initWithOrientation:[self flipViewController:nil orientationForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation]];
+        MPFlipViewController *flipViewController = [[MPFlipViewController alloc] initWithOrientation:[self flipViewController:nil orientationForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation]];
         [flipViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
         flipViewController.delegate = self;
         flipViewController.dataSource = self;
-
+        
         CGRect viewFrame;
-
+        
         switch (i)
         {
             case 0:
@@ -61,7 +56,7 @@
             case 5:
                 viewFrame = CGRectMake(160, 200, 160, 100);
                 break;
-
+                
             default:
                 break;
         }
@@ -125,7 +120,7 @@
     {
         if (self.delegate)
         {
-            SGPlace * place = ((SGPlaceImageViewController *) previousViewController).place;
+            MKMapItem *place = ((SGPlaceImageViewController *) previousViewController).place;
             [self.delegate placeSelected:place];
         }
     }

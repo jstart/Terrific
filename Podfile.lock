@@ -21,38 +21,32 @@ PODS:
   - FlurrySDK (4.4.0):
     - FlurrySDK/FlurrySDK
   - FlurrySDK/FlurrySDK (4.4.0)
-  - GoogleAnalytics-iOS-SDK (3.0.7)
   - GroundControl (2.1.0):
     - AFNetworking (~> 2.2)
   - HexColors (2.2.1)
   - MBLocationManager (0.1.1)
   - Mixpanel (2.3.6)
   - MPFlipViewController (0.0.2)
-  - TestFlightSDK (3.0.0)
   - TSMessages (0.9.9):
     - HexColors
 
 DEPENDENCIES:
   - AFNetworking
   - FlurrySDK
-  - GoogleAnalytics-iOS-SDK
   - GroundControl
   - MBLocationManager
   - Mixpanel
   - MPFlipViewController
-  - TestFlightSDK
   - TSMessages
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
   FlurrySDK: 2cd8f2ce2383ca152c5d96fa34cb9ef29706feda
-  GoogleAnalytics-iOS-SDK: 594702aaf93e6ee497140fd31e758c2e2fa44315
   GroundControl: 6c9ad5f196e61ada7624d5acfbfe0f714d6c7e27
   HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
   MBLocationManager: f1f15dea5ababd67c0872dded0c9f4d169d4bb5d
   Mixpanel: b1c61efa748193777889dfe8b7f80471ceb95e97
   MPFlipViewController: a1f32bd11035fa45ec05f211d0ee2ec47cfc52f7
-  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
   TSMessages: 49f9083df41d320b34e8d66c5ed3ef147e543187
 
 COCOAPODS: 0.32.1

@@ -3,7 +3,7 @@
 //  LocationDataComparison
 //
 //  Created by Truman, Christopher on 2/27/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import "SGAnnotation.h"
@@ -25,11 +25,6 @@
 + (SGAnnotation *) resultWithTitle:(NSString *)title Coordinate:(CLLocationCoordinate2D)coordinate
 {
     return [[SGAnnotation alloc] initWithTitle:title Coordinate:coordinate];
-}
-
-- (NSString *) description
-{
-    return [NSString stringWithFormat:@"LocationResult Name: %@ Coordinate: %f, %f", self.title, self.coordinate.latitude, self.coordinate.longitude];
 }
 
 @end

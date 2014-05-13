@@ -3,7 +3,7 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,9 +12,9 @@
 
 @interface SGAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow * window;
-@property (strong, nonatomic) CLGeocoder * geocoder;
-@property (strong, nonatomic) CLLocation * currentLocation;
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) CLGeocoder *geocoder;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 + (SGAppDelegate *) sharedAppDelegate;
 

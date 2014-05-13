@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class SGPlace;
+@import MapKit;
 
-@interface SGPlaceDetailsViewController : GAITrackedViewController <UIGestureRecognizerDelegate>
+@interface SGPlaceDetailsViewController : UIViewController <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) SGPlace * place;
-@property (nonatomic, strong) UIImageView * mapImageView;
-@property (nonatomic, strong) UILabel * nameLabel;
-@property (nonatomic, strong) UILabel * phoneLabel;
-@property (nonatomic, strong) UIButton * directionsButton;
+@property (nonatomic, strong) MKMapItem *place;
+@property (nonatomic, strong) UIImageView *mapImageView;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *phoneLabel;
+@property (nonatomic, strong) UIButton *directionsButton;
 
-+ (SGPlaceDetailsViewController *) placeDetailsViewControllerWithPlace:(SGPlace *)place;
++ (SGPlaceDetailsViewController *) placeDetailsViewControllerWithPlace:(MKMapItem *)place;
 
 @end

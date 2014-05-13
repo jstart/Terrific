@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@import MapKit;
 
 @class SGPlace;
 
-@interface SGPlaceImageViewController : GAITrackedViewController
+@interface SGPlaceImageViewController : UIViewController
 
-@property (nonatomic, strong) SGPlace * place;
-@property (nonatomic, strong) UIImageView * mapImageView;
-@property (nonatomic, strong) UILabel * nameLabel;
+@property (nonatomic, strong) MKMapItem *place;
+@property (nonatomic, strong) UIImageView *mapImageView;
+@property (nonatomic, strong) UILabel *nameLabel;
 
-+ (SGPlaceImageViewController *) placeImageViewControllerWithPlace:(SGPlace *)place;
++ (SGPlaceImageViewController *) placeImageViewControllerWithPlace:(MKMapItem *)place;
 + (UIViewController *) blankViewController;
 
 @end

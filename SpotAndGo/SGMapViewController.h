@@ -3,7 +3,7 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -19,13 +19,12 @@
 #define kDefaultZoomToStreetLonMeters 1600 * 1
 #define kPinEdgePaddingSpan           0.02
 
-@interface SGMapViewController : GAITrackedViewController <MKMapViewDelegate, SGDetailCardViewDelegate>
+@interface SGMapViewController : UIViewController <MKMapViewDelegate, SGDetailCardViewDelegate>
 
-@property (strong, nonatomic) MKMapView * mapView;
-@property (strong, nonatomic) SGDetailCardViewController * placeResultCardViewController;
-@property (strong, nonatomic) NSMutableArray * currentPlaces;
-@property (strong, nonatomic) NSString * currentCategory;
+@property (strong, nonatomic) MKMapView *mapView;
+@property (strong, nonatomic) SGDetailCardViewController *placeResultCardViewController;
+@property (strong, nonatomic) NSMutableArray *currentPlaces;
+@property (strong, nonatomic) NSString *currentCategory;
 @property (nonatomic) CLAuthorizationStatus authStatus;
-@property (nonatomic, retain) NSArray * polylineArray;
 
 @end

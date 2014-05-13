@@ -276,6 +276,7 @@
 		FDC4844C154CFBE00035BB36 /* SpotAndGo */ = {
 			isa = PBXGroup;
 			children = (
+				FD5380AF15F217700016447B /* Results */,
 				FDC48455154CFBE00035BB36 /* SGAppDelegate.h */,
 				FDC48456154CFBE00035BB36 /* SGAppDelegate.m */,
 				FD5907EE155488A000678CB7 /* SGAnnotation.h */,
@@ -289,7 +290,6 @@
 				FDC4844D154CFBE00035BB36 /* Supporting Files */,
 				FDC484C4154D07C70035BB36 /* SGConstants.h */,
 				FDC48458154CFBE00035BB36 /* MainStoryboard.storyboard */,
-				FD5380AF15F217700016447B /* Results */,
 				FDC484BF154D065E0035BB36 /* images */,
 			);
 			path = SpotAndGo;

@@ -3,7 +3,7 @@
 //  SpotAndGo
 //
 //  Created by Truman, Christopher on 4/28/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2014 Truman. All rights reserved.
 //
 #import "SGAppDelegate.h"
 #import "SGMapViewController.h"
@@ -21,15 +21,11 @@
 
 @implementation SGMapViewController
 
-@synthesize mapView;
-@synthesize currentPlaces, currentCategory, authStatus, polylineArray;
-
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-        // Custom initialization
         [TSMessage setDefaultViewController:self];
     }
     return self;
@@ -38,10 +34,9 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
+    
     [self.placeResultCardViewController setDelegate:self];
-
+    
     int rowNumber = isPhone568 ? 3 : 2;
     int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
     
@@ -50,8 +45,10 @@
     [self.view addSubview:self.mapView];
 }
 
--(SGDetailCardViewController *)placeResultCardViewController{
-    if (_placeResultCardViewController == nil){
+- (SGDetailCardViewController *) placeResultCardViewController
+{
+    if (_placeResultCardViewController == nil)
+    {
         _placeResultCardViewController = [[SGDetailCardViewController alloc] init];
         int rowNumber = isPhone568 ? 3 : 2;
         int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
@@ -64,7 +61,7 @@
         [[self view] addSubview:_placeResultCardViewController.view];
         [_placeResultCardViewController didMoveToParentViewController:self];
     }
-
+    
     return _placeResultCardViewController;
 }
 
@@ -84,27 +81,26 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    NSDictionary * appearance = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [UIColor blackColor], NSForegroundColorAttributeName,
-                                 [UIColor grayColor], NSShadowAttributeName, nil];
-    UIBarButtonItem * item = self.navigationController.navigationItem.backBarButtonItem;
-
+    NSDictionary *appearance = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor blackColor], NSForegroundColorAttributeName,
+                                [UIColor grayColor], NSShadowAttributeName, nil];
+    UIBarButtonItem *item = self.navigationController.navigationItem.backBarButtonItem;
+    
     [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
-    [TestFlight passCheckpoint:@"SGMapViewController Appeared"];
-    if (authStatus == kCLAuthorizationStatusAuthorized)
+    if (_authStatus == kCLAuthorizationStatusAuthorized)
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
-
+        
         [self performSearch];
     }
     else
     {
-        [TestFlight passCheckpoint:@"locationDisabled"];
         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+- (void) viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     [TSMessage dismissActiveNotification];
 }
@@ -118,7 +114,8 @@
             [self.mapView removeAnnotation:annotation];
         }
     }
-    for (UIView * view in self.placeResultCardViewController.view.subviews) {
+    for (UIView *view in self.placeResultCardViewController.view.subviews)
+    {
         [view removeFromSuperview];
     }
     _placeResultCardViewController = nil;
@@ -130,62 +127,53 @@
     {
         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
-
-    CLLocation * currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
-    NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ? [NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat], [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ? [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
-
-//  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+    
+    CLLocation *currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
+    NSArray *locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ? [NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat], [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ? [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+    
+    //  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     int numOfResults = isPhone568 ? 6 : 4;
-    [[SGNetworkManager sharedManager] categorySearchWithCategory:currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray * placeArray) {
-         self.currentPlaces = [placeArray mutableCopy];
-         NSMutableArray * annotationsArray = [NSMutableArray array];
-         for (SGPlace * place in self.currentPlaces)
-         {
-             SGAnnotation * annotation = [[SGAnnotation alloc] init];
-             [annotation setTitle:place.name];
-
-             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([place.latitude floatValue], [place.longitude floatValue]);
-             [annotation setCoordinate:coordinate];
-             [annotationsArray addObject:annotation];
-         }
-
-         [self.mapView addAnnotations:annotationsArray];
-
-         MKMapPoint annotationPoint = MKMapPointForCoordinate(self->mapView.userLocation.coordinate);
-         MKMapRect zoomRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-         for (id <MKAnnotation> annotation in self->mapView.annotations)
-         {
-             MKMapPoint newAnnotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-             MKMapRect pointRect = MKMapRectMake(newAnnotationPoint.x, newAnnotationPoint.y, 0.1, 0.1);
-             zoomRect = MKMapRectUnion(zoomRect, pointRect);
-         }
-
-         [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
-
-         [self updateResultCards];
-     } failure: ^(NSError * error) {
-         NSLog(@"error searching categories %@", error);
-         [TSMessage showNotificationInViewController:self title:@"No Spots Found" subtitle:@"No great spots were found :( Try again somewhere else!" type:TSMessageNotificationTypeWarning];
-     }];
+    
+    [[SGNetworkManager sharedManager] categorySearchWithCategory:self.currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray *placeArray) {
+        self.currentPlaces = [placeArray mutableCopy];
+        
+        
+        [self.mapView addAnnotations:[placeArray valueForKeyPath:@"placemark"]];
+        
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.mapView.userLocation.coordinate);
+        MKMapRect zoomRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        for (id <MKAnnotation> annotation in self.mapView.annotations)
+        {
+            MKMapPoint newAnnotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(newAnnotationPoint.x, newAnnotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+        
+        [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(44, 5, 5, 5) animated:YES];
+        
+        [self updateResultCards];
+    } failure: ^(NSError *error) {
+        NSLog(@"error searching categories %@", error);
+        [TSMessage showNotificationInViewController:self title:@"No Spots Found" subtitle:@"No great spots were found :( Try again somewhere else!" type:TSMessageNotificationTypeWarning];
+    }];
 }
 
 - (void) updateResultCards
 {
     int totalPlaces = isPhone568 ? 6 : 4;
     NSInteger remainingPlaces = totalPlaces - [self.currentPlaces count];
-
+    
     for (int i = totalPlaces - 1; i > remainingPlaces; i--)
     {
-        MPFlipViewController * currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
-        UIViewController * placeImageViewController = [SGPlaceImageViewController blankViewController];
+        MPFlipViewController *currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
+        UIViewController *placeImageViewController = [SGPlaceImageViewController blankViewController];
         [currentView setViewController:placeImageViewController direction:MPFlipViewControllerDirectionForward animated:NO completion:nil];
     }
     for (int i = 0; i < (int) [self.currentPlaces count]; i++)
     {
-        SGPlace * place = [self.currentPlaces objectAtIndex:i];
-        NSLog(@"updating... %@", place.name);
-        MPFlipViewController * currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
-        SGPlaceImageViewController * placeImageViewController = [SGPlaceImageViewController placeImageViewControllerWithPlace:place];
+        MKMapItem *mapItem = [self.currentPlaces objectAtIndex:i];
+        MPFlipViewController *currentView = [self.placeResultCardViewController.flipViewControllerArray objectAtIndex:i];
+        SGPlaceImageViewController *placeImageViewController = [SGPlaceImageViewController placeImageViewControllerWithPlace:mapItem];
         [currentView setViewController:placeImageViewController direction:MPFlipViewControllerDirectionForward animated:YES completion:nil];
     }
 }
@@ -195,29 +183,19 @@
     return nil;
 }
 
-# pragma mark - MKMapViewDelegate
-
-- (void) mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
-{
-}
-
-- (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-}
-
 #pragma mark - SGDetailCardViewDelegate
 
 - (void) placeSelected:(SGPlace *)place
 {
-    SGAnnotation * chosenAnnotation;
-
-    for (SGAnnotation * annotation in[self.mapView annotations])
+    SGAnnotation *chosenAnnotation;
+    
+    for (SGAnnotation *annotation in[self.mapView annotations])
     {
         if ([annotation respondsToSelector:@selector(title)])
         {
             if ([annotation.title isEqualToString:place.name])
             {
-                [[Mixpanel sharedInstance] track:@"tapped business" properties:@{@"business": annotation.title}];
+                [[Mixpanel sharedInstance] track:@"tapped business" properties:@{ @"business" : annotation.title }];
                 [Flurry logEvent:@"tapped business"];
                 chosenAnnotation = annotation;
             }
@@ -231,8 +209,8 @@
 
 - (void) displayAlert:(NSString *)title message:(NSString *)message
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    
     [alert show];
 }
 
@@ -241,15 +219,14 @@
     switch (buttonIndex)
     {
         case 1 :
-            {
-                NSString * trimmedString = [[[[alertView.message stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                NSString * phoneURLString = [NSString stringWithFormat:@"tel:%@", trimmedString];
-                NSURL * phoneURL = [NSURL URLWithString:phoneURLString];
-                [[UIApplication sharedApplication] openURL:phoneURL];
-            }
+        {
+            NSString *trimmedString = [[[[alertView.message stringByReplacingOccurrencesOfString:@"(" withString:@""] stringByReplacingOccurrencesOfString:@")" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+            NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", trimmedString];
+            NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+            [[UIApplication sharedApplication] openURL:phoneURL];
+        }
             break;
-
-        default :
+        default:
             break;
     }
 }
