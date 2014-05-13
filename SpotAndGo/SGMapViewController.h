@@ -17,7 +17,6 @@
 #define kDefaultCurrentLng            -118.49596
 #define kDefaultZoomToStreetLatMeters 1600 * 1
 #define kDefaultZoomToStreetLonMeters 1600 * 1
-#define kPinEdgePaddingSpan           0.02
 
 @interface SGMapViewController : UIViewController <MKMapViewDelegate, SGDetailCardViewDelegate>
 

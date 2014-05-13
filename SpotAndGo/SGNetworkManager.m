@@ -89,9 +89,9 @@ static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
     
     MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        if (response.mapItems.count > 5)
+        if (response.mapItems.count > (NSUInteger)resultCount)
         {
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, 6)];
+            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, resultCount)];
             success([response.mapItems objectsAtIndexes:indexSet]);
         }
         else
