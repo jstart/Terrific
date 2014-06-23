@@ -43,6 +43,13 @@
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
     [self.mapView setDelegate:self];
     [self.view addSubview:self.mapView];
+    
+    NSDictionary *appearance = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor whiteColor], NSForegroundColorAttributeName,
+                                [UIColor grayColor], NSShadowAttributeName, nil];
+    UIBarButtonItem *item = self.navigationController.navigationItem.backBarButtonItem;
+    
+    [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
 }
 
 - (SGDetailCardViewController *) placeResultCardViewController
@@ -81,12 +88,7 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    NSDictionary *appearance = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [UIColor blackColor], NSForegroundColorAttributeName,
-                                [UIColor grayColor], NSShadowAttributeName, nil];
-    UIBarButtonItem *item = self.navigationController.navigationItem.backBarButtonItem;
-    
-    [item setTitleTextAttributes:appearance forState:UIControlStateNormal];
+
     if (_authStatus == kCLAuthorizationStatusAuthorized)
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
@@ -196,7 +198,6 @@
             if ([annotation.title isEqualToString:place.name])
             {
                 [[Mixpanel sharedInstance] track:@"tapped business" properties:@{ @"business" : annotation.title }];
-                [Flurry logEvent:@"tapped business"];
                 chosenAnnotation = annotation;
             }
         }

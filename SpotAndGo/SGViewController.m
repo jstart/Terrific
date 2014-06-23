@@ -8,28 +8,15 @@
 
 #import "SGViewController.h"
 #import <MBLocationManager/MBLocationManager.h>
+#import "SGConstants.h"
 
 @interface SGViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *background;
 
 @end
 
 @implementation SGViewController
 @synthesize logoImageView, categoryButtons, mapViewController;
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [Flurry logAllPageViews:self.navigationController];
-    [[Mixpanel sharedInstance] track:@"Main Menu Appeared"];
-    
-    if ([self.navigationController isNavigationBarHidden])
-    {
-        [self.navigationController setNavigationBarHidden:YES animated:NO];
-    }
-    else
-    {
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    }
-}
 
 - (void) viewDidLoad
 {
@@ -44,10 +31,30 @@
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
     
-    CLLocation *location = [MBLocationManager sharedManager].locationManager.location;
-    [Flurry setLatitude:location.coordinate.latitude longitude:location.coordinate.longitude horizontalAccuracy:location.horizontalAccuracy verticalAccuracy:location.verticalAccuracy];
+//    CLLocation *location = [MBLocationManager sharedManager].locationManager.location;
+
     // Do any additional setup after loading the view, typically from a nib.
     self.mapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"map"];
+    if (isPhone568) {
+        self.background.image = [UIImage imageNamed:@"Default-568h@2x.png"];
+    }else{
+        self.background.image = [UIImage imageNamed:@"Default@2x.png"];
+    }
+}
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [[Mixpanel sharedInstance] track:@"Main Menu Appeared"];
+    
+    if ([self.navigationController isNavigationBarHidden])
+    {
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+    }
+    else
+    {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
 }
 
 - (IBAction) buttonSelected:(id)sender
@@ -79,7 +86,6 @@
             break;
     }
     [[Mixpanel sharedInstance] track:@"chose" properties:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
-    [Flurry logEvent:@"chose" withParameters:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
     [[NSUserDefaults standardUserDefaults] setObject:chosenCategory forKey:@"category"];
     [self.navigationController pushViewController:mapViewController animated:YES];
 }

@@ -17,6 +17,7 @@
 // #import <PonyDebugger.h>
 #import <GroundControl/NSUserDefaults+GroundControl.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <UIColor-HexString/UIColor+HexString.h>
 
 @interface SGAppDelegate ()
 
@@ -36,6 +37,21 @@
 - (BOOL) application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    #if TARGET_IPHONE_SIMULATOR || DEBUG
+        //    [[DCIntrospect sharedIntrospector] start];
+        //    PDDebugger *debugger = [PDDebugger defaultInstance];
+        //    [debugger enableNetworkTrafficDebugging];
+        //    [debugger forwardAllNetworkTraffic];
+        //    [debugger enableViewHierarchyDebugging];
+        //    [debugger enableRemoteLogging];
+        //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+    #else
+        [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
+        [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
+        [[Mixpanel sharedInstance] track:@"Launched"];
+    #endif
+    
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"eat"])
     {
         NSDictionary *defaultsDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Search_Params.plist"]];
@@ -47,17 +63,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     } failure: ^(NSError *error) {
     }];
     
-    [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
-    [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
-    [Flurry startSession:@"FJX9G2A6P8VGCM5736M7"];
-    [[Mixpanel sharedInstance] track:@"Launched"];
-    
-    //    PDDebugger *debugger = [PDDebugger defaultInstance];
-    //    [debugger enableNetworkTrafficDebugging];
-    //    [debugger forwardAllNetworkTraffic];
-    //    [debugger enableViewHierarchyDebugging];
-    //    [debugger enableRemoteLogging];
-    //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"844fe5"]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:24]}];
     
     [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                              distanceFilter:kCLDistanceFilterNone
@@ -70,9 +77,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-#if TARGET_IPHONE_SIMULATOR
-    //    [[DCIntrospect sharedIntrospector] start];
-#endif
     return YES;
 }
 

@@ -45,7 +45,7 @@
         [placeDetailsViewController.phoneLabel setAttributedText:attrString];
         
         [placeDetailsViewController.phoneLabel setFont:[UIFont systemFontOfSize:18]];
-        [placeDetailsViewController.phoneLabel setTextColor:[UIColor colorWithRed:0.268 green:0.260 blue:1.000 alpha:1.000]];
+        [placeDetailsViewController.phoneLabel setTextColor:[UIColor whiteColor]];
         [placeDetailsViewController.phoneLabel setContentMode:UIViewContentModeCenter];
         [placeDetailsViewController.phoneLabel setTextAlignment:NSTextAlignmentCenter];
         [placeDetailsViewController.phoneLabel setBackgroundColor:[UIColor clearColor]];
@@ -62,11 +62,8 @@
     [directionsButton setFrame:CGRectMake(10, 55, 135, 30)];
     [directionsButton.titleLabel setFont:[UIFont systemFontOfSize:18]];
     directionsButton.backgroundColor = [UIColor clearColor];
-    directionsButton.alpha = 0.8;
-    directionsButton.layer.borderColor = [UIColor blackColor].CGColor;
-    directionsButton.layer.borderWidth = 2;
-    directionsButton.layer.cornerRadius = 10;
     [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
+    directionsButton.titleLabel.textColor = [UIColor whiteColor];
     [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [placeDetailsViewController.view addSubview:directionsButton];
     
