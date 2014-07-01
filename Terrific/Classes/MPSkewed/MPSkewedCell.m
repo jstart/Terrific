@@ -107,7 +107,7 @@
     
     CGFloat offset = self.frame.origin.y - [(UICollectionView *)[self superview] contentOffset].y;
     CGFloat parallaxValue = offset/self.superview.frame.size.height;
-    self.parallaxValue = parallaxValue * 2;
+    self.parallaxValue = parallaxValue;
 }
 
 #define DEGTORAD(D)((D * 3.14) / 180.0) // Converts Degrees to radians
