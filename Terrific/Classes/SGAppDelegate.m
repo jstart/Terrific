@@ -18,6 +18,7 @@
 #import <GroundControl/NSUserDefaults+GroundControl.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <UIColor-HexString/UIColor+HexString.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface SGAppDelegate ()
 
@@ -37,7 +38,7 @@
 - (BOOL) application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
     #if TARGET_IPHONE_SIMULATOR || DEBUG
         //    [[DCIntrospect sharedIntrospector] start];
         //    PDDebugger *debugger = [PDDebugger defaultInstance];

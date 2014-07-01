@@ -9,6 +9,7 @@
 #import "SGPlaceImageViewController.h"
 #import "SGPlace.h"
 
+#import <Google-Maps-iOS-SDK/GoogleMaps/GoogleMaps.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 @import MapKit;
 
@@ -60,6 +61,10 @@
     
     NSString *googleMapURL = [NSString stringWithFormat:@"http://cbk0.google.com/cbk?output=thumbnail&w=%d&h=%d&ll=%f,%f", 160, 100, lat, lon];
     [placeImageViewController.mapImageView setImageWithURL:[NSURL URLWithString:googleMapURL]];
+//    GMSPanoramaView *panoView =
+//    [GMSPanoramaView panoramaWithFrame:placeImageViewController.mapImageView.frame
+//                        nearCoordinate:place.placemark.location.coordinate];
+//    [placeImageViewController.mapImageView addSubview:panoView];
     return placeImageViewController;
 }
 

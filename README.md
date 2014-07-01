@@ -1,12 +1,14 @@
-Spot-Go
+Terrific
 =======
+
+I have renamed the app to “Terrific”.
 
 Spot+Go was an app created for the CityGridLA hackathon.  When you are in a new place, Spot+Go will show you the 4 closest and best places to eat, shop, watch movies, or be entertained.  You can try the app on the store here:
 https://itunes.apple.com/us/app/spot+go/id524294513?mt=8
 
 Server and API development: Joe Rozner (https://github.com/jrozner)
 
-Design and Product: Hanako Truman (http://about.me/hana.ruth)
+Design and Product: Hanako Truman (http://hanatruman.com)
 
 Business and Presentation: Peter Kovach (http://www.linkedin.com/pub/peter-kovach/30/385/223)
 
