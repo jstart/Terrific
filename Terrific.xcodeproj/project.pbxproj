@@ -41,7 +41,10 @@
 		ADA2194B19624481007050C1 /* SGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193B19624481007050C1 /* SGMapViewController.m */; };
 		ADA2194C19624481007050C1 /* SGPlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */; };
 		ADA2194D19624481007050C1 /* SGPlaceImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */; };
-		ADA2194E19624481007050C1 /* SGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2194119624481007050C1 /* SGViewController.m */; };
+		ADA21951196245A0007050C1 /* SGMenuCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */; };
+		ADA219671962464C007050C1 /* MPSkewedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219601962464C007050C1 /* MPSkewedCell.m */; };
+		ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */; };
+		ADA2196A1962464C007050C1 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219661962464C007050C1 /* UIView+Frame.m */; };
 		ADEA5B90195E0E0000CE20B2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */; };
 		ADFC15DE18D8FABE00B18F32 /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = ADFC15CD18D8FABE00B18F32 /* NotificationBackgroundError.png */; };
 		ADFC15DF18D8FABE00B18F32 /* NotificationBackgroundError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADFC15CE18D8FABE00B18F32 /* NotificationBackgroundError@2x.png */; };
@@ -108,8 +111,14 @@
 		ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceDetailsViewController.m; sourceTree = "<group>"; };
 		ADA2193E19624481007050C1 /* SGPlaceImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlaceImageViewController.h; sourceTree = "<group>"; };
 		ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceImageViewController.m; sourceTree = "<group>"; };
-		ADA2194019624481007050C1 /* SGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
-		ADA2194119624481007050C1 /* SGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
+		ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMenuCollectionViewController.h; sourceTree = "<group>"; };
+		ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMenuCollectionViewController.m; sourceTree = "<group>"; };
+		ADA2195F1962464C007050C1 /* MPSkewedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPSkewedCell.h; sourceTree = "<group>"; };
+		ADA219601962464C007050C1 /* MPSkewedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPSkewedCell.m; sourceTree = "<group>"; };
+		ADA219611962464C007050C1 /* MPSkewedParallaxLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPSkewedParallaxLayout.h; sourceTree = "<group>"; };
+		ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPSkewedParallaxLayout.m; sourceTree = "<group>"; };
+		ADA219651962464C007050C1 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		ADA219661962464C007050C1 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "Pods/Google-Maps-iOS-SDK/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
 		ADFC15CD18D8FABE00B18F32 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
 		ADFC15CE18D8FABE00B18F32 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
@@ -217,6 +226,7 @@
 		ADA2192419624481007050C1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				ADA2195E1962464C007050C1 /* MPSkewed */,
 				ADA2192D19624481007050C1 /* Model */,
 				ADA2193019624481007050C1 /* SGAnnotation.h */,
 				ADA2193119624481007050C1 /* SGAnnotation.m */,
@@ -250,10 +260,23 @@
 				ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */,
 				ADA2193E19624481007050C1 /* SGPlaceImageViewController.h */,
 				ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */,
-				ADA2194019624481007050C1 /* SGViewController.h */,
-				ADA2194119624481007050C1 /* SGViewController.m */,
+				ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */,
+				ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		ADA2195E1962464C007050C1 /* MPSkewed */ = {
+			isa = PBXGroup;
+			children = (
+				ADA2195F1962464C007050C1 /* MPSkewedCell.h */,
+				ADA219601962464C007050C1 /* MPSkewedCell.m */,
+				ADA219611962464C007050C1 /* MPSkewedParallaxLayout.h */,
+				ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */,
+				ADA219651962464C007050C1 /* UIView+Frame.h */,
+				ADA219661962464C007050C1 /* UIView+Frame.m */,
+			);
+			path = MPSkewed;
 			sourceTree = "<group>";
 		};
 		ADFC15CB18D8FABE00B18F32 /* TSMessages Resources */ = {
@@ -350,7 +373,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SG;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				TargetAttributes = {
 					FDC48441154CFBE00035BB36 = {
 						DevelopmentTeam = PP6S682Z9F;
@@ -465,11 +488,14 @@
 				ADA2194C19624481007050C1 /* SGPlaceDetailsViewController.m in Sources */,
 				ADA2194D19624481007050C1 /* SGPlaceImageViewController.m in Sources */,
 				ADA2194719624481007050C1 /* SGAnnotation.m in Sources */,
-				ADA2194E19624481007050C1 /* SGViewController.m in Sources */,
+				ADA2196A1962464C007050C1 /* UIView+Frame.m in Sources */,
+				ADA219671962464C007050C1 /* MPSkewedCell.m in Sources */,
 				ADA2191F1962434E007050C1 /* main.m in Sources */,
 				ADA2194B19624481007050C1 /* SGMapViewController.m in Sources */,
 				ADA2194A19624481007050C1 /* SGDetailCardViewController.m in Sources */,
+				ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */,
 				ADA2194619624481007050C1 /* SGPlace.m in Sources */,
+				ADA21951196245A0007050C1 /* SGMenuCollectionViewController.m in Sources */,
 				ADA2194919624481007050C1 /* SGNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,10 +527,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -549,10 +577,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
