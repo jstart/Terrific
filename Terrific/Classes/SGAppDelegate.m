@@ -20,7 +20,7 @@
 #import <UIColor-HexString/UIColor+HexString.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface SGAppDelegate ()
+@interface SGAppDelegate () <CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSString *currentLocationString;
 
@@ -67,6 +67,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"844fe5"]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:24]}];
     
+    [[MBLocationManager sharedManager].locationManager setDelegate:self];
+    [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                              distanceFilter:kCLDistanceFilterNone
                                                    accuracy:kCLLocationAccuracyNearestTenMeters];
@@ -90,6 +92,16 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 - (void) applicationWillEnterForeground:(UIApplication *)application
 {
     [[Mixpanel sharedInstance] track:@"Brought to foreground"];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
+                                                 distanceFilter:kCLDistanceFilterNone
+                                                       accuracy:kCLLocationAccuracyNearestTenMeters];
+    }else{
+        [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
+    }
 }
 
 - (void) changeLocation:(NSNotification *)notification

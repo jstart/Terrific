@@ -40,7 +40,7 @@
     int rowNumber = isPhone568 ? 3 : 2;
     int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
     
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, 320, mapHeight)];
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, mapHeight)];
     [self.mapView setDelegate:self];
     [self.view addSubview:self.mapView];
     
@@ -61,7 +61,7 @@
         int mapHeight = [UIScreen mainScreen].bounds.size.height - 100 * rowNumber;
         
         int resultsHeight = [UIScreen mainScreen].bounds.size.height - mapHeight;
-        [_placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, 320, resultsHeight)];
+        [_placeResultCardViewController.view setFrame:CGRectMake(0, mapHeight, [UIScreen mainScreen].bounds.size.width, resultsHeight)];
         
         [_placeResultCardViewController addObserver:self forKeyPath:@"view.frame" options:NSKeyValueObservingOptionNew context:NULL];
         [self addChildViewController:_placeResultCardViewController];
@@ -74,31 +74,29 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.mapView setShowsUserLocation:YES];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
     self.title = self.currentCategory;
     self.authStatus = [CLLocationManager authorizationStatus];
 }
 
-- (void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-    [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
-}
-
 - (void) viewDidAppear:(BOOL)animated
 {
-
-    if (_authStatus == kCLAuthorizationStatusAuthorized)
+    [super viewDidAppear:animated];
+    if (_authStatus == kCLAuthorizationStatusAuthorized && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
         
         [self performSearch];
     }
-    else
-    {
-        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
-    }
+//    else
+//    {
+//        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
+//
+//    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -121,6 +119,13 @@
         [view removeFromSuperview];
     }
     _placeResultCardViewController = nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(userLocation.coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
+    
+    [self performSearch];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 }
 
 - (void) performSearch
