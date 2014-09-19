@@ -45,6 +45,24 @@
 		ADA219671962464C007050C1 /* MPSkewedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219601962464C007050C1 /* MPSkewedCell.m */; };
 		ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */; };
 		ADA2196A1962464C007050C1 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219661962464C007050C1 /* UIView+Frame.m */; };
+		ADA597C419CCE40A00012489 /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */; };
+		ADA597C519CCE40A00012489 /* NotificationBackgroundError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */; };
+		ADA597C619CCE40A00012489 /* NotificationBackgroundErrorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B519CCE40A00012489 /* NotificationBackgroundErrorIcon.png */; };
+		ADA597C719CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B619CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png */; };
+		ADA597C819CCE40A00012489 /* NotificationBackgroundMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B719CCE40A00012489 /* NotificationBackgroundMessage.png */; };
+		ADA597C919CCE40A00012489 /* NotificationBackgroundMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B819CCE40A00012489 /* NotificationBackgroundMessage@2x.png */; };
+		ADA597CA19CCE40A00012489 /* NotificationBackgroundSuccess.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B919CCE40A00012489 /* NotificationBackgroundSuccess.png */; };
+		ADA597CB19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BA19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png */; };
+		ADA597CC19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BB19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png */; };
+		ADA597CD19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BC19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png */; };
+		ADA597CE19CCE40A00012489 /* NotificationBackgroundWarning.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BD19CCE40A00012489 /* NotificationBackgroundWarning.png */; };
+		ADA597CF19CCE40A00012489 /* NotificationBackgroundWarning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BE19CCE40A00012489 /* NotificationBackgroundWarning@2x.png */; };
+		ADA597D019CCE40A00012489 /* NotificationBackgroundWarningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597BF19CCE40A00012489 /* NotificationBackgroundWarningIcon.png */; };
+		ADA597D119CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C019CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png */; };
+		ADA597D219CCE40A00012489 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */; };
+		ADA597D319CCE40A00012489 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */; };
+		ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */; };
+		ADA597D619CCE8CD00012489 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA597D519CCE8CD00012489 /* MapKit.framework */; };
 		ADEA5B90195E0E0000CE20B2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */; };
 		FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +120,24 @@
 		ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPSkewedParallaxLayout.m; sourceTree = "<group>"; };
 		ADA219651962464C007050C1 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		ADA219661962464C007050C1 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
+		ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
+		ADA597B519CCE40A00012489 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
+		ADA597B619CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundErrorIcon@2x.png"; sourceTree = "<group>"; };
+		ADA597B719CCE40A00012489 /* NotificationBackgroundMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundMessage.png; sourceTree = "<group>"; };
+		ADA597B819CCE40A00012489 /* NotificationBackgroundMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundMessage@2x.png"; sourceTree = "<group>"; };
+		ADA597B919CCE40A00012489 /* NotificationBackgroundSuccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundSuccess.png; sourceTree = "<group>"; };
+		ADA597BA19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundSuccess@2x.png"; sourceTree = "<group>"; };
+		ADA597BB19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundSuccessIcon.png; sourceTree = "<group>"; };
+		ADA597BC19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundSuccessIcon@2x.png"; sourceTree = "<group>"; };
+		ADA597BD19CCE40A00012489 /* NotificationBackgroundWarning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundWarning.png; sourceTree = "<group>"; };
+		ADA597BE19CCE40A00012489 /* NotificationBackgroundWarning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundWarning@2x.png"; sourceTree = "<group>"; };
+		ADA597BF19CCE40A00012489 /* NotificationBackgroundWarningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundWarningIcon.png; sourceTree = "<group>"; };
+		ADA597C019CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundWarningIcon@2x.png"; sourceTree = "<group>"; };
+		ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
+		ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
+		ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		ADA597D519CCE8CD00012489 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "Pods/Google-Maps-iOS-SDK/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
 		B0D7DFF6021B4A21BBAA755A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		F98CF40EF0CE46A1BA959525 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */,
+				ADA597D619CCE8CD00012489 /* MapKit.framework in Frameworks */,
 				04BA76BC719E418FB5016D43 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +173,7 @@
 		ADA2189119624235007050C1 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				ADA597B219CCE40A00012489 /* Assets */,
 				ADA218AC19624235007050C1 /* Images.xcassets */,
 				ADA2189219624235007050C1 /* App Icon [Squared] */,
 				ADA2191919624337007050C1 /* Default */,
@@ -245,6 +283,30 @@
 			path = MPSkewed;
 			sourceTree = "<group>";
 		};
+		ADA597B219CCE40A00012489 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */,
+				ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */,
+				ADA597B519CCE40A00012489 /* NotificationBackgroundErrorIcon.png */,
+				ADA597B619CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png */,
+				ADA597B719CCE40A00012489 /* NotificationBackgroundMessage.png */,
+				ADA597B819CCE40A00012489 /* NotificationBackgroundMessage@2x.png */,
+				ADA597B919CCE40A00012489 /* NotificationBackgroundSuccess.png */,
+				ADA597BA19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png */,
+				ADA597BB19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png */,
+				ADA597BC19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png */,
+				ADA597BD19CCE40A00012489 /* NotificationBackgroundWarning.png */,
+				ADA597BE19CCE40A00012489 /* NotificationBackgroundWarning@2x.png */,
+				ADA597BF19CCE40A00012489 /* NotificationBackgroundWarningIcon.png */,
+				ADA597C019CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png */,
+				ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */,
+				ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */,
+				ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		FDC48437154CFBDF0035BB36 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +332,7 @@
 		FDC48445154CFBE00035BB36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADA597D519CCE8CD00012489 /* MapKit.framework */,
 				FD8D133315F4C04700A4C749 /* Crashlytics.framework */,
 				F98CF40EF0CE46A1BA959525 /* libPods.a */,
 			);
@@ -309,6 +372,11 @@
 				TargetAttributes = {
 					FDC48441154CFBE00035BB36 = {
 						DevelopmentTeam = PP6S682Z9F;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -334,31 +402,48 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA597CF19CCE40A00012489 /* NotificationBackgroundWarning@2x.png in Resources */,
 				ADA218D219624235007050C1 /* AppIcon60x60@2x.png in Resources */,
 				ADA218D619624235007050C1 /* AppIcon76x76@2x.png in Resources */,
 				ADA218CB19624235007050C1 /* AppIcon40x40.png in Resources */,
+				ADA597D319CCE40A00012489 /* NotificationButtonBackground@2x.png in Resources */,
 				ADA219201962434E007050C1 /* Search_Params.plist in Resources */,
 				ADA218D719624235007050C1 /* iTunesArtwork.png in Resources */,
 				ADA218DA19624235007050C1 /* Default@2x.png in Resources */,
 				ADA218CE19624235007050C1 /* AppIcon50x50@2x.png in Resources */,
+				ADA597C919CCE40A00012489 /* NotificationBackgroundMessage@2x.png in Resources */,
+				ADA597C419CCE40A00012489 /* NotificationBackgroundError.png in Resources */,
+				ADA597CD19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
+				ADA597C819CCE40A00012489 /* NotificationBackgroundMessage.png in Resources */,
+				ADA597D219CCE40A00012489 /* NotificationButtonBackground.png in Resources */,
+				ADA597CE19CCE40A00012489 /* NotificationBackgroundWarning.png in Resources */,
 				ADEA5B90195E0E0000CE20B2 /* GoogleMaps.bundle in Resources */,
 				ADA218E219624235007050C1 /* Images.xcassets in Resources */,
 				ADA218D519624235007050C1 /* AppIcon76x76.png in Resources */,
 				ADA218D819624235007050C1 /* iTunesArtwork@2x.png in Resources */,
+				ADA597C619CCE40A00012489 /* NotificationBackgroundErrorIcon.png in Resources */,
 				ADA218D419624235007050C1 /* AppIcon72x72@2x.png in Resources */,
 				ADA218DD19624235007050C1 /* gplaypattern@2X.png in Resources */,
+				ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */,
+				ADA597D019CCE40A00012489 /* NotificationBackgroundWarningIcon.png in Resources */,
+				ADA597D119CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png in Resources */,
 				ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */,
 				ADA218DC19624235007050C1 /* gplaypattern.png in Resources */,
 				ADA218D919624235007050C1 /* Default-568h@2x.png in Resources */,
 				ADA218C919624235007050C1 /* AppIcon29x29.png in Resources */,
 				ADA218D019624235007050C1 /* AppIcon57x57@2x.png in Resources */,
+				ADA597C719CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
 				ADA218D319624235007050C1 /* AppIcon72x72.png in Resources */,
+				ADA597CB19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png in Resources */,
 				ADA218CC19624235007050C1 /* AppIcon40x40@2x.png in Resources */,
 				ADA218CD19624235007050C1 /* AppIcon50x50.png in Resources */,
+				ADA597C519CCE40A00012489 /* NotificationBackgroundError@2x.png in Resources */,
 				ADA219231962436D007050C1 /* Location.gpx in Resources */,
+				ADA597CA19CCE40A00012489 /* NotificationBackgroundSuccess.png in Resources */,
 				ADA218CA19624235007050C1 /* AppIcon29x29@2x.png in Resources */,
 				ADA218D119624235007050C1 /* AppIcon60x60.png in Resources */,
 				ADA218CF19624235007050C1 /* AppIcon57x57.png in Resources */,
+				ADA597CC19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +646,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

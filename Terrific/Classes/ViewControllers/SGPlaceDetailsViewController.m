@@ -39,7 +39,7 @@
     
     if (place.phoneNumber)
     {
-        placeDetailsViewController.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 160, 30)];
+        placeDetailsViewController.phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 160, 45)];
         
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:place.phoneNumber attributes:@{ NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle) }];
         [placeDetailsViewController.phoneLabel setAttributedText:attrString];
@@ -59,11 +59,11 @@
     }
     
     UIButton *directionsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [directionsButton setFrame:CGRectMake(10, 55, 135, 30)];
+    [directionsButton setFrame:CGRectMake(10, 50, 135, 45)];
     [directionsButton.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    directionsButton.backgroundColor = [UIColor clearColor];
+    directionsButton.backgroundColor = [UIColor colorWithRed:0.325 green:0.317 blue:0.529 alpha:1.000];
     [directionsButton setTitle:@"Directions" forState:UIControlStateNormal];
-    directionsButton.titleLabel.textColor = [UIColor whiteColor];
+    [directionsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [directionsButton addTarget:placeDetailsViewController action:@selector(getDirections) forControlEvents:UIControlEventTouchUpInside];
     [placeDetailsViewController.view addSubview:directionsButton];
     

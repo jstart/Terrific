@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 Truman. All rights reserved.
 //
 
-#define isPhone568 ([UIScreen mainScreen].bounds.size.height == 568)
+#define isPhone568 ([UIScreen mainScreen].bounds.size.height >= 568)

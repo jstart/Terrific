@@ -14,6 +14,7 @@
 #import "SGAnnotation.h"
 #import "SGConstants.h"
 #import <TSMessages/TSMessageView.h>
+#import <MBLocationManager/MBLocationManager.h>
 
 @interface SGMapViewController ()
 
@@ -75,28 +76,30 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[MBLocationManager sharedManager].locationManager startUpdatingLocation];
+
     [self.mapView setShowsUserLocation:YES];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
     self.title = self.currentCategory;
+
     self.authStatus = [CLLocationManager authorizationStatus];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (_authStatus == kCLAuthorizationStatusAuthorized && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
+    if ((_authStatus == kCLAuthorizationStatusAuthorized || _authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
         
         [self performSearch];
     }
-//    else
-//    {
-//        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Spot+Go in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
-//
-//    }
+    else if(_authStatus == kCLAuthorizationStatusDenied || _authStatus == kCLAuthorizationStatusNotDetermined || _authStatus == kCLAuthorizationStatusRestricted)
+    {
+        [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Terrific in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
