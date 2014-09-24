@@ -37,45 +37,9 @@ static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
     return sharedManager;
 }
 
-- (void) citygrid_categorySearchWithCategory:(NSString *)category locationArray:(NSArray *)locationArray resultCount:(int)resultCount success:(void (^)(NSArray *placeArray))success failure:(void (^)(NSError *error))failure
-{
-    NSDictionary *configDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:category];
-    NSDictionary *postDictionary =  @{ @"what": configDictionary[@"tag_name"], @"lat": locationArray[0], @"lon" : locationArray[1], @"rpp":@(resultCount), @"radius" : configDictionary[@"radius"], @"publisher":PUBLISHER_ID, @"format":@"json" };
-    
-    [[Mixpanel sharedInstance] track:@"category_search" properties:postDictionary];
-    
-    [self.requestOperationManager POST:LATLON_PATH parameters:postDictionary success:^(AFHTTPRequestOperation *urlResponse, id responseObject){
-        responseObject = responseObject[@"results"][@"locations"];
-        if ([responseObject isKindOfClass:[NSArray class]] && [responseObject count] > 0)
-        {
-            if ([[responseObject objectAtIndex:0] isKindOfClass:[NSDictionary class]])
-            {
-                NSMutableArray *placeArray = [NSMutableArray array];
-                for (NSDictionary * placeDictionary in responseObject)
-                {
-                    SGPlace *place = [SGPlace objectWithDictionary:placeDictionary];
-                    [placeArray addObject:place];
-                }
-                success(placeArray);
-            }
-            success(@[]);
-        }
-        else
-        {
-            failure(nil);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        failure(error);
-    }];
-}
-
 - (void) categorySearchWithCategory:(NSString *)category locationArray:(NSArray *)locationArray resultCount:(int)resultCount success:(void (^)(NSArray *placeArray))success failure:(void (^)(NSError *error))failure
 {
-    NSDictionary *configDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:category];
-    NSDictionary *postDictionary =  @{ @"lat": locationArray[0], @"lon" : locationArray[1], @"rpp":@(resultCount), @"radius" : configDictionary[@"radius"] };
-    
-    [[Mixpanel sharedInstance] track:@"category_search" properties:postDictionary];
-    
+    NSDictionary *configDictionary = [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:category];
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = configDictionary[@"tag_name"];
     
@@ -86,7 +50,6 @@ static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
     region.span = MKCoordinateSpanMake(spanAmount, spanAmount);
     request.region = region;
     
-    
     MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
         if (response.mapItems.count > (NSUInteger)resultCount)
@@ -94,9 +57,11 @@ static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndexesInRange:NSMakeRange(0, resultCount)];
             success([response.mapItems objectsAtIndexes:indexSet]);
         }
-        else
+        else if (response.mapItems.count)
         {
             success(response.mapItems);
+        }else{
+            failure(nil);
         }
     }];
 }

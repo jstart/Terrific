@@ -53,14 +53,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [[Mixpanel sharedInstance] track:@"Launched"];
     #endif
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"eat"])
+    if (![[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:@"eat"])
     {
         NSDictionary *defaultsDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Search_Params.plist"]];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsDictionary];
+        [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] registerDefaults:defaultsDictionary];
     }
     
     NSURL *URL = [NSURL URLWithString:@"http://spotandgo-plist.herokuapp.com/defaults.plist"];
-    [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL success: ^(NSDictionary *defaults) {
+    [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] registerDefaultsWithURL:URL success: ^(NSDictionary *defaults) {
     } failure: ^(NSError *error) {
     }];
     

@@ -81,7 +81,7 @@
     [self.mapView setShowsUserLocation:YES];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.currentCategory = [[NSUserDefaults standardUserDefaults] objectForKey:@"category"];
+    self.currentCategory = [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:@"category"];
     self.title = self.currentCategory;
 
     self.authStatus = [CLLocationManager authorizationStatus];
@@ -90,7 +90,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if ((_authStatus == kCLAuthorizationStatusAuthorized || _authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
+    if ((_authStatus == kCLAuthorizationStatusAuthorizedAlways || _authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
         
@@ -145,6 +145,7 @@
     int numOfResults = isPhone568 ? 6 : 4;
     
     [[SGNetworkManager sharedManager] categorySearchWithCategory:self.currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray *placeArray) {
+        [[Mixpanel sharedInstance] track:@"category_search" properties:@{@"location":locationArray, @"category": self.currentCategory}];
         self.currentPlaces = [placeArray mutableCopy];
         
         
