@@ -12,7 +12,7 @@
 		AD22A1BC19D368BF00D6695A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */; };
 		AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD22A1C019D368BF00D6695A /* TodayViewController.swift */; };
 		AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD22A1C219D368BF00D6695A /* MainInterface.storyboard */; };
-		AD22A1C619D368BF00D6695A /* Terrific-Nearby.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD22A1BA19D368BF00D6695A /* Terrific-Nearby.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD22A1BA19D368BF00D6695A /* Nearby Places.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD22A1D419D36BAA00D6695A /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
 		AD39FC2219D36FBF00F7C63C /* SGPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2192F19624481007050C1 /* SGPlace.m */; };
 		ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA2188B19624235007050C1 /* MainStoryboard.storyboard */; };
@@ -98,7 +98,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AD22A1C619D368BF00D6695A /* Terrific-Nearby.appex in Embed App Extensions */,
+				AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +106,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AD22A1BA19D368BF00D6695A /* Terrific-Nearby.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Terrific-Nearby.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD22A1BA19D368BF00D6695A /* Nearby Places.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nearby Places.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD22A1BF19D368BF00D6695A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD22A1C019D368BF00D6695A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				FDC48442154CFBE00035BB36 /* Terrific.app */,
-				AD22A1BA19D368BF00D6695A /* Terrific-Nearby.appex */,
+				AD22A1BA19D368BF00D6695A /* Nearby Places.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -421,9 +421,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AD22A1B919D368BF00D6695A /* Terrific-Nearby */ = {
+		AD22A1B919D368BF00D6695A /* Nearby Places */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Terrific-Nearby" */;
+			buildConfigurationList = AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Nearby Places" */;
 			buildPhases = (
 				CE80FDA6F551450CAC460235 /* Check Pods Manifest.lock */,
 				AD22A1B619D368BF00D6695A /* Sources */,
@@ -435,9 +435,9 @@
 			);
 			dependencies = (
 			);
-			name = "Terrific-Nearby";
+			name = "Nearby Places";
 			productName = "Terrific-Nearby";
-			productReference = AD22A1BA19D368BF00D6695A /* Terrific-Nearby.appex */;
+			productReference = AD22A1BA19D368BF00D6695A /* Nearby Places.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		FDC48441154CFBE00035BB36 /* Terrific */ = {
@@ -506,7 +506,7 @@
 			projectRoot = "";
 			targets = (
 				FDC48441154CFBE00035BB36 /* Terrific */,
-				AD22A1B919D368BF00D6695A /* Terrific-Nearby */,
+				AD22A1B919D368BF00D6695A /* Nearby Places */,
 			);
 		};
 /* End PBXProject section */
@@ -667,12 +667,12 @@
 /* Begin PBXTargetDependency section */
 		AD22A1C519D368BF00D6695A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AD22A1B919D368BF00D6695A /* Terrific-Nearby */;
+			target = AD22A1B919D368BF00D6695A /* Nearby Places */;
 			targetProxy = AD22A1C419D368BF00D6695A /* PBXContainerItemProxy */;
 		};
 		AD22A1C819D368BF00D6695A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AD22A1B919D368BF00D6695A /* Terrific-Nearby */;
+			target = AD22A1B919D368BF00D6695A /* Nearby Places */;
 			targetProxy = AD22A1C719D368BF00D6695A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -717,6 +717,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Nearby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -744,6 +745,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Nearby-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -867,7 +869,7 @@
 				);
 				PRODUCT_NAME = Terrific;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "826EEB4F-B56B-4764-9124-0036AB95AA26";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -881,8 +883,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Terrific/Terrific.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,7 +901,7 @@
 				);
 				PRODUCT_NAME = Terrific;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "544EC413-FF8D-4602-9A36-D36A9AB4BB60";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -908,7 +910,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Terrific-Nearby" */ = {
+		AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Nearby Places" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AD22A1C919D368BF00D6695A /* Debug */,

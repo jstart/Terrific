@@ -126,7 +126,7 @@
             break;
     }
     [[Mixpanel sharedInstance] track:@"chose" properties:[NSDictionary dictionaryWithObject:chosenCategory forKey:@"category"]];
-    [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] setObject:chosenCategory forKey:@"category"];
+    [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] setObject:chosenCategory forKey:@"category"];
     [self.navigationController pushViewController:self.mapViewController animated:YES];
 }
 

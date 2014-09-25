@@ -19,6 +19,7 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <UIColor-HexString/UIColor+HexString.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <NotificationCenter/NotificationCenter.h>
 
 @interface SGAppDelegate () <CLLocationManagerDelegate>
 
@@ -53,14 +54,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [[Mixpanel sharedInstance] track:@"Launched"];
     #endif
     
-    if (![[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:@"eat"])
+    if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"])
     {
         NSDictionary *defaultsDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Search_Params.plist"]];
-        [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] registerDefaults:defaultsDictionary];
+        [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] registerDefaults:defaultsDictionary];
     }
     
     NSURL *URL = [NSURL URLWithString:@"http://spotandgo-plist.herokuapp.com/defaults.plist"];
-    [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] registerDefaultsWithURL:URL success: ^(NSDictionary *defaults) {
+    [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] registerDefaultsWithURL:URL success: ^(NSDictionary *defaults) {
     } failure: ^(NSError *error) {
     }];
     
@@ -79,7 +80,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     self.geocoder = [[CLGeocoder alloc] init];
     
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-    
+    [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
+
     return YES;
 }
 
@@ -96,6 +98,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
+
         [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                                  distanceFilter:kCLDistanceFilterNone
                                                        accuracy:kCLLocationAccuracyNearestTenMeters];

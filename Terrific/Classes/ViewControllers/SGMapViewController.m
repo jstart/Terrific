@@ -81,7 +81,7 @@
     [self.mapView setShowsUserLocation:YES];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.currentCategory = [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:@"category"];
+    self.currentCategory = [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"category"];
     self.title = self.currentCategory;
 
     self.authStatus = [CLLocationManager authorizationStatus];

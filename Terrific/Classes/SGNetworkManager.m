@@ -39,7 +39,7 @@ static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
 
 - (void) categorySearchWithCategory:(NSString *)category locationArray:(NSArray *)locationArray resultCount:(int)resultCount success:(void (^)(NSArray *placeArray))success failure:(void (^)(NSError *error))failure
 {
-    NSDictionary *configDictionary = [[[NSUserDefaults alloc] initWithSuiteName:@"groups.truman.Terrific"] objectForKey:category];
+    NSDictionary *configDictionary = [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:category];
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = configDictionary[@"tag_name"];
     
