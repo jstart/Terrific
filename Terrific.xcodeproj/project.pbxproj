@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04BA76BC719E418FB5016D43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
 		A5C8C7D74CE64FF2B29A0BC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
+		AD19731A19D4ABF6003509D1 /* MKMapItem+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */; };
 		AD22A1BC19D368BF00D6695A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */; };
 		AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD22A1C019D368BF00D6695A /* TodayViewController.swift */; };
 		AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD22A1C219D368BF00D6695A /* MainInterface.storyboard */; };
@@ -106,6 +107,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD19731419D4A9CC003509D1 /* Terrific-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Terrific-Bridging-Header.h"; sourceTree = "<group>"; };
+		AD19731719D4ABF1003509D1 /* MKMapItem+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapItem+NSCoding.h"; sourceTree = "<group>"; };
+		AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapItem+NSCoding.m"; sourceTree = "<group>"; };
 		AD22A1BA19D368BF00D6695A /* Nearby Places.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nearby Places.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD22A1BF19D368BF00D6695A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -214,9 +218,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD19731319D4A9A2003509D1 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				AD19731419D4A9CC003509D1 /* Terrific-Bridging-Header.h */,
+				AD19731719D4ABF1003509D1 /* MKMapItem+NSCoding.h */,
+				AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		AD22A1BD19D368BF00D6695A /* Terrific-Nearby */ = {
 			isa = PBXGroup;
 			children = (
+				AD19731319D4A9A2003509D1 /* Category */,
 				AD39FC2419D378EE00F7C63C /* Terrific-Nearby.entitlements */,
 				AD22A1C019D368BF00D6695A /* TodayViewController.swift */,
 				AD22A1C219D368BF00D6695A /* MainInterface.storyboard */,
@@ -638,6 +653,7 @@
 			files = (
 				AD39FC2219D36FBF00F7C63C /* SGPlace.m in Sources */,
 				AD22A1D419D36BAA00D6695A /* SGNetworkManager.m in Sources */,
+				AD19731A19D4ABF6003509D1 /* MKMapItem+NSCoding.m in Sources */,
 				AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,7 +729,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b82bb223-6dcd-4e3e-927a-fd0a23cb419a";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Nearby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -731,8 +747,8 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_ENTITLEMENTS = "Terrific-Nearby/Terrific-Nearby.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -742,7 +758,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "201d740d-b6e1-48e7-a188-cad4634a42da";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Nearby-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -863,13 +879,16 @@
 				GCC_PREFIX_HEADER = "Terrific/Supporting Files/Terrific-Prefix.pch";
 				INFOPLIST_FILE = "Terrific/Supporting Files/Terrific-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Terrific;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "4a83df7a-ab96-470f-b66f-799113217ad0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4a83df7a-ab96-470f-b66f-799113217ad0";
+				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -883,8 +902,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Terrific/Terrific.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science) (PP6S682Z9F)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -895,13 +914,15 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Terrific/Supporting Files/Terrific-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = Terrific;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "0c85e8bd-0ed6-4cb3-a18a-6da154591769";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0c85e8bd-0ed6-4cb3-a18a-6da154591769";
+				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Bridging-Header.h";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
