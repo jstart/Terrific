@@ -14,9 +14,14 @@ import MapKit
 class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate {
     var manager = CLLocationManager()
     var places = [MKMapItem]()
+    var defaults = NSUserDefaults(suiteName:"group.truman.Terrific")
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if (defaults.objectForKey("eat") == nil) {
+            var defaultsDictionary = NSDictionary(contentsOfFile:NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Search_Params.plist"))
+            defaults.registerDefaults(defaultsDictionary)
+        }
     }
     
     override func viewDidLoad() {
@@ -32,8 +37,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         super.viewWillAppear(animated)
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        if ((NSUserDefaults(suiteName: "group.truman.Terrific").objectForKey("nearby-places")) != nil){
-            var places = NSKeyedUnarchiver.unarchiveObjectWithData(NSUserDefaults(suiteName: "group.truman.Terrific").objectForKey("nearby-places") as NSData) as [MKMapItem]
+        if (defaults.objectForKey("nearby-places") != nil) {
+            var places = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as NSData) as [MKMapItem]
         
             if (places.count > 0){
                 for view in self.view.subviews {
@@ -88,7 +93,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
                             }
                             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
                             var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
-                            NSUserDefaults(suiteName: "group.truman.Terrific").setObject(placesData, forKey: "nearby-places")
+                            self.defaults.setObject(placesData, forKey: "nearby-places")
                             
                             self.places = places as [MKMapItem]
                             //Add views with new state and fade in
@@ -114,7 +119,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         var horizontalSizeClass = self.view.traitCollection.horizontalSizeClass
         
         var itemHeight = self.view.traitCollection.verticalSizeClass == .Regular ? 30.0 : 25.0 as CGFloat
-        var fontSize = self.view.traitCollection.verticalSizeClass == .Regular ? 14.0 : 18.0 as CGFloat
+        var fontSize = self.view.traitCollection.verticalSizeClass == .Regular ? 24.0 : 18.0 as CGFloat
         var padding = self.view.traitCollection.verticalSizeClass == .Regular ? 15.0 : 10.0 as CGFloat
 
         self.preferredContentSize = CGSizeMake(self.view.frame.size.width, padding + (itemHeight * CGFloat(places.count)))
@@ -123,7 +128,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             var frame = CGRectMake(0, 0, self.view.frame.size.width, itemHeight)
             var button = UIButton.buttonWithType(.System) as UIButton
             button.frame = frame
-            button.titleLabel?.textAlignment = .Left
             button.contentHorizontalAlignment = .Left
             if (animated){
                 button.alpha = 0.0
@@ -131,7 +135,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             
             var visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
             visualEffectView.frame = button.bounds
-            visualEffectView.frame.origin.x = 0
             visualEffectView.frame.origin.y = padding + (itemHeight * CGFloat(index))
             visualEffectView.contentView.addSubview(button)
             
@@ -159,7 +162,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     func openInMaps(sender: UIButton) {
         var mapItem = self.places[sender.tag]
-        mapItem.openInMapsWithLaunchOptions(nil)
+        if (!mapItem.openInMapsWithLaunchOptions(nil)){
+            //TODO: Handle tap when screen is locked
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus){

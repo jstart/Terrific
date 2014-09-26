@@ -71,7 +71,10 @@
 		ADA597D319CCE40A00012489 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */; };
 		ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */; };
 		ADA597D619CCE8CD00012489 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA597D519CCE8CD00012489 /* MapKit.framework */; };
-		ADEA5B90195E0E0000CE20B2 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */; };
+		ADDAE11419D6156200E1B08B /* AppIcon29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */; };
+		ADDAE11519D6156200E1B08B /* AppIcon40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */; };
+		ADDAE11619D6156200E1B08B /* AppIcon60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */; };
+		ADDAE11719D615C500E1B08B /* Search_Params.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA2191C1962434E007050C1 /* Search_Params.plist */; };
 		FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
@@ -189,7 +192,9 @@
 		ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
 		ADA597D519CCE8CD00012489 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = "Pods/Google-Maps-iOS-SDK/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle"; sourceTree = "<group>"; };
+		ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@3x.png"; sourceTree = "<group>"; };
+		ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@3x.png"; sourceTree = "<group>"; };
+		ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@3x.png"; sourceTree = "<group>"; };
 		F8817065BDBC5AC8F44E9388 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F98CF40EF0CE46A1BA959525 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8D133315F4C04700A4C749 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -289,14 +294,17 @@
 			children = (
 				ADA2189319624235007050C1 /* AppIcon29x29.png */,
 				ADA2189419624235007050C1 /* AppIcon29x29@2x.png */,
+				ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */,
 				ADA2189519624235007050C1 /* AppIcon40x40.png */,
 				ADA2189619624235007050C1 /* AppIcon40x40@2x.png */,
+				ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */,
 				ADA2189719624235007050C1 /* AppIcon50x50.png */,
 				ADA2189819624235007050C1 /* AppIcon50x50@2x.png */,
 				ADA2189919624235007050C1 /* AppIcon57x57.png */,
 				ADA2189A19624235007050C1 /* AppIcon57x57@2x.png */,
 				ADA2189B19624235007050C1 /* AppIcon60x60.png */,
 				ADA2189C19624235007050C1 /* AppIcon60x60@2x.png */,
+				ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */,
 				ADA2189D19624235007050C1 /* AppIcon72x72.png */,
 				ADA2189E19624235007050C1 /* AppIcon72x72@2x.png */,
 				ADA2189F19624235007050C1 /* AppIcon76x76.png */,
@@ -412,7 +420,6 @@
 			isa = PBXGroup;
 			children = (
 				ADA2188619624235007050C1 /* Terrific */,
-				ADEA5B8F195E0E0000CE20B2 /* GoogleMaps.bundle */,
 				AD22A1BD19D368BF00D6695A /* Terrific-Nearby */,
 				FDC48445154CFBE00035BB36 /* Frameworks */,
 				FDC48443154CFBE00035BB36 /* Products */,
@@ -539,6 +546,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDAE11719D615C500E1B08B /* Search_Params.plist in Resources */,
 				AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,21 +566,23 @@
 				ADA218CE19624235007050C1 /* AppIcon50x50@2x.png in Resources */,
 				ADA597C919CCE40A00012489 /* NotificationBackgroundMessage@2x.png in Resources */,
 				ADA597C419CCE40A00012489 /* NotificationBackgroundError.png in Resources */,
+				ADDAE11619D6156200E1B08B /* AppIcon60x60@3x.png in Resources */,
 				ADA597CD19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
 				ADA597C819CCE40A00012489 /* NotificationBackgroundMessage.png in Resources */,
 				ADA597D219CCE40A00012489 /* NotificationButtonBackground.png in Resources */,
 				ADA597CE19CCE40A00012489 /* NotificationBackgroundWarning.png in Resources */,
-				ADEA5B90195E0E0000CE20B2 /* GoogleMaps.bundle in Resources */,
 				ADA218E219624235007050C1 /* Images.xcassets in Resources */,
 				ADA218D519624235007050C1 /* AppIcon76x76.png in Resources */,
 				ADA218D819624235007050C1 /* iTunesArtwork@2x.png in Resources */,
 				ADA597C619CCE40A00012489 /* NotificationBackgroundErrorIcon.png in Resources */,
+				ADDAE11419D6156200E1B08B /* AppIcon29x29@3x.png in Resources */,
 				ADA218D419624235007050C1 /* AppIcon72x72@2x.png in Resources */,
 				ADA218DD19624235007050C1 /* gplaypattern@2X.png in Resources */,
 				ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */,
 				ADA597D019CCE40A00012489 /* NotificationBackgroundWarningIcon.png in Resources */,
 				ADA597D119CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png in Resources */,
 				ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */,
+				ADDAE11519D6156200E1B08B /* AppIcon40x40@3x.png in Resources */,
 				ADA218DC19624235007050C1 /* gplaypattern.png in Resources */,
 				ADA218D919624235007050C1 /* Default-568h@2x.png in Resources */,
 				ADA218C919624235007050C1 /* AppIcon29x29.png in Resources */,
