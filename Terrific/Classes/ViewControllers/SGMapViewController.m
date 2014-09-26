@@ -126,9 +126,7 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(userLocation.coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
-    
     [self performSearch];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeNone animated:YES];
 }
 
 - (void) performSearch

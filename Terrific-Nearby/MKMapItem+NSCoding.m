@@ -36,4 +36,15 @@
     [aCoder encodeObject: self.url forKey:@"url"];
 }
 
+-(BOOL)isEqual:(id)object{
+    if (![object isKindOfClass:[MKMapItem class]]) {
+        return NO;
+    }
+    MKMapItem * mapItem = object;
+    if (![self.name isEqualToString:mapItem.name] && ![self.phoneNumber isEqualToString:mapItem.phoneNumber] && self.url != mapItem.url) {
+        return NO;
+    }
+    return YES;
+}
+
 @end
