@@ -39,7 +39,7 @@ DEPENDENCIES:
   - Mixpanel
   - MPFlipViewController
   - TSMessages
-  - UIColor-HexString (~> 1.1)
+  - UIColor-HexString
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
@@ -52,4 +52,4 @@ SPEC CHECKSUMS:
   TSMessages: 8598a0645e9d54847f6e5f3b070bef39c493bbf8
   UIColor-HexString: a9eabf02c1a2f9036ed6ac9cb2a3ea086f3b39e4
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.1
