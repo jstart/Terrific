@@ -26,8 +26,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        manager.distanceFilter = 100.0
+        manager.desiredAccuracy = 50.0
         manager.requestWhenInUseAuthorization()
-//        NSNotificationCenter.defaultCenter().addObserver(NSNotificationCenter.defaultCenter(), selector: "userDefaultsDidChange:", name: NSUserDefaultsDidChangeNotification, object: nil)
         manager.delegate = self
         manager.startUpdatingLocation()
         NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
@@ -58,11 +59,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
 //        coordinator.animateAlongsideTransition({ context in
 //        }, completion:{ context in
 //        })
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
@@ -98,17 +94,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
                             self.places = places as [MKMapItem]
                             //Add views with new state and fade in
                             self.updateWithPlaces(self.places, animated: true)
+                            completionHandler(NCUpdateResult.NewData)
                     })
                 }
-                completionHandler(NCUpdateResult.NewData)
             }, failure: { error in
                     self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
                     completionHandler(NCUpdateResult.NoData)
             })
-        } else if(CLLocationManager.authorizationStatus() != .AuthorizedWhenInUse){
-            self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
-            NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
-        }else{
+        } else {
             self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
             completionHandler(NCUpdateResult.NoData)
         }
@@ -170,7 +163,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if (status == .AuthorizedWhenInUse){
             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
-        }else{
+        }else if (status == .Denied || status == .Restricted){
             NCWidgetController.widgetController().setHasContent(false, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
         }
     }
