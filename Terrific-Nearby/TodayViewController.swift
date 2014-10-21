@@ -26,10 +26,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.distanceFilter = 100.0
         manager.desiredAccuracy = 50.0
-        manager.requestWhenInUseAuthorization()
         manager.delegate = self
+        manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
     }
@@ -70,7 +69,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
 
             var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
-            
             SGNetworkManager.sharedManager().categorySearchWithCategory("eat", locationArray: locationArray, resultCount: resultCount, success: { places in
                 //Fade out current state
                 if (!self.isEqualToCachedPlaces(places as [MKMapItem])){

@@ -25,7 +25,7 @@ PODS:
     - AFNetworking (~> 2.2)
   - HexColors (2.2.1)
   - MBLocationManager (0.1.2)
-  - Mixpanel (2.5.3)
+  - Mixpanel (2.5.4)
   - MPFlipViewController (0.0.2)
   - TSMessages (0.9.10):
     - HexColors
@@ -47,9 +47,9 @@ SPEC CHECKSUMS:
   GroundControl: 2f9024230e41ff5e5a8e3ca060ed1b74883bdd1a
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   MBLocationManager: 82e477b28b7a748a63fb12f8211e89aa79be1b81
-  Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
+  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   MPFlipViewController: c044c0b6385c8d826601a36b05211d5cf009d4e8
   TSMessages: 8598a0645e9d54847f6e5f3b070bef39c493bbf8
   UIColor-HexString: a9eabf02c1a2f9036ed6ac9cb2a3ea086f3b39e4
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.4
