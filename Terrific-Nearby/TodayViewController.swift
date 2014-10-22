@@ -14,12 +14,12 @@ import MapKit
 class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate {
     var manager = CLLocationManager()
     var places = [MKMapItem]()
-    var defaults = NSUserDefaults(suiteName:"group.truman.Terrific")
+    var defaults = NSUserDefaults(suiteName:"group.truman.Terrific")!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         if (defaults.objectForKey("eat") == nil) {
-            var defaultsDictionary = NSDictionary(contentsOfFile:NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Search_Params.plist"))
+            var defaultsDictionary = NSDictionary(contentsOfFile:NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Search_Params.plist"))!
             defaults.registerDefaults(defaultsDictionary)
         }
     }

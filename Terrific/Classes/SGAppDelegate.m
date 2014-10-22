@@ -11,6 +11,8 @@
 @import AdSupport;
 
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+
 #import "SGConstants.h"
 #import <MBLocationManager/MBLocationManager.h>
 // #import "DCIntrospect.h"
@@ -39,8 +41,7 @@
 - (BOOL) application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
-    #if TARGET_IPHONE_SIMULATOR || DEBUG
+//    #if TARGET_IPHONE_SIMULATOR || DEBUG
         //    [[DCIntrospect sharedIntrospector] start];
         //    PDDebugger *debugger = [PDDebugger defaultInstance];
         //    [debugger enableNetworkTrafficDebugging];
@@ -48,11 +49,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         //    [debugger enableViewHierarchyDebugging];
         //    [debugger enableRemoteLogging];
         //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
-    #else
-        [Crashlytics startWithAPIKey:@"ff6f76d45da103570f8070443d1760ea5199fc81"];
+//    #else
+        [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
+        [Fabric with:@[CrashlyticsKit]];
         [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
         [[Mixpanel sharedInstance] track:@"Launched"];
-    #endif
+//    #endif
     
     if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"])
     {
