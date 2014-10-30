@@ -15,9 +15,9 @@
 		AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD22A1C219D368BF00D6695A /* MainInterface.storyboard */; };
 		AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD22A1BA19D368BF00D6695A /* Nearby Places.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD22A1D419D36BAA00D6695A /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
-		AD39FC2219D36FBF00F7C63C /* SGPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2192F19624481007050C1 /* SGPlace.m */; };
 		AD65703419F82E6F00875ECF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD65703319F82E6F00875ECF /* Fabric.framework */; };
 		AD65703519F82E6F00875ECF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD65703319F82E6F00875ECF /* Fabric.framework */; };
+		AD7F43071A02FFEB003D25D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 		ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA2188B19624235007050C1 /* MainStoryboard.storyboard */; };
 		ADA218C919624235007050C1 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189319624235007050C1 /* AppIcon29x29.png */; };
 		ADA218CA19624235007050C1 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189419624235007050C1 /* AppIcon29x29@2x.png */; };
@@ -43,7 +43,6 @@
 		ADA2191F1962434E007050C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2191B1962434E007050C1 /* main.m */; };
 		ADA219201962434E007050C1 /* Search_Params.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA2191C1962434E007050C1 /* Search_Params.plist */; };
 		ADA219231962436D007050C1 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = ADA219221962436D007050C1 /* Location.gpx */; };
-		ADA2194619624481007050C1 /* SGPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2192F19624481007050C1 /* SGPlace.m */; };
 		ADA2194719624481007050C1 /* SGAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193119624481007050C1 /* SGAnnotation.m */; };
 		ADA2194819624481007050C1 /* SGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193319624481007050C1 /* SGAppDelegate.m */; };
 		ADA2194919624481007050C1 /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
@@ -152,8 +151,6 @@
 		ADA2191D1962434E007050C1 /* Terrific-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Terrific-Info.plist"; sourceTree = "<group>"; };
 		ADA2191E1962434E007050C1 /* Terrific-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Terrific-Prefix.pch"; sourceTree = "<group>"; };
 		ADA219221962436D007050C1 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = SOURCE_ROOT; };
-		ADA2192E19624481007050C1 /* SGPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlace.h; sourceTree = "<group>"; };
-		ADA2192F19624481007050C1 /* SGPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlace.m; sourceTree = "<group>"; };
 		ADA2193019624481007050C1 /* SGAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAnnotation.h; sourceTree = "<group>"; };
 		ADA2193119624481007050C1 /* SGAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAnnotation.m; sourceTree = "<group>"; };
 		ADA2193219624481007050C1 /* SGAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAppDelegate.h; sourceTree = "<group>"; };
@@ -211,6 +208,7 @@
 			files = (
 				AD22A1BC19D368BF00D6695A /* NotificationCenter.framework in Frameworks */,
 				A5C8C7D74CE64FF2B29A0BC5 /* libPods.a in Frameworks */,
+				AD7F43071A02FFEB003D25D5 /* Crashlytics.framework in Frameworks */,
 				AD65703519F82E6F00875ECF /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				ADA2195E1962464C007050C1 /* MPSkewed */,
-				ADA2192D19624481007050C1 /* Model */,
 				ADA2193019624481007050C1 /* SGAnnotation.h */,
 				ADA2193119624481007050C1 /* SGAnnotation.m */,
 				ADA2193219624481007050C1 /* SGAppDelegate.h */,
@@ -356,15 +353,6 @@
 				ADA2193719624481007050C1 /* ViewControllers */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		ADA2192D19624481007050C1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				ADA2192E19624481007050C1 /* SGPlace.h */,
-				ADA2192F19624481007050C1 /* SGPlace.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		ADA2193719624481007050C1 /* ViewControllers */ = {
@@ -645,7 +633,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD39FC2219D36FBF00F7C63C /* SGPlace.m in Sources */,
 				AD22A1D419D36BAA00D6695A /* SGNetworkManager.m in Sources */,
 				AD19731A19D4ABF6003509D1 /* MKMapItem+NSCoding.m in Sources */,
 				AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */,
@@ -666,7 +653,6 @@
 				ADA2194B19624481007050C1 /* SGMapViewController.m in Sources */,
 				ADA2194A19624481007050C1 /* SGDetailCardViewController.m in Sources */,
 				ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */,
-				ADA2194619624481007050C1 /* SGPlace.m in Sources */,
 				ADA21951196245A0007050C1 /* SGMenuCollectionViewController.m in Sources */,
 				ADA2194919624481007050C1 /* SGNetworkManager.m in Sources */,
 			);

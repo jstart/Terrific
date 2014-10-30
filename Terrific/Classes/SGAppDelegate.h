@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Truman. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
 @import CoreLocation;
 
 @interface SGAppDelegate : UIResponder <UIApplicationDelegate>

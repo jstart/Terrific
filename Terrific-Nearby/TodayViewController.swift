@@ -10,6 +10,8 @@ import UIKit
 import NotificationCenter
 import CoreLocation
 import MapKit
+import Fabric
+import Crashlytics
 
 class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate {
     var manager = CLLocationManager()
@@ -26,6 +28,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Fabric.with([Crashlytics()])
         manager.desiredAccuracy = 50.0
         manager.delegate = self
         manager.requestWhenInUseAuthorization()

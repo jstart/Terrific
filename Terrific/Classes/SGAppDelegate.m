@@ -11,6 +11,7 @@
 @import AdSupport;
 
 #import <Crashlytics/Crashlytics.h>
+#import <Twitter/Twitter.h>
 #import <Fabric/Fabric.h>
 
 #import "SGConstants.h"
@@ -41,20 +42,14 @@
 - (BOOL) application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    #if TARGET_IPHONE_SIMULATOR || DEBUG
-        //    [[DCIntrospect sharedIntrospector] start];
-        //    PDDebugger *debugger = [PDDebugger defaultInstance];
-        //    [debugger enableNetworkTrafficDebugging];
-        //    [debugger forwardAllNetworkTraffic];
-        //    [debugger enableViewHierarchyDebugging];
-        //    [debugger enableRemoteLogging];
-        //    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
-//    #else
+    #if TARGET_IPHONE_SIMULATOR || DEBUG
+
+    #else
         [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
         [Fabric with:@[CrashlyticsKit]];
         [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
         [[Mixpanel sharedInstance] track:@"Launched"];
-//    #endif
+    #endif
     
     if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"])
     {
