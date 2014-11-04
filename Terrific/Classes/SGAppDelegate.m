@@ -11,17 +11,13 @@
 @import AdSupport;
 
 #import <Crashlytics/Crashlytics.h>
-#import <Twitter/Twitter.h>
 #import <Fabric/Fabric.h>
 
 #import "SGConstants.h"
 #import <MBLocationManager/MBLocationManager.h>
-// #import "DCIntrospect.h"
-// #import <PonyDebugger.h>
 #import <GroundControl/NSUserDefaults+GroundControl.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <UIColor-HexString/UIColor+HexString.h>
-#import <GoogleMaps/GoogleMaps.h>
 #import <NotificationCenter/NotificationCenter.h>
 
 @interface SGAppDelegate () <CLLocationManagerDelegate>
@@ -45,7 +41,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     #if TARGET_IPHONE_SIMULATOR || DEBUG
 
     #else
-        [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
+//        [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
         [Fabric with:@[CrashlyticsKit]];
         [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
         [[Mixpanel sharedInstance] track:@"Launched"];
@@ -62,26 +58,17 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     } failure: ^(NSError *error) {
     }];
     
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"844fe5"]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:24]}];
-    
     [[MBLocationManager sharedManager].locationManager setDelegate:self];
     [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                              distanceFilter:kCLDistanceFilterNone
                                                    accuracy:kCLLocationAccuracyNearestTenMeters];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(changeLocation:)
-                                                 name:kMBLocationManagerNotificationLocationUpdatedName
-                                               object:nil];
-    self.geocoder = [[CLGeocoder alloc] init];
     
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
 
     return YES;
 }
-
 
 - (void) applicationDidEnterBackground:(UIApplication *)application
 {
@@ -100,28 +87,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
         [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                                  distanceFilter:kCLDistanceFilterNone
                                                        accuracy:kCLLocationAccuracyNearestTenMeters];
-    }else{
+    } else if (status == kCLAuthorizationStatusDenied) {
+        [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
+    } else {
         [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     }
-}
-
-- (void) changeLocation:(NSNotification *)notification
-{
-    [[MBLocationManager sharedManager] stopLocationUpdates];
-    
-    CLLocation *location = [[MBLocationManager sharedManager] currentLocation];
-    self.currentLocation = location;
-    [self.geocoder reverseGeocodeLocation:location completionHandler:
-     
-     ^(NSArray *placemarks, NSError *error) {
-         // Get nearby address
-         CLPlacemark *placemark = [placemarks objectAtIndex:0];
-         
-         // String to hold address
-         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-         
-         self.currentLocationString = locatedAt;
-     }];
 }
 
 @end

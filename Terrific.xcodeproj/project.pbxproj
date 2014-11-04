@@ -10,50 +10,23 @@
 		04BA76BC719E418FB5016D43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
 		A5C8C7D74CE64FF2B29A0BC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
 		AD19731A19D4ABF6003509D1 /* MKMapItem+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */; };
-		AD22A1BC19D368BF00D6695A /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */; };
 		AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD22A1C019D368BF00D6695A /* TodayViewController.swift */; };
 		AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD22A1C219D368BF00D6695A /* MainInterface.storyboard */; };
 		AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD22A1BA19D368BF00D6695A /* Nearby Places.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD22A1D419D36BAA00D6695A /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
 		AD65703419F82E6F00875ECF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD65703319F82E6F00875ECF /* Fabric.framework */; };
-		AD65703519F82E6F00875ECF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD65703319F82E6F00875ECF /* Fabric.framework */; };
-		AD7F43071A02FFEB003D25D5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 		ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA2188B19624235007050C1 /* MainStoryboard.storyboard */; };
-		ADA218C919624235007050C1 /* AppIcon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189319624235007050C1 /* AppIcon29x29.png */; };
-		ADA218CA19624235007050C1 /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189419624235007050C1 /* AppIcon29x29@2x.png */; };
-		ADA218CB19624235007050C1 /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189519624235007050C1 /* AppIcon40x40.png */; };
-		ADA218CC19624235007050C1 /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189619624235007050C1 /* AppIcon40x40@2x.png */; };
-		ADA218CD19624235007050C1 /* AppIcon50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189719624235007050C1 /* AppIcon50x50.png */; };
-		ADA218CE19624235007050C1 /* AppIcon50x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189819624235007050C1 /* AppIcon50x50@2x.png */; };
-		ADA218CF19624235007050C1 /* AppIcon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189919624235007050C1 /* AppIcon57x57.png */; };
-		ADA218D019624235007050C1 /* AppIcon57x57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189A19624235007050C1 /* AppIcon57x57@2x.png */; };
-		ADA218D119624235007050C1 /* AppIcon60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189B19624235007050C1 /* AppIcon60x60.png */; };
-		ADA218D219624235007050C1 /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189C19624235007050C1 /* AppIcon60x60@2x.png */; };
-		ADA218D319624235007050C1 /* AppIcon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189D19624235007050C1 /* AppIcon72x72.png */; };
-		ADA218D419624235007050C1 /* AppIcon72x72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189E19624235007050C1 /* AppIcon72x72@2x.png */; };
-		ADA218D519624235007050C1 /* AppIcon76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA2189F19624235007050C1 /* AppIcon76x76.png */; };
-		ADA218D619624235007050C1 /* AppIcon76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A019624235007050C1 /* AppIcon76x76@2x.png */; };
-		ADA218D719624235007050C1 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A119624235007050C1 /* iTunesArtwork.png */; };
-		ADA218D819624235007050C1 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A219624235007050C1 /* iTunesArtwork@2x.png */; };
 		ADA218D919624235007050C1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A319624235007050C1 /* Default-568h@2x.png */; };
 		ADA218DA19624235007050C1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A419624235007050C1 /* Default@2x.png */; };
-		ADA218DC19624235007050C1 /* gplaypattern.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A619624235007050C1 /* gplaypattern.png */; };
-		ADA218DD19624235007050C1 /* gplaypattern@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA218A719624235007050C1 /* gplaypattern@2X.png */; };
 		ADA218E219624235007050C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA218AC19624235007050C1 /* Images.xcassets */; };
 		ADA2191F1962434E007050C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2191B1962434E007050C1 /* main.m */; };
 		ADA219201962434E007050C1 /* Search_Params.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA2191C1962434E007050C1 /* Search_Params.plist */; };
 		ADA219231962436D007050C1 /* Location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = ADA219221962436D007050C1 /* Location.gpx */; };
-		ADA2194719624481007050C1 /* SGAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193119624481007050C1 /* SGAnnotation.m */; };
 		ADA2194819624481007050C1 /* SGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193319624481007050C1 /* SGAppDelegate.m */; };
 		ADA2194919624481007050C1 /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
-		ADA2194A19624481007050C1 /* SGDetailCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193919624481007050C1 /* SGDetailCardViewController.m */; };
 		ADA2194B19624481007050C1 /* SGMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193B19624481007050C1 /* SGMapViewController.m */; };
-		ADA2194C19624481007050C1 /* SGPlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */; };
 		ADA2194D19624481007050C1 /* SGPlaceImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */; };
 		ADA21951196245A0007050C1 /* SGMenuCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */; };
-		ADA219671962464C007050C1 /* MPSkewedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219601962464C007050C1 /* MPSkewedCell.m */; };
-		ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */; };
-		ADA2196A1962464C007050C1 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA219661962464C007050C1 /* UIView+Frame.m */; };
 		ADA597C419CCE40A00012489 /* NotificationBackgroundError.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */; };
 		ADA597C519CCE40A00012489 /* NotificationBackgroundError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */; };
 		ADA597C619CCE40A00012489 /* NotificationBackgroundErrorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597B519CCE40A00012489 /* NotificationBackgroundErrorIcon.png */; };
@@ -71,10 +44,8 @@
 		ADA597D219CCE40A00012489 /* NotificationButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */; };
 		ADA597D319CCE40A00012489 /* NotificationButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */; };
 		ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */; };
-		ADA597D619CCE8CD00012489 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA597D519CCE8CD00012489 /* MapKit.framework */; };
-		ADDAE11419D6156200E1B08B /* AppIcon29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */; };
-		ADDAE11519D6156200E1B08B /* AppIcon40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */; };
-		ADDAE11619D6156200E1B08B /* AppIcon60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */; };
+		ADABCE0C1A05C9D100F0BDE6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD65703319F82E6F00875ECF /* Fabric.framework */; };
+		ADABCE0D1A05C9D300F0BDE6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 		ADDAE11719D615C500E1B08B /* Search_Params.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA2191C1962434E007050C1 /* Search_Params.plist */; };
 		FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD8D133315F4C04700A4C749 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
@@ -116,7 +87,6 @@
 		AD19731719D4ABF1003509D1 /* MKMapItem+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapItem+NSCoding.h"; sourceTree = "<group>"; };
 		AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapItem+NSCoding.m"; sourceTree = "<group>"; };
 		AD22A1BA19D368BF00D6695A /* Nearby Places.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nearby Places.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		AD22A1BF19D368BF00D6695A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD22A1C019D368BF00D6695A /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		AD22A1C219D368BF00D6695A /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
@@ -125,55 +95,25 @@
 		AD39FC2419D378EE00F7C63C /* Terrific-Nearby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Terrific-Nearby.entitlements"; sourceTree = "<group>"; };
 		AD65703319F82E6F00875ECF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		ADA2188C19624235007050C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		ADA2189319624235007050C1 /* AppIcon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon29x29.png; sourceTree = "<group>"; };
-		ADA2189419624235007050C1 /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
-		ADA2189519624235007050C1 /* AppIcon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon40x40.png; sourceTree = "<group>"; };
-		ADA2189619624235007050C1 /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x.png"; sourceTree = "<group>"; };
-		ADA2189719624235007050C1 /* AppIcon50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon50x50.png; sourceTree = "<group>"; };
-		ADA2189819624235007050C1 /* AppIcon50x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon50x50@2x.png"; sourceTree = "<group>"; };
-		ADA2189919624235007050C1 /* AppIcon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon57x57.png; sourceTree = "<group>"; };
-		ADA2189A19624235007050C1 /* AppIcon57x57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon57x57@2x.png"; sourceTree = "<group>"; };
-		ADA2189B19624235007050C1 /* AppIcon60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon60x60.png; sourceTree = "<group>"; };
-		ADA2189C19624235007050C1 /* AppIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@2x.png"; sourceTree = "<group>"; };
-		ADA2189D19624235007050C1 /* AppIcon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon72x72.png; sourceTree = "<group>"; };
-		ADA2189E19624235007050C1 /* AppIcon72x72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon72x72@2x.png"; sourceTree = "<group>"; };
-		ADA2189F19624235007050C1 /* AppIcon76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon76x76.png; sourceTree = "<group>"; };
-		ADA218A019624235007050C1 /* AppIcon76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon76x76@2x.png"; sourceTree = "<group>"; };
-		ADA218A119624235007050C1 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		ADA218A219624235007050C1 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		ADA218A319624235007050C1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ADA218A419624235007050C1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		ADA218A619624235007050C1 /* gplaypattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gplaypattern.png; sourceTree = "<group>"; };
-		ADA218A719624235007050C1 /* gplaypattern@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gplaypattern@2X.png"; sourceTree = "<group>"; };
 		ADA218AC19624235007050C1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		ADA2191B1962434E007050C1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADA2191C1962434E007050C1 /* Search_Params.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Search_Params.plist; sourceTree = "<group>"; };
 		ADA2191D1962434E007050C1 /* Terrific-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Terrific-Info.plist"; sourceTree = "<group>"; };
 		ADA2191E1962434E007050C1 /* Terrific-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Terrific-Prefix.pch"; sourceTree = "<group>"; };
 		ADA219221962436D007050C1 /* Location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = SOURCE_ROOT; };
-		ADA2193019624481007050C1 /* SGAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAnnotation.h; sourceTree = "<group>"; };
-		ADA2193119624481007050C1 /* SGAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAnnotation.m; sourceTree = "<group>"; };
 		ADA2193219624481007050C1 /* SGAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAppDelegate.h; sourceTree = "<group>"; };
 		ADA2193319624481007050C1 /* SGAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAppDelegate.m; sourceTree = "<group>"; };
 		ADA2193419624481007050C1 /* SGConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGConstants.h; sourceTree = "<group>"; };
 		ADA2193519624481007050C1 /* SGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGNetworkManager.h; sourceTree = "<group>"; };
 		ADA2193619624481007050C1 /* SGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGNetworkManager.m; sourceTree = "<group>"; };
-		ADA2193819624481007050C1 /* SGDetailCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDetailCardViewController.h; sourceTree = "<group>"; };
-		ADA2193919624481007050C1 /* SGDetailCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDetailCardViewController.m; sourceTree = "<group>"; };
 		ADA2193A19624481007050C1 /* SGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapViewController.h; sourceTree = "<group>"; };
 		ADA2193B19624481007050C1 /* SGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapViewController.m; sourceTree = "<group>"; };
 		ADA2193C19624481007050C1 /* SGPlaceDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlaceDetailsViewController.h; sourceTree = "<group>"; };
-		ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceDetailsViewController.m; sourceTree = "<group>"; };
-		ADA2193E19624481007050C1 /* SGPlaceImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlaceImageViewController.h; sourceTree = "<group>"; };
 		ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceImageViewController.m; sourceTree = "<group>"; };
 		ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMenuCollectionViewController.h; sourceTree = "<group>"; };
 		ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMenuCollectionViewController.m; sourceTree = "<group>"; };
-		ADA2195F1962464C007050C1 /* MPSkewedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPSkewedCell.h; sourceTree = "<group>"; };
-		ADA219601962464C007050C1 /* MPSkewedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPSkewedCell.m; sourceTree = "<group>"; };
-		ADA219611962464C007050C1 /* MPSkewedParallaxLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPSkewedParallaxLayout.h; sourceTree = "<group>"; };
-		ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPSkewedParallaxLayout.m; sourceTree = "<group>"; };
-		ADA219651962464C007050C1 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		ADA219661962464C007050C1 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
 		ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
 		ADA597B519CCE40A00012489 /* NotificationBackgroundErrorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundErrorIcon.png; sourceTree = "<group>"; };
@@ -191,10 +131,6 @@
 		ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
 		ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
-		ADA597D519CCE8CD00012489 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@3x.png"; sourceTree = "<group>"; };
-		ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@3x.png"; sourceTree = "<group>"; };
-		ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@3x.png"; sourceTree = "<group>"; };
 		F8817065BDBC5AC8F44E9388 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F98CF40EF0CE46A1BA959525 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8D133315F4C04700A4C749 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -206,10 +142,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD22A1BC19D368BF00D6695A /* NotificationCenter.framework in Frameworks */,
 				A5C8C7D74CE64FF2B29A0BC5 /* libPods.a in Frameworks */,
-				AD7F43071A02FFEB003D25D5 /* Crashlytics.framework in Frameworks */,
-				AD65703519F82E6F00875ECF /* Fabric.framework in Frameworks */,
+				ADABCE0D1A05C9D300F0BDE6 /* Crashlytics.framework in Frameworks */,
+				ADABCE0C1A05C9D100F0BDE6 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +153,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD8D133415F4C04700A4C749 /* Crashlytics.framework in Frameworks */,
-				ADA597D619CCE8CD00012489 /* MapKit.framework in Frameworks */,
 				04BA76BC719E418FB5016D43 /* libPods.a in Frameworks */,
 				AD65703419F82E6F00875ECF /* Fabric.framework in Frameworks */,
 			);
@@ -284,38 +218,9 @@
 			children = (
 				ADA597B219CCE40A00012489 /* Assets */,
 				ADA218AC19624235007050C1 /* Images.xcassets */,
-				ADA2189219624235007050C1 /* App Icon [Squared] */,
 				ADA2191919624337007050C1 /* Default */,
-				ADA218A619624235007050C1 /* gplaypattern.png */,
-				ADA218A719624235007050C1 /* gplaypattern@2X.png */,
 			);
 			path = images;
-			sourceTree = "<group>";
-		};
-		ADA2189219624235007050C1 /* App Icon [Squared] */ = {
-			isa = PBXGroup;
-			children = (
-				ADA2189319624235007050C1 /* AppIcon29x29.png */,
-				ADA2189419624235007050C1 /* AppIcon29x29@2x.png */,
-				ADDAE11119D6156200E1B08B /* AppIcon29x29@3x.png */,
-				ADA2189519624235007050C1 /* AppIcon40x40.png */,
-				ADA2189619624235007050C1 /* AppIcon40x40@2x.png */,
-				ADDAE11219D6156200E1B08B /* AppIcon40x40@3x.png */,
-				ADA2189719624235007050C1 /* AppIcon50x50.png */,
-				ADA2189819624235007050C1 /* AppIcon50x50@2x.png */,
-				ADA2189919624235007050C1 /* AppIcon57x57.png */,
-				ADA2189A19624235007050C1 /* AppIcon57x57@2x.png */,
-				ADA2189B19624235007050C1 /* AppIcon60x60.png */,
-				ADA2189C19624235007050C1 /* AppIcon60x60@2x.png */,
-				ADDAE11319D6156200E1B08B /* AppIcon60x60@3x.png */,
-				ADA2189D19624235007050C1 /* AppIcon72x72.png */,
-				ADA2189E19624235007050C1 /* AppIcon72x72@2x.png */,
-				ADA2189F19624235007050C1 /* AppIcon76x76.png */,
-				ADA218A019624235007050C1 /* AppIcon76x76@2x.png */,
-				ADA218A119624235007050C1 /* iTunesArtwork.png */,
-				ADA218A219624235007050C1 /* iTunesArtwork@2x.png */,
-			);
-			path = "App Icon [Squared]";
 			sourceTree = "<group>";
 		};
 		ADA2191919624337007050C1 /* Default */ = {
@@ -342,9 +247,6 @@
 		ADA2192419624481007050C1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				ADA2195E1962464C007050C1 /* MPSkewed */,
-				ADA2193019624481007050C1 /* SGAnnotation.h */,
-				ADA2193119624481007050C1 /* SGAnnotation.m */,
 				ADA2193219624481007050C1 /* SGAppDelegate.h */,
 				ADA2193319624481007050C1 /* SGAppDelegate.m */,
 				ADA2193419624481007050C1 /* SGConstants.h */,
@@ -358,31 +260,14 @@
 		ADA2193719624481007050C1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				ADA2193819624481007050C1 /* SGDetailCardViewController.h */,
-				ADA2193919624481007050C1 /* SGDetailCardViewController.m */,
 				ADA2193A19624481007050C1 /* SGMapViewController.h */,
 				ADA2193B19624481007050C1 /* SGMapViewController.m */,
 				ADA2193C19624481007050C1 /* SGPlaceDetailsViewController.h */,
-				ADA2193D19624481007050C1 /* SGPlaceDetailsViewController.m */,
-				ADA2193E19624481007050C1 /* SGPlaceImageViewController.h */,
 				ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */,
 				ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */,
 				ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		ADA2195E1962464C007050C1 /* MPSkewed */ = {
-			isa = PBXGroup;
-			children = (
-				ADA2195F1962464C007050C1 /* MPSkewedCell.h */,
-				ADA219601962464C007050C1 /* MPSkewedCell.m */,
-				ADA219611962464C007050C1 /* MPSkewedParallaxLayout.h */,
-				ADA219621962464C007050C1 /* MPSkewedParallaxLayout.m */,
-				ADA219651962464C007050C1 /* UIView+Frame.h */,
-				ADA219661962464C007050C1 /* UIView+Frame.m */,
-			);
-			path = MPSkewed;
 			sourceTree = "<group>";
 		};
 		ADA597B219CCE40A00012489 /* Assets */ = {
@@ -436,10 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				AD65703319F82E6F00875ECF /* Fabric.framework */,
-				ADA597D519CCE8CD00012489 /* MapKit.framework */,
 				FD8D133315F4C04700A4C749 /* Crashlytics.framework */,
 				F98CF40EF0CE46A1BA959525 /* libPods.a */,
-				AD22A1BB19D368BF00D6695A /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -550,48 +433,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA597CF19CCE40A00012489 /* NotificationBackgroundWarning@2x.png in Resources */,
-				ADA218D219624235007050C1 /* AppIcon60x60@2x.png in Resources */,
-				ADA218D619624235007050C1 /* AppIcon76x76@2x.png in Resources */,
-				ADA218CB19624235007050C1 /* AppIcon40x40.png in Resources */,
 				ADA597D319CCE40A00012489 /* NotificationButtonBackground@2x.png in Resources */,
 				ADA219201962434E007050C1 /* Search_Params.plist in Resources */,
-				ADA218D719624235007050C1 /* iTunesArtwork.png in Resources */,
 				ADA218DA19624235007050C1 /* Default@2x.png in Resources */,
-				ADA218CE19624235007050C1 /* AppIcon50x50@2x.png in Resources */,
 				ADA597C919CCE40A00012489 /* NotificationBackgroundMessage@2x.png in Resources */,
 				ADA597C419CCE40A00012489 /* NotificationBackgroundError.png in Resources */,
-				ADDAE11619D6156200E1B08B /* AppIcon60x60@3x.png in Resources */,
 				ADA597CD19CCE40A00012489 /* NotificationBackgroundSuccessIcon@2x.png in Resources */,
 				ADA597C819CCE40A00012489 /* NotificationBackgroundMessage.png in Resources */,
 				ADA597D219CCE40A00012489 /* NotificationButtonBackground.png in Resources */,
 				ADA597CE19CCE40A00012489 /* NotificationBackgroundWarning.png in Resources */,
 				ADA218E219624235007050C1 /* Images.xcassets in Resources */,
-				ADA218D519624235007050C1 /* AppIcon76x76.png in Resources */,
-				ADA218D819624235007050C1 /* iTunesArtwork@2x.png in Resources */,
 				ADA597C619CCE40A00012489 /* NotificationBackgroundErrorIcon.png in Resources */,
-				ADDAE11419D6156200E1B08B /* AppIcon29x29@3x.png in Resources */,
-				ADA218D419624235007050C1 /* AppIcon72x72@2x.png in Resources */,
-				ADA218DD19624235007050C1 /* gplaypattern@2X.png in Resources */,
 				ADA597D419CCE40A00012489 /* TSMessagesDefaultDesign.json in Resources */,
 				ADA597D019CCE40A00012489 /* NotificationBackgroundWarningIcon.png in Resources */,
 				ADA597D119CCE40A00012489 /* NotificationBackgroundWarningIcon@2x.png in Resources */,
 				ADA218C619624235007050C1 /* MainStoryboard.storyboard in Resources */,
-				ADDAE11519D6156200E1B08B /* AppIcon40x40@3x.png in Resources */,
-				ADA218DC19624235007050C1 /* gplaypattern.png in Resources */,
 				ADA218D919624235007050C1 /* Default-568h@2x.png in Resources */,
-				ADA218C919624235007050C1 /* AppIcon29x29.png in Resources */,
-				ADA218D019624235007050C1 /* AppIcon57x57@2x.png in Resources */,
 				ADA597C719CCE40A00012489 /* NotificationBackgroundErrorIcon@2x.png in Resources */,
-				ADA218D319624235007050C1 /* AppIcon72x72.png in Resources */,
 				ADA597CB19CCE40A00012489 /* NotificationBackgroundSuccess@2x.png in Resources */,
-				ADA218CC19624235007050C1 /* AppIcon40x40@2x.png in Resources */,
-				ADA218CD19624235007050C1 /* AppIcon50x50.png in Resources */,
 				ADA597C519CCE40A00012489 /* NotificationBackgroundError@2x.png in Resources */,
 				ADA219231962436D007050C1 /* Location.gpx in Resources */,
 				ADA597CA19CCE40A00012489 /* NotificationBackgroundSuccess.png in Resources */,
-				ADA218CA19624235007050C1 /* AppIcon29x29@2x.png in Resources */,
-				ADA218D119624235007050C1 /* AppIcon60x60.png in Resources */,
-				ADA218CF19624235007050C1 /* AppIcon57x57.png in Resources */,
 				ADA597CC19CCE40A00012489 /* NotificationBackgroundSuccessIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,15 +506,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADA2194819624481007050C1 /* SGAppDelegate.m in Sources */,
-				ADA2194C19624481007050C1 /* SGPlaceDetailsViewController.m in Sources */,
 				ADA2194D19624481007050C1 /* SGPlaceImageViewController.m in Sources */,
-				ADA2194719624481007050C1 /* SGAnnotation.m in Sources */,
-				ADA2196A1962464C007050C1 /* UIView+Frame.m in Sources */,
-				ADA219671962464C007050C1 /* MPSkewedCell.m in Sources */,
 				ADA2191F1962434E007050C1 /* main.m in Sources */,
 				ADA2194B19624481007050C1 /* SGMapViewController.m in Sources */,
-				ADA2194A19624481007050C1 /* SGDetailCardViewController.m in Sources */,
-				ADA219681962464C007050C1 /* MPSkewedParallaxLayout.m in Sources */,
 				ADA21951196245A0007050C1 /* SGMenuCollectionViewController.m in Sources */,
 				ADA2194919624481007050C1 /* SGNetworkManager.m in Sources */,
 			);
@@ -914,8 +770,8 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Terrific;
-				PROVISIONING_PROFILE = "544EC413-FF8D-4602-9A36-D36A9AB4BB60";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "544EC413-FF8D-4602-9A36-D36A9AB4BB60";
+				PROVISIONING_PROFILE = "0c85e8bd-0ed6-4cb3-a18a-6da154591769";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0c85e8bd-0ed6-4cb3-a18a-6da154591769";
 				SWIFT_OBJC_BRIDGING_HEADER = "Terrific-Nearby/Terrific-Bridging-Header.h";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;

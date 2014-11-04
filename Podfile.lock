@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Google-Maps-iOS-SDK (1.8.1)
   - GroundControl (2.1.0):
     - AFNetworking (~> 2.2)
   - HexColors (2.2.1)
@@ -32,8 +31,6 @@ PODS:
   - UIColor-HexString (1.1.0)
 
 DEPENDENCIES:
-  - AFNetworking
-  - Google-Maps-iOS-SDK
   - GroundControl
   - MBLocationManager
   - Mixpanel
@@ -43,7 +40,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
-  Google-Maps-iOS-SDK: 4fe35d952dbd1e4dacfcfa178e9cce2f06d67ecc
   GroundControl: 2f9024230e41ff5e5a8e3ca060ed1b74883bdd1a
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   MBLocationManager: 82e477b28b7a748a63fb12f8211e89aa79be1b81

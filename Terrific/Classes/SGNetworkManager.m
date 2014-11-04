@@ -7,32 +7,21 @@
 //
 
 #import "SGNetworkManager.h"
-#import "SGPlace.h"
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
 @import MapKit;
 
 static SGNetworkManager *sharedManager;
 
 @interface SGNetworkManager ()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *requestOperationManager;
-
 @end
 
 @implementation SGNetworkManager
-
-static NSString *PUBLISHER_ID = @"test";
-static NSString *HOST = @"http://api.citygridmedia.com";
-static NSString *LATLON_PATH = @"/content/places/v2/search/latlon";
 
 + (SGNetworkManager *) sharedManager
 {
     if (sharedManager == nil)
     {
         sharedManager = [[SGNetworkManager alloc] init];
-        sharedManager.requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:HOST]];
-        sharedManager.requestOperationManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        sharedManager.requestOperationManager.responseSerializer = [AFJSONResponseSerializer serializer];
     }
     return sharedManager;
 }
