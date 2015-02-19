@@ -110,9 +110,7 @@
 		ADA2193619624481007050C1 /* SGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGNetworkManager.m; sourceTree = "<group>"; };
 		ADA2193A19624481007050C1 /* SGMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMapViewController.h; sourceTree = "<group>"; };
 		ADA2193B19624481007050C1 /* SGMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMapViewController.m; sourceTree = "<group>"; };
-		ADA2193C19624481007050C1 /* SGPlaceDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGPlaceDetailsViewController.h; sourceTree = "<group>"; };
 		ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGPlaceImageViewController.m; sourceTree = "<group>"; };
-		ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMenuCollectionViewController.h; sourceTree = "<group>"; };
 		ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMenuCollectionViewController.m; sourceTree = "<group>"; };
 		ADA597B319CCE40A00012489 /* NotificationBackgroundError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationBackgroundError.png; sourceTree = "<group>"; };
 		ADA597B419CCE40A00012489 /* NotificationBackgroundError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationBackgroundError@2x.png"; sourceTree = "<group>"; };
@@ -131,6 +129,7 @@
 		ADA597C119CCE40A00012489 /* NotificationButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NotificationButtonBackground.png; sourceTree = "<group>"; };
 		ADA597C219CCE40A00012489 /* NotificationButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NotificationButtonBackground@2x.png"; sourceTree = "<group>"; };
 		ADA597C319CCE40A00012489 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		ADE2FC7B1A215E30004BC7A3 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		F8817065BDBC5AC8F44E9388 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F98CF40EF0CE46A1BA959525 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD8D133315F4C04700A4C749 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -262,9 +261,7 @@
 			children = (
 				ADA2193A19624481007050C1 /* SGMapViewController.h */,
 				ADA2193B19624481007050C1 /* SGMapViewController.m */,
-				ADA2193C19624481007050C1 /* SGPlaceDetailsViewController.h */,
 				ADA2193F19624481007050C1 /* SGPlaceImageViewController.m */,
-				ADA2194F196245A0007050C1 /* SGMenuCollectionViewController.h */,
 				ADA21950196245A0007050C1 /* SGMenuCollectionViewController.m */,
 			);
 			path = ViewControllers;
@@ -323,6 +320,7 @@
 				AD65703319F82E6F00875ECF /* Fabric.framework */,
 				FD8D133315F4C04700A4C749 /* Crashlytics.framework */,
 				F98CF40EF0CE46A1BA959525 /* libPods.a */,
+				ADE2FC7B1A215E30004BC7A3 /* WatchKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -9,6 +9,7 @@
 #import "SGMapViewController.h"
 #import "SGNetworkManager.h"
 #import "SGConstants.h"
+#import "SVPulsingAnnotationView.h"
 #import <TSMessages/TSMessageView.h>
 #import <MBLocationManager/MBLocationManager.h>
 
@@ -23,31 +24,22 @@
 
 @implementation SGMapViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-        [TSMessage setDefaultViewController:self];
-    }
-    return self;
-}
-
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    [TSMessage setDefaultViewController:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [[MBLocationManager sharedManager].locationManager startUpdatingLocation];
-
+    
     [self.mapView setShowsUserLocation:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.currentCategory = [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"category"];
     self.title = self.currentCategory;
-
+    
     self.authStatus = [CLLocationManager authorizationStatus];
 }
 
@@ -57,10 +49,9 @@
     if ((_authStatus == kCLAuthorizationStatusAuthorizedAlways || _authStatus == kCLAuthorizationStatusAuthorizedWhenInUse) && self.mapView.userLocation.coordinate.latitude != 0.0f && self.mapView.userLocation.coordinate.longitude != 0.0f )
     {
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
-        
         [self performSearch];
     }
-    else if(_authStatus == kCLAuthorizationStatusDenied || _authStatus == kCLAuthorizationStatusNotDetermined || _authStatus == kCLAuthorizationStatusRestricted)
+    else if (_authStatus == kCLAuthorizationStatusDenied || _authStatus == kCLAuthorizationStatusNotDetermined || _authStatus == kCLAuthorizationStatusRestricted)
     {
         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Terrific in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
@@ -74,6 +65,7 @@
 
 - (void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     for (id <MKAnnotation> annotation in self.mapView.annotations)
     {
         if (![annotation isKindOfClass:[MKUserLocation class]])
@@ -83,7 +75,8 @@
     }
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+- (void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(userLocation.coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
     [self performSearch];
 }
@@ -96,13 +89,13 @@
     }
     
     CLLocation *currentLocation = [[SGAppDelegate sharedAppDelegate] currentLocation];
-    NSArray *locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ? [NSNumber numberWithFloat:currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat], [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ? [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
+    NSArray *locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:currentLocation.coordinate.latitude] ? [NSNumber numberWithFloat : currentLocation.coordinate.latitude]:[NSNumber numberWithFloat:kDefaultCurrentLat], [NSNumber numberWithFloat:[self.mapView userLocation].coordinate.longitude] ? [NSNumber numberWithFloat : [self.mapView userLocation].coordinate.longitude]:[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     
     //  NSArray * locationArray = [NSArray arrayWithObjects:[NSNumber numberWithFloat:kDefaultCurrentLat],[NSNumber numberWithFloat:kDefaultCurrentLng], nil];
     int numOfResults = 6;
     
     [[SGNetworkManager sharedManager] categorySearchWithCategory:self.currentCategory locationArray:locationArray resultCount:numOfResults success: ^(NSArray *placeArray) {
-        [[Mixpanel sharedInstance] track:@"category_search" properties:@{@"location":locationArray, @"category": self.currentCategory}];
+        [[Mixpanel sharedInstance] track:@"category_search" properties:@{ @"location":locationArray, @"category": self.currentCategory }];
         self.currentPlaces = [placeArray mutableCopy];
         
         
@@ -125,9 +118,28 @@
     }];
 }
 
-- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation> )annotation
+- (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    return nil;
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+    {
+        return nil;  // return nil to use default blue dot view
+        
+    }
+    static NSString *identifier = @"currentLocation";
+    SVPulsingAnnotationView *pulsingView = (SVPulsingAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    
+    if (pulsingView == nil)
+    {
+        pulsingView = [[SVPulsingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+        pulsingView.annotationColor = [UIColor colorWithRed:0.831 green:0.592 blue:0.965 alpha:1.000];
+    }
+    
+    return pulsingView;
+}
+
+- (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    
 }
 
 @end

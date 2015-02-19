@@ -38,14 +38,14 @@
 - (BOOL) application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    #if TARGET_IPHONE_SIMULATOR || DEBUG
-
-    #else
-//        [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
-        [Fabric with:@[CrashlyticsKit]];
-        [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
-        [[Mixpanel sharedInstance] track:@"Launched"];
-    #endif
+#if TARGET_IPHONE_SIMULATOR || DEBUG
+    
+#else
+    //        [GMSServices provideAPIKey:@"AIzaSyDogBo6yZiDAZOAUVQTfktm2X00JuNR1Ac"];
+    [Fabric with:@[CrashlyticsKit]];
+    [Mixpanel sharedInstanceWithToken:@"8ed4b958846a5a4f2336e6ed19687a20"];
+    [[Mixpanel sharedInstance] track:@"Launched"];
+#endif
     
     if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"])
     {
@@ -62,11 +62,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                              distanceFilter:kCLDistanceFilterNone
-                                                   accuracy:kCLLocationAccuracyNearestTenMeters];
+                                                   accuracy:kCLLocationAccuracyHundredMeters];
     
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
-
+    
     return YES;
 }
 
@@ -80,16 +80,22 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[Mixpanel sharedInstance] track:@"Brought to foreground"];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
-    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
         [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
-
+        
         [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                                  distanceFilter:kCLDistanceFilterNone
                                                        accuracy:kCLLocationAccuracyNearestTenMeters];
-    } else if (status == kCLAuthorizationStatusDenied) {
+    }
+    else if (status == kCLAuthorizationStatusDenied)
+    {
         [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
-    } else {
+    }
+    else
+    {
         [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     }
 }

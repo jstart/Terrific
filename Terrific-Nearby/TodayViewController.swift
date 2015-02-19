@@ -13,10 +13,11 @@ import MapKit
 import Fabric
 import Crashlytics
 
-class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate {
+class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     var manager = CLLocationManager()
     var places = [MKMapItem]()
     var defaults = NSUserDefaults(suiteName:"group.truman.Terrific")!
+    @IBOutlet weak var tableView: UITableView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,7 +30,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     override func viewDidLoad() {
         super.viewDidLoad()
         Fabric.with([Crashlytics()])
-        manager.desiredAccuracy = 50.0
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
@@ -41,14 +42,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         if (defaults.objectForKey("nearby-places") != nil) {
-            var places = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as NSData) as [MKMapItem]
+            var newPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as NSData) as [MKMapItem]
         
             if (places.count > 0){
                 for view in self.view.subviews {
                     view.removeFromSuperview()
                 }
-                self.places = places
-                self.updateWithPlaces(places, animated: false)
+                places = newPlaces
+                updateWithPlaces(places, animated: false)
             }
         }
     }
@@ -75,19 +76,19 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             SGNetworkManager.sharedManager().categorySearchWithCategory("eat", locationArray: locationArray, resultCount: resultCount, success: { places in
                 //Fade out current state
                 if (!self.isEqualToCachedPlaces(places as [MKMapItem])){
-                    UIView.animateWithDuration(0.5, animations: {
-                        for view in self.view.subviews {
-                            for subview in view.subviews as [UIView] {
-                                for subsubview in subview.subviews as [UIView] {
-                                    subsubview.alpha = 0.0
-                                }
-                            }
-                        }
-                        }, completion:{ _ in
-                            //Remove faded out views
-                            for view in self.view.subviews {
-                                view.removeFromSuperview()
-                            }
+//                    UIView.animateWithDuration(0.5, animations: {
+//                        for view in self.view.subviews {
+//                            for subview in view.subviews as [UIView] {
+//                                for subsubview in subview.subviews as [UIView] {
+//                                    subsubview.alpha = 0.0
+//                                }
+//                            }
+//                        }
+//                        }, completion:{ _ in
+//                            //Remove faded out views
+//                            for view in self.view.subviews {
+//                                view.removeFromSuperview()
+//                            }
                             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
                             var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
                             self.defaults.setObject(placesData, forKey: "nearby-places")
@@ -96,7 +97,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
                             //Add views with new state and fade in
                             self.updateWithPlaces(self.places, animated: true)
                             completionHandler(NCUpdateResult.NewData)
-                    })
+//                    })
                 }
             }, failure: { error in
                     self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
@@ -116,42 +117,42 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         var fontSize = self.view.traitCollection.verticalSizeClass == .Regular ? 24.0 : 18.0 as CGFloat
         var padding = self.view.traitCollection.verticalSizeClass == .Regular ? 15.0 : 10.0 as CGFloat
 
-        self.preferredContentSize = CGSizeMake(self.view.frame.size.width, padding + (itemHeight * CGFloat(places.count)))
-        
-        for index in 0..<places.count{
-            var frame = CGRectMake(0, 0, self.view.frame.size.width, itemHeight)
-            var button = UIButton.buttonWithType(.System) as UIButton
-            button.frame = frame
-            button.contentHorizontalAlignment = .Left
-            if (animated){
-                button.alpha = 0.0
-            }
-            
-            var visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
-            visualEffectView.frame = button.bounds
-            visualEffectView.frame.origin.y = padding + (itemHeight * CGFloat(index))
-            visualEffectView.contentView.addSubview(button)
-            
-            var place = places[index] as MKMapItem
-            button.setTitle(place.name, forState: .Normal)
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            button.titleLabel!.font = UIFont.systemFontOfSize(fontSize)
-            button.tag = index
-            button.addTarget(self, action: "openInMaps:", forControlEvents: .TouchUpInside)
-            
-            self.view.addSubview(visualEffectView)
-        }
-        if (animated){
-            UIView.animateWithDuration(0.5, animations: {
-                for view in self.view.subviews {
-                    for subview in view.subviews as [UIView] {
-                        for subsubview in subview.subviews as [UIView] {
-                            subsubview.alpha = 1.0
-                        }
-                    }
-                }
-            })
-        }
+//        self.preferredContentSize = CGSizeMake(self.view.frame.size.width, padding + (itemHeight * CGFloat(places.count)))
+        tableView.reloadData()
+//        for index in 0..<places.count{
+//            var frame = CGRectMake(0, 0, self.view.frame.size.width, itemHeight)
+//            var button = UIButton.buttonWithType(.System) as UIButton
+//            button.frame = frame
+//            button.contentHorizontalAlignment = .Left
+//            if (animated){
+//                button.alpha = 0.0
+//            }
+//            
+//            var visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
+//            visualEffectView.frame = button.bounds
+//            visualEffectView.frame.origin.y = padding + (itemHeight * CGFloat(index))
+//            visualEffectView.contentView.addSubview(button)
+//            
+//            var place = places[index] as MKMapItem
+//            button.setTitle(place.name, forState: .Normal)
+//            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+//            button.titleLabel!.font = UIFont.systemFontOfSize(fontSize)
+//            button.tag = index
+//            button.addTarget(self, action: "openInMaps:", forControlEvents: .TouchUpInside)
+//            
+//            self.view.addSubview(visualEffectView)
+//        }
+//        if (animated){
+//            UIView.animateWithDuration(0.5, animations: {
+//                for view in self.view.subviews {
+//                    for subview in view.subviews as [UIView] {
+//                        for subsubview in subview.subviews as [UIView] {
+//                            subsubview.alpha = 1.0
+//                        }
+//                    }
+//                }
+//            })
+//        }
     }
     
     func openInMaps(sender: UIButton) {
@@ -181,4 +182,25 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         return true
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return places.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var place = places[indexPath.row]
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        cell.textLabel?.text = place.name
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (!places[indexPath.row].openInMapsWithLaunchOptions(nil)){
+            //TODO: Handle tap when screen is locked
+        }
+    }
 }

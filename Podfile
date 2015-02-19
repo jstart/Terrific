@@ -5,8 +5,8 @@ platform :ios, "8.0"
 link_with ['Nearby-Places', 'Terrific']
 
 pod 'MBLocationManager'
-pod 'MPFlipViewController'
 pod 'TSMessages'
+pod 'SVPulsingAnnotationView', :head
 pod 'Mixpanel'
 
 pod 'GroundControl'
