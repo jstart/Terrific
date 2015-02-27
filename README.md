@@ -13,3 +13,7 @@ Business and Presentation: Peter Kovach (http://www.linkedin.com/pub/peter-kovac
 
 <blockquote class="twitter-tweet" lang="en"><p>Winners of <a href="https://twitter.com/hashtag/citygridhackathonla?src=hash">#citygridhackathonla</a> <a href="https://twitter.com/jrozner">@jrozner</a> <a href="https://twitter.com/JStart">@jstart</a> <a href="https://twitter.com/ProPJK007">@propjk007</a> you guys rock!!! Had an awesome weekend workin with ya! <a href="http://t.co/XBj3PBVg">pic.twitter.com/XBj3PBVg</a></p>&mdash; Hana Truman (@hanatruman) <a href="https://twitter.com/hanatruman/status/196778445403996160">April 30, 2012</a></blockquote>
 ![](https://pbs.twimg.com/media/ArsY9BoCQAM0a-3.jpg)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jstart/terrific/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
