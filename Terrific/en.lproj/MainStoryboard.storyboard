@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZTb-gh-xb1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZTb-gh-xb1">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -22,53 +22,80 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blD-pN-wla" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-566" y="125"/>
+            <point key="canvasLocation" x="-1061.25" y="156.25"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="yjg-in-low">
             <objects>
                 <viewController storyboardIdentifier="map" id="BIf-ar-Snl" customClass="SGMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7AF-G5-42h"/>
+                        <viewControllerLayoutGuide type="bottom" id="LTh-cD-Af9"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6Uv-7S-ch1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="3Qk-J6-ni4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Qk-J6-ni4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                 <connections>
                                     <outlet property="delegate" destination="BIf-ar-Snl" id="hnB-h5-qzn"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J8d-pL-jlp">
-                                <rect key="frame" x="77" y="528" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Eat">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oeA-b3-kIV">
-                                <rect key="frame" x="115" y="528" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Shop">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hbu-GQ-S6W">
-                                <rect key="frame" x="161" y="528" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCm-OJ-bCw">
-                                <rect key="frame" x="199" y="528" width="44" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Watch">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVW-GC-R0J">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="LDe-bI-hpl"/>
+                                    <barButtonItem style="plain" id="Zui-JK-FdQ">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J8d-pL-jlp">
+                                            <rect key="frame" x="77" y="528" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Eat">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="6ZA-Ml-BM5">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oeA-b3-kIV">
+                                            <rect key="frame" x="115" y="528" width="37" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Shop">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="Tio-x9-re7">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hbu-GQ-S6W">
+                                            <rect key="frame" x="161" y="528" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Play">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="6aY-uW-Qck">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lCm-OJ-bCw">
+                                            <rect key="frame" x="199" y="528" width="44" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Watch">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="6D9-au-kXb"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="3Qk-J6-ni4" secondAttribute="centerX" id="6Hc-CQ-snK"/>
+                            <constraint firstItem="pVW-GC-R0J" firstAttribute="top" secondItem="3Qk-J6-ni4" secondAttribute="bottom" id="8yP-r1-Jgm"/>
+                            <constraint firstItem="3Qk-J6-ni4" firstAttribute="top" secondItem="7AF-G5-42h" secondAttribute="bottom" id="EqG-pZ-bAx"/>
+                            <constraint firstItem="3Qk-J6-ni4" firstAttribute="width" secondItem="6Uv-7S-ch1" secondAttribute="width" id="NnU-VN-VFj"/>
+                            <constraint firstItem="pVW-GC-R0J" firstAttribute="width" secondItem="6Uv-7S-ch1" secondAttribute="width" id="brd-aQ-aAM"/>
+                            <constraint firstItem="LTh-cD-Af9" firstAttribute="top" secondItem="pVW-GC-R0J" secondAttribute="bottom" id="vIW-zC-RP2"/>
+                            <constraint firstAttribute="centerX" secondItem="pVW-GC-R0J" secondAttribute="centerX" id="zTg-L4-4Z2"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rJQ-MD-M1A"/>
                     <connections>
@@ -77,12 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uMR-O0-gmR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-164" y="125"/>
+            <point key="canvasLocation" x="-657" y="156"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
