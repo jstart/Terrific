@@ -9,6 +9,7 @@
 #import "SGAppDelegate.h"
 
 @import AdSupport;
+@import MapKit;
 
 #import <Crashlytics/Crashlytics.h>
 #import <Fabric/Fabric.h>
@@ -30,14 +31,12 @@
 
 @synthesize window = _window;
 
-+ (SGAppDelegate *) sharedAppDelegate
-{
-    return (SGAppDelegate *) [[UIApplication sharedApplication] delegate];
++ (SGAppDelegate *)sharedAppDelegate {
+    return (SGAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-- (BOOL) application:(UIApplication *)application
-didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)              application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #if TARGET_IPHONE_SIMULATOR || DEBUG
     
 #else
@@ -47,8 +46,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[Mixpanel sharedInstance] track:@"Launched"];
 #endif
     
-    if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"])
-    {
+    if (![[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] objectForKey:@"eat"]) {
         NSDictionary *defaultsDictionary = [NSDictionary dictionaryWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Search_Params.plist"]];
         [[[NSUserDefaults alloc] initWithSuiteName:@"group.truman.Terrific"] registerDefaults:defaultsDictionary];
     }
@@ -70,32 +68,32 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     return YES;
 }
 
-- (void) applicationDidEnterBackground:(UIApplication *)application
-{
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     [[Mixpanel sharedInstance] track:@"Sent to Background"];
 }
 
-- (void) applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     [[Mixpanel sharedInstance] track:@"Brought to foreground"];
 }
 
-- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    if (status == kCLAuthorizationStatusAuthorizedWhenInUse)
-    {
+- (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply {
+    NSData *mapItemData = userInfo[@"mapItem"];
+    MKMapItem *mapItem = [NSKeyedUnarchiver unarchiveObjectWithData:mapItemData];
+    [mapItem openInMapsWithLaunchOptions:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [[NCWidgetController widgetController] setHasContent:YES forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
         
         [[MBLocationManager sharedManager] startLocationUpdates:kMBLocationManagerModeStandard
                                                  distanceFilter:kCLDistanceFilterNone
                                                        accuracy:kCLLocationAccuracyNearestTenMeters];
     }
-    else if (status == kCLAuthorizationStatusDenied)
-    {
+    else if (status == kCLAuthorizationStatusDenied) {
         [[NCWidgetController widgetController] setHasContent:NO forWidgetWithBundleIdentifier:@"spotngo.Nearby-Places"];
     }
-    else
-    {
+    else {
         [[MBLocationManager sharedManager].locationManager requestWhenInUseAuthorization];
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Terrific_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <map width="1" height="100" alignment="left" id="R1z-PX-CYo"/>
+                        <table alignment="left" id="QEn-eA-zZR">
+                            <items>
+                                <tableRow identifier="Default" id="MKQ-tq-QfX" customClass="SGPlaceRowController" customModule="Terrific_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="68.5" alignment="left" layout="vertical" id="lnV-p4-4FI">
+                                        <items>
+                                            <label width="136" alignment="left" text="Label" id="4rj-SD-DnH"/>
+                                            <label width="128" alignment="left" text="Label" id="JIl-X8-YLu"/>
+                                            <button width="1" alignment="left" title="Directions" id="rJ2-dm-KUK">
+                                                <connections>
+                                                    <action selector="button" destination="MKQ-tq-QfX" id="YQ2-mq-XQA"/>
+                                                </connections>
+                                            </button>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="name" destination="4rj-SD-DnH" id="1Ua-uL-wdw"/>
+                                        <outlet property="subtitle" destination="JIl-X8-YLu" id="Ttz-j6-jbP"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="3fs-lc-Ct0">
+                        <items>
+                            <menuItem title="Eat" icon="accept" id="f7A-j7-96Q">
+                                <connections>
+                                    <action selector="eat" destination="AgC-eL-Hgc" id="hXV-zU-dDQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Shop" icon="accept" id="XOx-55-fNx">
+                                <connections>
+                                    <action selector="shop" destination="AgC-eL-Hgc" id="qBe-gt-A0c"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Watch" icon="accept" id="HOW-EX-n7F">
+                                <connections>
+                                    <action selector="watch" destination="AgC-eL-Hgc" id="DjH-fp-G9S"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Play" icon="accept" id="dVo-Ab-FGS">
+                                <connections>
+                                    <action selector="play" destination="AgC-eL-Hgc" id="hvG-uF-K4t"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="map" destination="R1z-PX-CYo" id="IQT-KC-uhx"/>
+                        <outlet property="table" destination="QEn-eA-zZR" id="mQx-Wo-E5v"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="164" y="228"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="rjY-Ar-IMT">
+            <objects>
+                <glanceController spacing="0.0" id="Sv0-Ai-Zie" customClass="GlanceController" customModule="Terrific_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="gv7-I2-MZq"/>
+                        <group alignment="left" id="eew-Gs-W6Y"/>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="164" y="514"/>
+        </scene>
+    </scenes>
+</document>

@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         super.awakeFromNib()
         if (defaults.objectForKey("eat") == nil) {
             var defaultsDictionary = NSDictionary(contentsOfFile:NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Search_Params.plist"))!
-            defaults.registerDefaults(defaultsDictionary)
+            defaults.registerDefaults(defaultsDictionary as [NSObject : AnyObject])
         }
     }
     
@@ -42,7 +42,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         if (defaults.objectForKey("nearby-places") != nil) {
-            var newPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as NSData) as [MKMapItem]
+            var newPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as! NSData) as! [MKMapItem]
         
             if (places.count > 0){
                 for view in self.view.subviews {
@@ -73,9 +73,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
 
             var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
-            SGNetworkManager.sharedManager().categorySearchWithCategory("eat", locationArray: locationArray, resultCount: resultCount, success: { places in
+            SGNetworkManager.sharedManager().categorySearchWithCategory("eat", locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
                 //Fade out current state
-                if (!self.isEqualToCachedPlaces(places as [MKMapItem])){
+                if (!self.isEqualToCachedPlaces(places as! [MKMapItem])){
 //                    UIView.animateWithDuration(0.5, animations: {
 //                        for view in self.view.subviews {
 //                            for subview in view.subviews as [UIView] {
@@ -93,7 +93,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
                             var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
                             self.defaults.setObject(placesData, forKey: "nearby-places")
                             
-                            self.places = places as [MKMapItem]
+                            self.places = places as! [MKMapItem]
                             //Add views with new state and fade in
                             self.updateWithPlaces(self.places, animated: true)
                             completionHandler(NCUpdateResult.NewData)
@@ -192,7 +192,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var place = places[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
         cell.textLabel?.text = place.name
         cell.textLabel?.textColor = UIColor.whiteColor()
         return cell
