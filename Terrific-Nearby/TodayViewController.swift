@@ -17,6 +17,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     var manager = CLLocationManager()
     var places = [MKMapItem]()
     var defaults = NSUserDefaults(suiteName:"group.truman.Terrific")!
+    var category = "eat"
     @IBOutlet weak var tableView: UITableView!
     
     override func awakeFromNib() {
@@ -64,6 +65,45 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
 //        })
     }
     
+    @IBAction func segmentedValueChanged(sender: UISegmentedControl) {
+        switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.category = "eat"
+            
+        case 1:
+            self.category = "shop"
+
+        case 2:
+            self.category = "watch"
+
+        case 3:
+            self.category = "play"
+            
+        default:
+            self.category = "eat"
+        }
+        var currentLocation = manager.location
+        var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
+        
+        var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
+        SGNetworkManager.sharedManager().categorySearchWithCategory(self.category, locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
+            //Fade out current state
+            if (!self.isEqualToCachedPlaces(places as! [MKMapItem])){
+                
+                NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
+                var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
+                self.defaults.setObject(placesData, forKey: "nearby-places")
+                
+                self.places = places as! [MKMapItem]
+                //Add views with new state and fade in
+                self.updateWithPlaces(self.places, animated: true)
+            }
+            }, failure: { error in
+                self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
+        })
+
+    }
+    
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
@@ -71,35 +111,22 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
             var currentLocation = manager.location
             var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
-
+            
             var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
-            SGNetworkManager.sharedManager().categorySearchWithCategory("eat", locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
+            SGNetworkManager.sharedManager().categorySearchWithCategory(self.category, locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
                 //Fade out current state
                 if (!self.isEqualToCachedPlaces(places as! [MKMapItem])){
-//                    UIView.animateWithDuration(0.5, animations: {
-//                        for view in self.view.subviews {
-//                            for subview in view.subviews as [UIView] {
-//                                for subsubview in subview.subviews as [UIView] {
-//                                    subsubview.alpha = 0.0
-//                                }
-//                            }
-//                        }
-//                        }, completion:{ _ in
-//                            //Remove faded out views
-//                            for view in self.view.subviews {
-//                                view.removeFromSuperview()
-//                            }
-                            NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
-                            var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
-                            self.defaults.setObject(placesData, forKey: "nearby-places")
-                            
-                            self.places = places as! [MKMapItem]
-                            //Add views with new state and fade in
-                            self.updateWithPlaces(self.places, animated: true)
-                            completionHandler(NCUpdateResult.NewData)
-//                    })
+
+                    NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
+                    var placesData = NSKeyedArchiver.archivedDataWithRootObject(NSArray(array:places))
+                    self.defaults.setObject(placesData, forKey: "nearby-places")
+                    
+                    self.places = places as! [MKMapItem]
+                    //Add views with new state and fade in
+                    self.updateWithPlaces(self.places, animated: true)
+                    completionHandler(NCUpdateResult.NewData)
                 }
-            }, failure: { error in
+                }, failure: { error in
                     self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
                     completionHandler(NCUpdateResult.NoData)
             })
@@ -107,6 +134,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             self.preferredContentSize = CGSizeMake(self.view.frame.size.width, 0)
             completionHandler(NCUpdateResult.NoData)
         }
+
     }
     
     func updateWithPlaces(places: [MKMapItem], animated: Bool){
@@ -116,43 +144,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         var itemHeight = self.view.traitCollection.verticalSizeClass == .Regular ? 30.0 : 25.0 as CGFloat
         var fontSize = self.view.traitCollection.verticalSizeClass == .Regular ? 24.0 : 18.0 as CGFloat
         var padding = self.view.traitCollection.verticalSizeClass == .Regular ? 15.0 : 10.0 as CGFloat
-
-//        self.preferredContentSize = CGSizeMake(self.view.frame.size.width, padding + (itemHeight * CGFloat(places.count)))
         tableView.reloadData()
-//        for index in 0..<places.count{
-//            var frame = CGRectMake(0, 0, self.view.frame.size.width, itemHeight)
-//            var button = UIButton.buttonWithType(.System) as UIButton
-//            button.frame = frame
-//            button.contentHorizontalAlignment = .Left
-//            if (animated){
-//                button.alpha = 0.0
-//            }
-//            
-//            var visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect.notificationCenterVibrancyEffect())
-//            visualEffectView.frame = button.bounds
-//            visualEffectView.frame.origin.y = padding + (itemHeight * CGFloat(index))
-//            visualEffectView.contentView.addSubview(button)
-//            
-//            var place = places[index] as MKMapItem
-//            button.setTitle(place.name, forState: .Normal)
-//            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-//            button.titleLabel!.font = UIFont.systemFontOfSize(fontSize)
-//            button.tag = index
-//            button.addTarget(self, action: "openInMaps:", forControlEvents: .TouchUpInside)
-//            
-//            self.view.addSubview(visualEffectView)
-//        }
-//        if (animated){
-//            UIView.animateWithDuration(0.5, animations: {
-//                for view in self.view.subviews {
-//                    for subview in view.subviews as [UIView] {
-//                        for subsubview in subview.subviews as [UIView] {
-//                            subsubview.alpha = 1.0
-//                        }
-//                    }
-//                }
-//            })
-//        }
     }
     
     func openInMaps(sender: UIButton) {

@@ -47,7 +47,7 @@
         [self.mapView setRegion:MKCoordinateRegionMakeWithDistance([self.mapView userLocation].coordinate, kDefaultZoomToStreetLatMeters, kDefaultZoomToStreetLonMeters) animated:YES];
         [self performSearch];
     }
-    else if (_authStatus == kCLAuthorizationStatusDenied || _authStatus == kCLAuthorizationStatusNotDetermined || _authStatus == kCLAuthorizationStatusRestricted) {
+    else if (_authStatus == kCLAuthorizationStatusDenied || _authStatus == kCLAuthorizationStatusRestricted) {
         [TSMessage showNotificationInViewController:self title:@"Location Disabled" subtitle:@"You can enable location for Terrific in your iPhone settings under \"Location Services\"." type:TSMessageNotificationTypeError duration:1.5 canBeDismissedByUser:YES];
     }
 }

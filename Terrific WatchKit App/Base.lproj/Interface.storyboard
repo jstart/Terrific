@@ -35,22 +35,22 @@
                     </items>
                     <menu key="menu" id="3fs-lc-Ct0">
                         <items>
-                            <menuItem title="Eat" icon="accept" id="f7A-j7-96Q">
+                            <menuItem title="Eat" icon="info" id="f7A-j7-96Q">
                                 <connections>
                                     <action selector="eat" destination="AgC-eL-Hgc" id="hXV-zU-dDQ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Shop" icon="accept" id="XOx-55-fNx">
+                            <menuItem title="Shop" icon="info" id="XOx-55-fNx">
                                 <connections>
                                     <action selector="shop" destination="AgC-eL-Hgc" id="qBe-gt-A0c"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Watch" icon="accept" id="HOW-EX-n7F">
+                            <menuItem title="Watch" icon="info" id="HOW-EX-n7F">
                                 <connections>
                                     <action selector="watch" destination="AgC-eL-Hgc" id="DjH-fp-G9S"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Play" icon="accept" id="dVo-Ab-FGS">
+                            <menuItem title="Play" icon="info" id="dVo-Ab-FGS">
                                 <connections>
                                     <action selector="play" destination="AgC-eL-Hgc" id="hvG-uF-K4t"/>
                                 </connections>
