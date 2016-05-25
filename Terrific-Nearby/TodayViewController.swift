@@ -23,8 +23,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     override func awakeFromNib() {
         super.awakeFromNib()
         if (defaults.objectForKey("eat") == nil) {
-            var defaultsDictionary = NSDictionary(contentsOfFile:NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Search_Params.plist"))!
-            defaults.registerDefaults(defaultsDictionary as [NSObject : AnyObject])
+            let defaultsDictionary = NSDictionary(contentsOfFile:(NSBundle.mainBundle().bundlePath as NSString).stringByAppendingPathComponent("Search_Params.plist"))!
+            defaults.registerDefaults(defaultsDictionary as! [String : AnyObject])
         }
     }
     
@@ -43,7 +43,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         if (defaults.objectForKey("nearby-places") != nil) {
-            var newPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as! NSData) as! [MKMapItem]
+            let newPlaces = NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey("nearby-places") as! NSData) as! [MKMapItem]
         
             if (places.count > 0){
                 for view in self.view.subviews {
@@ -83,7 +83,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             self.category = "eat"
         }
         var currentLocation = manager.location
-        var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
+        var locationArray = NSArray(objects: NSNumber(double: currentLocation!.coordinate.latitude), NSNumber(double:currentLocation!.coordinate.longitude));
         
         var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
         SGNetworkManager.sharedManager().categorySearchWithCategory(self.category, locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
@@ -104,13 +104,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
 
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         if manager.location != nil {
             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
             var currentLocation = manager.location
-            var locationArray = NSArray(objects: NSNumber(double: currentLocation.coordinate.latitude), NSNumber(double:currentLocation.coordinate.longitude));
+            var locationArray = NSArray(objects: NSNumber(double: currentLocation!.coordinate.latitude), NSNumber(double:currentLocation!.coordinate.longitude));
             
             var resultCount = self.view.traitCollection.verticalSizeClass == .Regular ? 6 : 4 as Int32
             SGNetworkManager.sharedManager().categorySearchWithCategory(self.category, locationArray: locationArray as [AnyObject], resultCount: resultCount, success: { places in
@@ -148,13 +148,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     }
     
     func openInMaps(sender: UIButton) {
-        var mapItem = self.places[sender.tag]
+        let mapItem = self.places[sender.tag]
         if (!mapItem.openInMapsWithLaunchOptions(nil)){
             //TODO: Handle tap when screen is locked
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         if (status == .AuthorizedWhenInUse){
             NCWidgetController.widgetController().setHasContent(true, forWidgetWithBundleIdentifier: "spotngo.Nearby-Places")
         }else if (status == .Denied || status == .Restricted){
@@ -184,7 +184,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var place = places[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as! UITableViewCell
         cell.textLabel?.text = place.name
         cell.textLabel?.textColor = UIColor.whiteColor()
         return cell

@@ -10,18 +10,8 @@
 		04BA76BC719E418FB5016D43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
 		A5C8C7D74CE64FF2B29A0BC5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98CF40EF0CE46A1BA959525 /* libPods.a */; };
 		AD19731A19D4ABF6003509D1 /* MKMapItem+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */; };
-		AD2116E91AFC66FC009C3090 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2116E81AFC66FC009C3090 /* InterfaceController.swift */; };
-		AD2116EB1AFC66FC009C3090 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2116EA1AFC66FC009C3090 /* GlanceController.swift */; };
-		AD2116ED1AFC66FC009C3090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD2116EC1AFC66FC009C3090 /* Images.xcassets */; };
-		AD2116F11AFC66FC009C3090 /* Terrific WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = AD2116F01AFC66FC009C3090 /* Terrific WatchKit App.app */; };
-		AD2116F91AFC66FC009C3090 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD2116F71AFC66FC009C3090 /* Interface.storyboard */; };
-		AD2116FB1AFC66FC009C3090 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD2116FA1AFC66FC009C3090 /* Images.xcassets */; };
-		AD2116FE1AFC66FC009C3090 /* Terrific WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD2116E41AFC66FC009C3090 /* Terrific WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD2117081AFC7274009C3090 /* SGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA2193619624481007050C1 /* SGNetworkManager.m */; };
 		AD21170A1AFC778C009C3090 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2117091AFC778C009C3090 /* MapKit.framework */; };
-		AD21170F1AFC7E50009C3090 /* SGPlaceRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD21170C1AFC7E50009C3090 /* SGPlaceRowController.swift */; };
 		AD2117131AFC8530009C3090 /* MKMapItem+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */; };
-		AD2117141AFC8531009C3090 /* MKMapItem+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */; };
 		AD22A1C119D368BF00D6695A /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD22A1C019D368BF00D6695A /* TodayViewController.swift */; };
 		AD22A1C319D368BF00D6695A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD22A1C219D368BF00D6695A /* MainInterface.storyboard */; };
 		AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AD22A1BA19D368BF00D6695A /* Nearby Places.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -63,20 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AD2116F21AFC66FC009C3090 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FDC48439154CFBDF0035BB36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD2116EF1AFC66FC009C3090;
-			remoteInfo = "Terrific WatchKit App";
-		};
-		AD2116FC1AFC66FC009C3090 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FDC48439154CFBDF0035BB36 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AD2116E31AFC66FC009C3090;
-			remoteInfo = "Terrific WatchKit Extension";
-		};
 		AD22A1C419D368BF00D6695A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FDC48439154CFBDF0035BB36 /* Project object */;
@@ -94,6 +70,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AD196F5E1CF57BF300E3CCBC /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AD22A1CC19D368BF00D6695A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,7 +87,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				AD22A1C619D368BF00D6695A /* Nearby Places.appex in Embed App Extensions */,
-				AD2116FE1AFC66FC009C3090 /* Terrific WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,12 +98,10 @@
 		AD19731419D4A9CC003509D1 /* Terrific-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Terrific-Bridging-Header.h"; sourceTree = "<group>"; };
 		AD19731719D4ABF1003509D1 /* MKMapItem+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapItem+NSCoding.h"; sourceTree = "<group>"; };
 		AD19731819D4ABF1003509D1 /* MKMapItem+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapItem+NSCoding.m"; sourceTree = "<group>"; };
-		AD2116E41AFC66FC009C3090 /* Terrific WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Terrific WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2116E71AFC66FC009C3090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2116E81AFC66FC009C3090 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		AD2116EA1AFC66FC009C3090 /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		AD2116EC1AFC66FC009C3090 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AD2116F01AFC66FC009C3090 /* Terrific WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terrific WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2116F61AFC66FC009C3090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD2116F81AFC66FC009C3090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		AD2116FA1AFC66FC009C3090 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -177,13 +160,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AD2116E11AFC66FC009C3090 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AD22A1B719D368BF00D6695A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -400,8 +376,6 @@
 			children = (
 				FDC48442154CFBE00035BB36 /* Terrific.app */,
 				AD22A1BA19D368BF00D6695A /* Nearby Places.appex */,
-				AD2116E41AFC66FC009C3090 /* Terrific WatchKit Extension.appex */,
-				AD2116F01AFC66FC009C3090 /* Terrific WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -421,39 +395,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AD2116E31AFC66FC009C3090 /* Terrific WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AD2117041AFC66FC009C3090 /* Build configuration list for PBXNativeTarget "Terrific WatchKit Extension" */;
-			buildPhases = (
-				AD2116E01AFC66FC009C3090 /* Sources */,
-				AD2116E11AFC66FC009C3090 /* Frameworks */,
-				AD2116E21AFC66FC009C3090 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AD2116F31AFC66FC009C3090 /* PBXTargetDependency */,
-			);
-			name = "Terrific WatchKit Extension";
-			productName = "Terrific WatchKit Extension";
-			productReference = AD2116E41AFC66FC009C3090 /* Terrific WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		AD2116EF1AFC66FC009C3090 /* Terrific WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AD2117031AFC66FC009C3090 /* Build configuration list for PBXNativeTarget "Terrific WatchKit App" */;
-			buildPhases = (
-				AD2116EE1AFC66FC009C3090 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Terrific WatchKit App";
-			productName = "Terrific WatchKit App";
-			productReference = AD2116F01AFC66FC009C3090 /* Terrific WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		AD22A1B919D368BF00D6695A /* Nearby Places */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Nearby Places" */;
@@ -481,13 +422,13 @@
 				FD8D133115F4BF0800A4C749 /* ShellScript */,
 				FDA52703666443B3B619EA51 /* Warn for TODO and FIXME comments */,
 				AD22A1CC19D368BF00D6695A /* Embed App Extensions */,
+				AD196F5E1CF57BF300E3CCBC /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				AD22A1C519D368BF00D6695A /* PBXTargetDependency */,
 				AD22A1C819D368BF00D6695A /* PBXTargetDependency */,
-				AD2116FD1AFC66FC009C3090 /* PBXTargetDependency */,
 			);
 			name = Terrific;
 			productName = SpotAndGo;
@@ -501,21 +442,10 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SG;
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0730;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				TargetAttributes = {
-					AD2116E31AFC66FC009C3090 = {
-						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = PP6S682Z9F;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
-					AD2116EF1AFC66FC009C3090 = {
-						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = PP6S682Z9F;
-					};
 					AD22A1B919D368BF00D6695A = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = PP6S682Z9F;
@@ -553,31 +483,11 @@
 			targets = (
 				FDC48441154CFBE00035BB36 /* Terrific */,
 				AD22A1B919D368BF00D6695A /* Nearby Places */,
-				AD2116E31AFC66FC009C3090 /* Terrific WatchKit Extension */,
-				AD2116EF1AFC66FC009C3090 /* Terrific WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AD2116E21AFC66FC009C3090 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD2116F11AFC66FC009C3090 /* Terrific WatchKit App.app in Resources */,
-				AD2116ED1AFC66FC009C3090 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AD2116EE1AFC66FC009C3090 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD2116F91AFC66FC009C3090 /* Interface.storyboard in Resources */,
-				AD2116FB1AFC66FC009C3090 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AD22A1B819D368BF00D6695A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -650,18 +560,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AD2116E01AFC66FC009C3090 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD21170F1AFC7E50009C3090 /* SGPlaceRowController.swift in Sources */,
-				AD2116E91AFC66FC009C3090 /* InterfaceController.swift in Sources */,
-				AD2117141AFC8531009C3090 /* MKMapItem+NSCoding.m in Sources */,
-				AD2117081AFC7274009C3090 /* SGNetworkManager.m in Sources */,
-				AD2116EB1AFC66FC009C3090 /* GlanceController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AD22A1B619D368BF00D6695A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -689,16 +587,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AD2116F31AFC66FC009C3090 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD2116EF1AFC66FC009C3090 /* Terrific WatchKit App */;
-			targetProxy = AD2116F21AFC66FC009C3090 /* PBXContainerItemProxy */;
-		};
-		AD2116FD1AFC66FC009C3090 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AD2116E31AFC66FC009C3090 /* Terrific WatchKit Extension */;
-			targetProxy = AD2116FC1AFC66FC009C3090 /* PBXContainerItemProxy */;
-		};
 		AD22A1C519D368BF00D6695A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AD22A1B919D368BF00D6695A /* Nearby Places */;
@@ -731,124 +619,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		AD2116FF1AFC66FC009C3090 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_ENTITLEMENTS = "Terrific WatchKit Extension/Terrific WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Terrific WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Terrific WatchKit Extension/Terrific WatchKit App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		AD2117001AFC66FC009C3090 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_ENTITLEMENTS = "Terrific WatchKit Extension/Terrific WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Terrific WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Terrific WatchKit Extension/Terrific WatchKit App-Bridging-Header.h";
-			};
-			name = Release;
-		};
-		AD2117011AFC66FC009C3090 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IBSC_MODULE = Terrific_WatchKit_Extension;
-				INFOPLIST_FILE = "Terrific WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Terrific WatchKit Extension/Terrific WatchKit App-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		AD2117021AFC66FC009C3090 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				IBSC_MODULE = Terrific_WatchKit_Extension;
-				INFOPLIST_FILE = "Terrific WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Terrific WatchKit Extension/Terrific WatchKit App-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Release;
-		};
 		AD22A1C919D368BF00D6695A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8817065BDBC5AC8F44E9388 /* Pods.debug.xcconfig */;
@@ -876,6 +646,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "spotngo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -910,6 +681,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "spotngo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -937,8 +709,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -989,6 +763,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1040,6 +815,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = spotngo;
 				PRODUCT_NAME = Terrific;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1077,6 +853,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = spotngo;
 				PRODUCT_NAME = Terrific;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1089,24 +866,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AD2117031AFC66FC009C3090 /* Build configuration list for PBXNativeTarget "Terrific WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AD2117011AFC66FC009C3090 /* Debug */,
-				AD2117021AFC66FC009C3090 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AD2117041AFC66FC009C3090 /* Build configuration list for PBXNativeTarget "Terrific WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AD2116FF1AFC66FC009C3090 /* Debug */,
-				AD2117001AFC66FC009C3090 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AD22A1CB19D368BF00D6695A /* Build configuration list for PBXNativeTarget "Nearby Places" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
